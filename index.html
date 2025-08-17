@@ -22,14 +22,12 @@
             height: 300px; /* A slightly smaller base height for general use */
             min-height: 200px; /* Ensure it's not too small */
             max-height: 40vh; /* Limit for very tall screens, for mobile charts */
-            /* aspect-ratio: 1 / 1; /* Removed as it applies to all charts, but useful for pie charts */
         }
         /* Specific styles for chart containers on larger screens */
         @media (min-width: 768px) {
             .chart-container {
                 height: 450px; /* Taller on desktop */
                 max-height: 450px; /* Cap for desktop */
-                /* aspect-ratio: auto; /* Allow aspect ratio to vary on desktop if needed */
             }
         }
         .accordion-content {
@@ -155,19 +153,24 @@
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Interdisciplinaridade e Contextualização</h2>
                 <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="flex flex-col items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"> <!-- Changed to items-start for better alignment -->
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <p class="text-5xl mb-4 text-[#EB6841]">&#x1F30D;</p>
-                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental</h4>
-                        <p class="text-sm text-gray-500">Temas como **poluição da água (15 questões)** e **controle de poluição (17 questões)** frequentemente exigem a compreensão de fenômenos globais e soluções sustentáveis.</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental e Sustentabilidade</h4>
+                        <p class="text-sm text-gray-500 mt-2">Temas como **poluição da água (15 questões)** e **controle de poluição (17 questões)** frequentemente exigem a compreensão de fenômenos globais e soluções sustentáveis, muitas vezes ligando-se à **Biologia** (ciclos biogeoquímicos) e **Geografia** (impactos regionais).</p>
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <p class="text-5xl mb-4 text-[#CC333F]">&#x1F52C;</p>
-                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química e Cotidiano</h4>
-                        <p class="text-sm text-gray-500">A **Termoquímica (13 questões)**, por exemplo, é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando a Física e a Biologia.</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química, Energia e Tecnologia</h4>
+                        <p class="text-sm text-gray-500 mt-2">A **Termoquímica (13 questões)** é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando-se à **Física** (transformações de energia) e à **Tecnologia** (desenvolvimento de novas fontes). Questões sobre **Eletroquímica** frequentemente exploram o funcionamento de pilhas e baterias em dispositivos eletrônicos ou carros elétricos.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2"> <!-- Span full width on larger screens -->
+                        <p class="text-5xl mb-4 text-[#EDC951]">&#x1F9EC;</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Orgânica, Saúde e Cotidiano</h4>
+                        <p class="text-sm text-gray-500 mt-2">A Química Orgânica, com **Funções Orgânicas (35 questões)** e **Reações Orgânicas (27 questões)**, frequentemente aparece em cenários de **saúde** (medicamentos, alimentos) e **cotidiano** (polímeros, cosméticos), exigindo a compreensão da estrutura e das transformações das moléculas que nos cercam.</p>
                     </div>
                 </div>
-                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor.</p>
+                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor, preparando o estudante para analisar problemas complexos e relevantes em diversas áreas.</p>
             </section>
 
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
@@ -201,7 +204,7 @@
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
-                        <div id="skill1-content" class="accordion-content">
+                        <div id="skill1-content" class="accordion-content hidden">
                             <p class="text-sm text-gray-700 mt-2">Esta habilidade exige que o estudante seja capaz de **avaliar materiais, tecnologias, processos e sistemas** não apenas por suas propriedades e aplicações técnicas, mas também considerando seu **impacto socioambiental**. Isso inclui analisar o ciclo de vida de produtos, a eficiência energética de processos e a sustentabilidade de novas tecnologias. Questões relacionadas a esta habilidade podem pedir que você compare a pegada de carbono de diferentes combustíveis ou avalie a segurança de um novo material sintético, por exemplo.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Alta</p>
                         </div>
@@ -211,7 +214,7 @@
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
-                        <div id="skill2-content" class="accordion-content">
+                        <div id="skill2-content" class="accordion-content hidden">
                             <p class="text-sm text-gray-700 mt-2">Focada na avaliação dos **impactos socioambientais** de materiais e tecnologias. Aqui, o aluno precisa identificar os prejuízos à saúde e ao meio ambiente resultantes da produção, uso e descarte de produtos químicos e tecnológicos, e propor soluções ou ações mais sustentáveis. Exemplos de questões incluem a análise da poluição da água por resíduos industriais ou a discussão sobre alternativas menos tóxicas em produtos de limpeza.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
                         </div>
@@ -221,7 +224,7 @@
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
-                        <div id="skill3-content" class="accordion-content">
+                        <div id="skill3-content" class="accordion-content hidden">
                             <p class="text-sm text-gray-700 mt-2">Esta habilidade envolve a capacidade de **raciocínio científico**. O aluno é desafiado a construir questões a partir de um problema, elaborar hipóteses para sua solução, prever resultados de experimentos ou fenômenos e interpretar dados (em gráficos, tabelas, textos) para chegar a conclusões. Muitas questões do ENEM que apresentam dados experimentais ou cenários complexos testam diretamente essa habilidade, exigindo uma análise crítica e a formulação de um plano para resolver a situação.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
                         </div>
@@ -235,7 +238,7 @@
                  <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
                     <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
-                        <span class="text-2xl font-bold">ENEM Impresso</span>
+                        <span class="text-2xl font-bold">ENEM 1ª aplicação</span>
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
                     <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info">
@@ -243,13 +246,13 @@
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
                 </div>
-                <div id="impresso-info" class="accordion-content mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM Impresso</h4>
+                <div id="impresso-info" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM 1ª aplicação</h4>
                     <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.</p>
                 </div>
-                <div id="ppl-digital-info" class="accordion-content mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="ppl-digital-info" class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM PPL / Digital</h4>
-                    <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM Impresso, mas voltado para um público específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
+                    <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM 1ª aplicação, mas voltado para um público específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
                 </div>
             </section>
 
@@ -649,6 +652,91 @@
                     'E) A massa atômica de um próton.'
                 ],
                 resposta_correta: 'C) O número de nêutrons.'
+            },
+            { // Nova questão
+                tema: 'Ligações Químicas',
+                ano: '2022',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Polaridade das Moléculas',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT103',
+                questao: 'Qual das seguintes moléculas é considerada apolar, apesar de possuir ligações polares?',
+                alternativas: [
+                    'A) H2O',
+                    'B) NH3',
+                    'C) CO2',
+                    'D) HCl',
+                    'E) CH3OH'
+                ],
+                resposta_correta: 'C) CO2'
+            },
+            { // Nova questão
+                tema: 'Equilíbrio Químico',
+                ano: '2021',
+                tipo_aplicacao: 'ENEM PPL',
+                tema_detalhado: 'Princípio de Le Chatelier (Pressão)',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT301',
+                questao: 'Para a reação em equilíbrio: N2(g) + 3H2(g) <=> 2NH3(g) (ΔH < 0). O que acontece com a concentração de NH3 se a pressão do sistema for aumentada?',
+                alternativas: [
+                    'A) Diminui, pois o equilíbrio se desloca para os reagentes.',
+                    'B) Aumenta, pois o equilíbrio se desloca para os produtos.',
+                    'C) Não se altera, pois a pressão não afeta o equilíbrio.',
+                    'D) Diminui, pois a temperatura do sistema aumenta.',
+                    'E) Aumenta, mas o equilíbrio não é afetado.'
+                ],
+                resposta_correta: 'B) Aumenta, pois o equilíbrio se desloca para os produtos.'
+            },
+            { // Nova questão
+                tema: 'Funções Inorgânicas',
+                ano: '2020',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Propriedades dos Ácidos e Bases',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT101',
+                questao: 'Qual das seguintes substâncias é uma base forte e um eletrólito?',
+                alternativas: [
+                    'A) Ácido acético (CH3COOH)',
+                    'B) Hidróxido de sódio (NaOH)',
+                    'C) Glicose (C6H12O6)',
+                    'D) Água (H2O)',
+                    'E) Amônia (NH3)'
+                ],
+                resposta_correta: 'B) Hidróxido de sódio (NaOH)'
+            },
+            { // Nova questão
+                tema: 'Reações Orgânicas',
+                ano: '2019',
+                tipo_aplicacao: 'ENEM Digital',
+                tema_detalhado: 'Reação de Esterificação',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT307',
+                questao: 'A reação entre um ácido carboxílico e um álcool, na presença de um catalisador ácido, produz qual tipo de composto orgânico?',
+                alternativas: [
+                    'A) Éter',
+                    'B) Amina',
+                    'C) Aldeído',
+                    'D) Éster',
+                    'E) Cetona'
+                ],
+                resposta_correta: 'D) Éster'
+            },
+            { // Nova questão
+                tema: 'Bioquímica',
+                ano: '2023',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Carboidratos e Açúcares',
+                competencia: 'Competência 2',
+                habilidade: 'EM13CNT207',
+                questao: 'A lactose, o açúcar do leite, é um dissacarídeo formado pela ligação glicosídica entre quais monossacarídeos?',
+                alternativas: [
+                    'A) Glicose e Glicose',
+                    'B) Glicose e Frutose',
+                    'C) Glicose e Galactose',
+                    'D) Frutose e Galactose',
+                    'E) Glicose e Sacarose'
+                ],
+                resposta_correta: 'C) Glicose e Galactose'
             }
         ];
 
@@ -912,12 +1000,15 @@
                             yearlyThemesChartInstance.destroy();
                             yearlyThemesChartInstance = null;
                         }
-                    } else if (content.id !== 'yearly-analysis-output') { // For other accordions like skills or modalities
-                        content.classList.remove('active');
-                        content.style.maxHeight = null;
-                        const otherToggleButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
-                        if (otherToggleButton) {
-                            otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
+                    } else { // For all other accordions (skills, modalities)
+                        if (content.classList.contains('active')) { // If another accordion is active, close it
+                            content.classList.remove('active');
+                            content.style.maxHeight = null;
+                            content.classList.add('hidden'); // Ensure it's hidden when closed
+                            const otherToggleButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
+                            if (otherToggleButton) {
+                                otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
+                            }
                         }
                     }
                 });
@@ -1006,7 +1097,9 @@
                         targetContent.classList.remove('active');
                         toggleIcon.classList.remove('active');
                         targetContent.style.maxHeight = null;
+                        targetContent.classList.add('hidden'); // Add hidden when closing
                     } else {
+                        targetContent.classList.remove('hidden'); // Remove hidden before animating open
                         targetContent.classList.add('active');
                         toggleIcon.classList.add('active');
                         targetContent.style.maxHeight = targetContent.scrollHeight + "px"; // Set max-height dynamically
