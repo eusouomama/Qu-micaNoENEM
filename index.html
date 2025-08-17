@@ -68,13 +68,13 @@
                 <!-- Use flex-col on smaller screens, and specific spacing for mobile vs desktop -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
                     <!-- Instagram Link -->
-                    <a href="https://instagram.com/eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                    <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
                         <span class="font-semibold">@eusouomama</span>
                     </a>
                     
                     <!-- YouTube Link -->
-                    <a href="https://www.youtube.com/@QuimicaDoMama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                    <a href="https://www.youtube.com/@eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
                         <span class="font-semibold">Química do Mamá</span>
                     </a>
@@ -1128,7 +1128,8 @@
 
             setTimeout(() => {
                 const filteredQuestions = pastQuestionsData.filter(q => 
-                    q.tema.toLowerCase().includes(topic.toLowerCase())
+                    q.tema.toLowerCase().includes(topic.toLowerCase()) ||
+                    q.tema_detalhado.toLowerCase().includes(topic.toLowerCase())
                 );
 
                 if (filteredQuestions.length > 0) {
