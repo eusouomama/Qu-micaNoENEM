@@ -1,1 +1,1056 @@
-# Qu-micaNoENEM
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Análise da Química no ENEM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 1000px; /* Large enough to contain chart and text, will be dynamically set by JS */
+        }
+        .toggle-button {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .toggle-icon {
+            transition: transform 0.3s ease-out;
+        }
+        .toggle-icon.active {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wider">Decifrando a Química no ENEM</h1>
+            <p class="text-lg md:text-xl text-[#6A4A3C] mt-2">Uma análise visual dos temas e competências mais cobrados no exame (2011-2024).</p>
+
+            <div class="mt-6 flex flex-col items-center space-y-4">
+                <!-- Imagem da Sua Marca -->
+                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="h-24 mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+
+                <!-- Links para Redes Sociais -->
+                <div class="flex items-center space-x-4">
+                    <!-- Instagram Link -->
+                    <a href="https://instagram.com/eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
+                        <span class="font-semibold">@eusouomama</span>
+                    </a>
+                    
+                    <!-- YouTube Link -->
+                    <a href="https://www.youtube.com/@QuimicaDoMama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
+                        <span class="font-semibold">Química do Mamá</span>
+                    </a>
+                </div>
+            </div>
+
+        </header>
+
+        <main class="space-y-10">
+            
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-2">Um Pilar Consistente na Prova</h2>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
+                <div class="flex justify-center items-center">
+                    <div class="text-8xl font-black text-[#EB6841]">~15</div>
+                    <div class="text-2xl font-bold text-left ml-4 text-[#6A4A3C]">
+                        Questões<br>por edição
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-500">Isso representa aproximadamente 1/3 da prova de Ciências da Natureza, destacando a importância estratégica de um preparo focado.</p>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">O Panorama Geral: Distribuição por Área</h3>
+                    <p class="text-center text-gray-600 mb-4 text-sm">A prova do ENEM concentra-se em três grandes pilares da Química, que juntos, somam quase 80% de todas as questões. O foco está nos fundamentos, nas transformações de energia e nos compostos do cotidiano.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="areasChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">A Filosofia do Exame: Foco Cognitivo</h3>
+                     <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para interpretar fenômenos e solucionar problemas práticos.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="cognitiveChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais Recorrentes</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
+                <ul class="list-disc list-inside text-left text-gray-700 mx-auto max-w-prose mb-6">
+                    <li>**Funções Orgânicas:** Com 35 questões, é um dos temas mais dominantes.</li>
+                    <li>**Reações Orgânicas:** Presente em 27 questões, fundamental para entender transformações.</li>
+                    <li>**Aplicações da Cinética Química:** Cobrada em 24 questões, essencial para processos e velocidade de reação.</li>
+                    <li>**Eletroquímica (Pilhas):** Apareceu em 19 questões, focando em geração de energia.</li>
+                    <li>**Separação de Misturas:** Também com 19 questões, demonstra a importância da Química no cotidiano.</li>
+                </ul>
+                <div class="w-full max-w-4xl mx-auto h-[500px] md:h-[600px] relative">
+                    <canvas id="topicsChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Coerência e Previsibilidade do Exame</h2>
+                <p class="text-lg text-gray-600 mb-4">A prova de Química no ENEM demonstra uma notável consistência e previsibilidade ao longo dos anos e em suas diferentes modalidades de aplicação.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl font-black text-[#EB6841]">~15</span>
+                        <p class="text-xl font-bold text-[#6A4A3C]">Questões/Ano</p>
+                        <p class="text-sm text-gray-500">Número estável em todas as edições, incluindo PPL e Digital.</p>
+                    </div>
+                    <div class="text-4xl font-bold text-[#00A0B0] transform md:rotate-0 rotate-90">&harr;</div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl font-black text-[#EDC951]">Idêntica</span>
+                        <p class="text-xl font-bold text-[#6A4A3C]">Matriz de Referência</p>
+                        <p class="text-sm text-gray-500">Conteúdo, estrutura e filosofia pedagógica equivalentes entre Impresso, PPL e Digital.</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essa estabilidade permite um planejamento de estudos mais eficiente, focando nos pilares e na abordagem do exame sem surpresas quanto ao formato.</p>
+            </section>
+
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Interdisciplinaridade e Contextualização</h2>
+                <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="flex flex-col items-center">
+                        <p class="text-5xl mb-4 text-[#EB6841]">&#x1F30D;</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental</h4>
+                        <p class="text-sm text-gray-500">Temas como **poluição da água (15 questões)** e **controle de poluição (17 questões)** frequentemente exigem a compreensão de fenômenos globais e soluções sustentáveis.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <p class="text-5xl mb-4 text-[#CC333F]">&#x1F52C;</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química e Cotidiano</h4>
+                        <p class="text-sm text-gray-500">A **Termoquímica (13 questões)**, por exemplo, é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando a Física e a Biologia.</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor.</p>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Alinhamento com a BNCC: Competências Avaliadas</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">As questões são formuladas para avaliar competências específicas da Base Nacional Comum Curricular, priorizando a capacidade de análise crítica e resolução de problemas em contextos reais.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#CC333F]">56%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 3</h4>
+                        <p class="text-sm text-gray-500">Analisar e resolver situações-problema, avaliando aplicações do conhecimento científico e tecnológico.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#EB6841]">34%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 1</h4>
+                        <p class="text-sm text-gray-500">Analisar fenômenos naturais e processos tecnológicos, com base nas interações e relações entre matéria e energia.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#EDC951]">10%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 2</h4>
+                        <p class="text-sm text-gray-500">Interpretar a dinâmica da vida, da Terra e do Cosmos, relacionando fenômenos e processos químicos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Habilidades Essenciais para o ENEM</h2>
+                <p class="text-lg text-gray-600 mb-6">A prova de Química no ENEM foca em habilidades específicas, que são cruciais para a aplicação do conhecimento e a resolução de problemas complexos. Dominar estas habilidades é tão importante quanto o conteúdo teórico.</p>
+                <div class="grid grid-cols-1 gap-4 text-left">
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill1-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
+                        </div>
+                        <div id="skill1-content" class="accordion-content">
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade exige que o estudante seja capaz de **avaliar materiais, tecnologias, processos e sistemas** não apenas por suas propriedades e aplicações técnicas, mas também considerando seu **impacto socioambiental**. Isso inclui analisar o ciclo de vida de produtos, a eficiência energética de processos e a sustentabilidade de novas tecnologias. Questões relacionadas a esta habilidade podem pedir que você compare a pegada de carbono de diferentes combustíveis ou avalie a segurança de um novo material sintético, por exemplo.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Alta</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill2-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
+                        </div>
+                        <div id="skill2-content" class="accordion-content">
+                            <p class="text-sm text-gray-700 mt-2">Focada na avaliação dos **impactos socioambientais** de materiais e tecnologias. Aqui, o aluno precisa identificar os prejuízos à saúde e ao meio ambiente resultantes da produção, uso e descarte de produtos químicos e tecnológicos, e propor soluções ou ações mais sustentáveis. Exemplos de questões incluem a análise da poluição da água por resíduos industriais ou a discussão sobre alternativas menos tóxicas em produtos de limpeza.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill3-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
+                        </div>
+                        <div id="skill3-content" class="accordion-content">
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade envolve a capacidade de **raciocínio científico**. O aluno é desafiado a construir questões a partir de um problema, elaborar hipóteses para sua solução, prever resultados de experimentos ou fenômenos e interpretar dados (em gráficos, tabelas, textos) para chegar a conclusões. Muitas questões do ENEM que apresentam dados experimentais ou cenários complexos testam diretamente essa habilidade, exigindo uma análise crítica e a formulação de um plano para resolver a situação.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essas habilidades indicam que o ENEM busca estudantes que consigam aplicar o conhecimento de Química para analisar e resolver problemas complexos e relevantes para o mundo real.</p>
+            </section>
+            
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
+                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
+                        <span class="text-2xl font-bold">ENEM Impresso</span>
+                        <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
+                    </button>
+                    <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info">
+                        <span class="text-2xl font-bold">ENEM PPL / Digital</span>
+                        <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
+                    </button>
+                </div>
+                <div id="impresso-info" class="accordion-content mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM Impresso</h4>
+                    <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.</p>
+                </div>
+                <div id="ppl-digital-info" class="accordion-content mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM PPL / Digital</h4>
+                    <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM Impresso, mas voltado para um público específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
+                <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+                    <!-- Botões dos anos gerados dinamicamente por JS -->
+                </div>
+                <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-xl text-[#6A4A3C] mb-2">Destaques do ENEM <span id="selectedYear"></span>:</h4>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span id="yearSummary"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span id="yearChemistryQuestions"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearApplicationType"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
+                    <p class="text-gray-800 mb-4"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
+                    <div class="chart-container mt-6">
+                        <canvas id="yearlyThemesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔎 Busca de Questões Anteriores do ENEM 🔎</h2>
+                <p class="text-lg text-gray-600 mb-6">Digite um tema de química para buscar uma questão que já caiu em provas anteriores do ENEM. Ideal para revisar tópicos específicos!</p>
+                <div class="flex flex-col items-center max-w-xl mx-auto">
+                    <input type="text" id="topicInput" placeholder="Ex: Eletroquímica, Termoquímica, Funções Orgânicas" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] mb-4 text-gray-800">
+                    <button id="generateQuestionBtn" class="bg-[#EB6841] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out">
+                        Buscar Questão ENEM
+                    </button>
+                    <div id="loadingIndicator" class="mt-4 text-[#00A0B0] hidden">
+                        Buscando questão... Por favor, aguarde.
+                    </div>
+                    <div id="questionOutput" class="mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 hidden">
+                        <p class="font-bold text-lg text-[#6A4A3C] mb-2">Questão Encontrada:</p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="questionYear"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="questionType"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="questionDetailedTopic"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
+                        <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
+                        <p id="questionText" class="text-gray-800 mb-4"></p>
+                        <p class="font-bold text-lg text-[#6A4A3C] mb-2">Alternativas:</p>
+                        <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
+                        <p class="font-bold text-lg text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
+                        <p id="correctAnswer" class="text-gray-800"></p>
+                    </div>
+                    <div id="noQuestionFound" class="mt-6 text-center text-gray-600 hidden">
+                        Nenhuma questão encontrada para o tema digitado. Tente outro tema!
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+        </footer>
+
+    </div>
+
+    <script>
+        let yearlyThemesChartInstance = null; // To hold the Chart.js instance for yearly themes
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const energeticPlayfulPalette = ['#00A0B0', '#EB6841', '#CC333F', '#EDC951', '#6A4A3C', '#8A4A5C', '#3F6841', '#B0A000']; // Extended palette
+
+        const areasData = {
+            labels: ['Química Geral', 'Físico-Química', 'Química Orgânica', 'Outras (Ambiental, Inorgânica)'],
+            datasets: [{
+                label: '% de Questões',
+                data: [29, 25, 25, 13],
+                backgroundColor: energeticPlayfulPalette,
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('areasChart'), {
+            type: 'doughnut',
+            data: areasData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const cognitiveData = {
+            labels: ['Compreender Fenômenos', 'Enfrentar Situações-Problema'],
+            datasets: [{
+                label: '% de Questões',
+                data: [67.8, 32.2],
+                backgroundColor: ['#CC333F', '#EB6841'],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('cognitiveChart'), {
+            type: 'pie',
+            data: cognitiveData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+        
+        const topicsRawData = [
+            { label: 'Funções Orgânicas', value: 35 },
+            { label: 'Reações Orgânicas', value: 27 },
+            { label: 'Aplicações da Cinética Química', value: 24 },
+            { label: 'Eletroquímica (Pilhas)', value: 19 },
+            { label: 'Separação de Misturas', value: 19 },
+            { label: 'Concentração de Soluções', value: 17 },
+            { label: 'Controle de Poluição', value: 17 },
+            { label: 'Poluição da Água', value: 15 },
+            { label: 'Tipos de Reações Químicas', value: 15 },
+            { label: 'Entalpia das Reações', value: 14 }
+        ];
+
+        new Chart(document.getElementById('topicsChart'), {
+            type: 'bar',
+            data: {
+                labels: topicsRawData.map(d => wrapLabel(d.label)),
+                datasets: [{
+                    label: 'Número de Questões (2011-2024)',
+                    data: topicsRawData.map(d => d.value),
+                    backgroundColor: energeticPlayfulPalette[0],
+                    borderColor: energeticPlayfulPalette[0],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                           color: '#6A4A3C'
+                        },
+                        grid: {
+                          color: '#E0E0E0'
+                        }
+                    },
+                    y: {
+                       ticks: {
+                           color: '#6A4A3C'
+                        },
+                        grid: {
+                          display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const pastQuestionsData = [
+            {
+                tema: 'Eletroquímica',
+                ano: '2022',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Pilhas e Reações Redox',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT104',
+                questao: 'Uma pilha de Daniell utiliza zinco e cobre. Qual das seguintes afirmações sobre a pilha é correta?',
+                alternativas: [
+                    'A) O zinco atua como cátodo e o cobre como ânodo.',
+                    'B) A oxidação ocorre no eletrodo de cobre.',
+                    'C) Os elétrons fluem do zinco para o cobre no circuito externo.',
+                    'D) A ponte salina permite o fluxo de elétrons.',
+                    'E) A redução do Zn2+ ocorre no ânodo.'
+                ],
+                resposta_correta: 'C) Os elétrons fluem do zinco para o cobre no circuito externo.'
+            },
+            {
+                tema: 'Termoquímica',
+                ano: '2023',
+                tipo_aplicacao: 'ENEM PPL',
+                tema_detalhado: 'Variação de Entalpia em Reações de Combustão',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT301',
+                questao: 'Considerando a reação de combustão completa do metano (CH4) e os valores de entalpia padrão de formação (ΔHf°) em kJ/mol: CH4(g) = -74.8; CO2(g) = -393.5; H2O(l) = -285.8. Qual a entalpia padrão de combustão do metano (ΔH°c)?',
+                alternativas: [
+                    'A) -890.3 kJ/mol',
+                    'B) +890.3 kJ/mol',
+                    'C) -76.1 kJ/mol',
+                    'D) +76.1 kJ/mol',
+                    'E) -584.5 kJ/mol'
+                ],
+                resposta_correta: 'A) -890.3 kJ/mol'
+            },
+            {
+                tema: 'Funções Orgânicas',
+                ano: '2021',
+                tipo_aplicacao: 'ENEM Digital',
+                tema_detalhado: 'Identificação e Propriedades de Ésteres',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT104',
+                questao: 'Qual das seguintes substâncias pertence à função orgânica éster e é responsável pelo aroma de banana?',
+                alternativas: [
+                    'A) Etanol',
+                    'B) Ácido acético',
+                    'C) Acetato de isopentila',
+                    'D) Metanal',
+                    'E) Benzeno'
+                ],
+                resposta_correta: 'C) Acetato de isopentila'
+            },
+            {
+                tema: 'Cinética Química',
+                ano: '2020',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Fatores que Afetam a Velocidade de Reação (Temperatura)',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT307',
+                questao: 'O que acontece com a velocidade de uma reação química quando a temperatura do sistema é aumentada?',
+                alternativas: [
+                    'A) Diminui, pois a energia de ativação aumenta.',
+                    'B) Aumenta, pois a frequência de colisões eficazes diminui.',
+                    'C) Diminui, pois a concentração dos reagentes diminui.',
+                    'D) Aumenta, pois a energia cinética das moléculas aumenta, favorecendo colisões eficazes.',
+                    'E) Não se altera, pois a velocidade é constante para cada reação.'
+                ],
+                resposta_correta: 'D) Aumenta, pois a energia cinética das moléculas aumenta, favorecendo colisões eficazes.'
+            },
+            {
+                tema: 'Soluções',
+                ano: '2019',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Cálculo de Molaridade',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT301',
+                questao: 'Uma solução aquosa de NaCl possui concentração de 58.5 g/L. Qual a molaridade desta solução? (Dados: Na = 23 g/mol; Cl = 35.5 g/mol)',
+                alternativas: [
+                    'A) 0.5 M',
+                    'B) 1.0 M',
+                    'C) 2.0 M',
+                    'D) 0.1 M',
+                    'E) 10.0 M'
+                ],
+                resposta_correta: 'B) 1.0 M'
+            },
+            {
+                tema: 'Separação de Misturas',
+                ano: '2023',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Métodos de Separação para Misturas Heterogêneas',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT307',
+                questao: 'Para separar os componentes de uma mistura heterogênea de areia e sal dissolvido em água, qual a sequência de métodos mais adequada?',
+                alternativas: [
+                    'A) Decantação, filtração e destilação.',
+                    'B) Filtração, evaporação e decantação.',
+                    'C) Decantação, cristalização e filtração.',
+                    'D) Dissolução, filtração e evaporação.',
+                    'E) Peneiração, centrifugação e decantação.'
+                ],
+                resposta_correta: 'D) Dissolução, filtração e evaporação.'
+            },
+            {
+                tema: 'Controle de Poluição',
+                ano: '2022',
+                tipo_aplicacao: 'ENEM PPL',
+                tema_detalhado: 'Tratamento de Efluentes Industriais',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT104',
+                questao: 'O processo de tratamento de efluentes industriais pode envolver a neutralização de ácidos e bases. Qual a importância dessa etapa para o meio ambiente?',
+                alternativas: [
+                    'A) Diminui a quantidade de oxigênio dissolvido na água.',
+                    'B) Aumenta a toxicidade dos resíduos líquidos.',
+                    'C) Evita a alteração do pH dos corpos d\'água, protegendo a vida aquática.',
+                    'D) Promove a proliferação de algas no ecossistema aquático.',
+                    'E) Reduz a demanda bioquímica de oxigênio (DBO).'
+                ],
+                resposta_correta: 'C) Evita a alteração do pH dos corpos d\'água, protegendo a vida aquática.'
+            },
+            {
+                tema: 'Poluição da Água',
+                ano: '2021',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Eutrofização e Impactos Ambientais',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT301',
+                questao: 'A eutrofização de corpos d\'água é um problema ambiental comum. Qual das seguintes ações humanas contribui diretamente para a eutrofização?',
+                alternativas: [
+                    'A) Aumento da oxigenação da água.',
+                    'B) Descarte inadequado de esgoto doméstico e agrícola.',
+                    'C) Redução do uso de fertilizantes na agricultura.',
+                    'D) Construção de barragens em rios.',
+                    'E) Introdução de espécies exóticas em ecossistemas aquáticos.'
+                ],
+                resposta_correta: 'B) Descarte inadequado de esgoto doméstico e agrícola.'
+            },
+            {
+                tema: 'Tipos de Reações Químicas',
+                ano: '2020',
+                tipo_aplicacao: 'ENEM Digital',
+                tema_detalhado: 'Classificação de Reações: Síntese',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT104',
+                questao: 'Qual tipo de reação química é caracterizado pela formação de uma única substância a partir de duas ou mais substâncias simples ou compostas?',
+                alternativas: [
+                    'A) Reação de análise ou decomposição.',
+                    'B) Reação de simples troca ou deslocamento.',
+                    'C) Reação de síntese ou adição.',
+                    'D) Reação de dupla troca ou precipitação.',
+                    'E) Reação de combustão.'
+                ],
+                resposta_correta: 'C) Reação de síntese ou adição.'
+            },
+            {
+                tema: 'Entalpia das Reações',
+                ano: '2019',
+                tipo_aplicacao: 'ENEM PPL',
+                tema_detalhado: 'Variação de Entalpia e Processos Endotérmicos',
+                competencia: 'Competência 3',
+                habilidade: 'EM13CNT307',
+                questao: 'Em uma reação química, quando o ΔH (variação de entalpia) é positivo, isso indica que a reação é:',
+                alternativas: [
+                    'A) Exotérmica, liberando calor para o ambiente.',
+                    'B) Endotérmica, absorvendo calor do ambiente.',
+                    'C) Espontânea, ocorrendo rapidamente.',
+                    'D) Irreversível, sem retorno aos reagentes.',
+                    'E) De neutralização, formando sal e água.'
+                ],
+                resposta_correta: 'B) Endotérmica, absorvendo calor do ambiente.'
+            },
+            {
+                tema: 'Estrutura Atômica',
+                ano: '2023',
+                tipo_aplicacao: 'ENEM Impresso',
+                tema_detalhado: 'Isótopos e Número de Nêutrons',
+                competencia: 'Competência 1',
+                habilidade: 'EM13CNT104',
+                questao: 'O que diferencia um isótopo de um elemento químico de outro isótopo do mesmo elemento?',
+                alternativas: [
+                    'A) O número de prótons.',
+                    'B) O número de elétrons.',
+                    'C) O número de nêutrons.',
+                    'D) A carga elétrica do átomo.',
+                    'E) A massa atômica de um próton.'
+                ],
+                resposta_correta: 'C) O número de nêutrons.'
+            }
+        ];
+
+        const enemByYearAnalysisData = [
+            {
+                year: 2024,
+                title: "ENEM 2024: Tendências Recentes em Química",
+                summary: "A prova de 2024 manteve o padrão de contextualização, com forte ênfase em Química Orgânica aplicada ao cotidiano e questões socioambientais. Houve um crescimento discreto em questões de Físico-Química envolvendo energia.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Orgânica (Farmacologia e Polímeros)", "Termoquímica (Bioenergia)", "Química Ambiental (Tratamento de Água)"],
+                competencyFocus: ["Competência 3 (Resolução de Problemas)", "Competência 1 (Análise de Fenômenos)"],
+                habilidades: ["EM13CNT307", "EM13CNT104"],
+                themesData: [
+                    { theme: 'Orgânica', percentage: 35 },
+                    { theme: 'Físico-Química', percentage: 30 },
+                    { theme: 'Geral', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2023,
+                title: "ENEM 2023: Consistência na Abordagem",
+                summary: "O ano de 2023 reforçou a importância da leitura e interpretação de gráficos e tabelas para a resolução de questões de Química Geral e Físico-Química.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Soluções (Concentração e Diluição)", "Equilíbrio Químico (Princípio de Le Chatelier)", "Química do Cotidiano (Alimentos)"],
+                competencyFocus: ["Competência 3 (Interpretação de Dados)", "Competência 2 (Interpretação da Dinâmica)"],
+                habilidades: ["EM13CNT301", "EM13CNT207"],
+                themesData: [
+                    { theme: 'Físico-Química', percentage: 35 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Geral', percentage: 25 },
+                    { theme: 'Ambiental', percentage: 10 }
+                ]
+            },
+            {
+                year: 2022,
+                title: "ENEM 2022: Foco em Sustentabilidade",
+                summary: "Questões de Química Ambiental ganharam destaque em 2022, com foco em processos de tratamento e impacto de poluentes.",
+                quimicaQuestions: 16,
+                aplicacaoType: "Impresso, PPL e Digital",
+                mainThemes: ["Química Ambiental (Resíduos e Poluentes)", "Eletroquímica (Corrosão e Baterias)", "Funções Orgânicas (Propriedades)"],
+                competencyFocus: ["Competência 1 (Impacto Socioambiental)", "Competência 3 (Proposição de Soluções)"],
+                habilidades: ["EM13CNT104", "EM13CNT307"],
+                themesData: [
+                    { theme: 'Ambiental', percentage: 40 },
+                    { theme: 'Orgânica', percentage: 25 },
+                    { theme: 'Físico-Química', percentage: 20 },
+                    { theme: 'Geral', percentage: 15 }
+                ]
+            },
+            {
+                year: 2021,
+                title: "ENEM 2021: Desafios Orgânicos e Físico-Químicos",
+                summary: "A prova de 2021 apresentou questões desafiadoras em Química Orgânica, especialmente reações e isomeria, e uma forte presença de cálculos em Físico-Química.",
+                quimicaQuestions: 14,
+                aplicacaoType: "Impresso, PPL e Digital",
+                mainThemes: ["Reações Orgânicas (Oxidação, Hidrólise)", "Termoquímica (Cálculo de Entalpia)", "Soluções (Coligativas)"],
+                competencyFocus: ["Competência 3 (Resolução de Problemas)", "Competência 1 (Análise de Fenômenos)"],
+                habilidades: ["EM13CNT301", "EM13CNT103"],
+                themesData: [
+                    { theme: 'Orgânica', percentage: 40 },
+                    { theme: 'Físico-Química', percentage: 30 },
+                    { theme: 'Geral', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 10 }
+                ]
+            },
+            {
+                year: 2020,
+                title: "ENEM 2020: A Importância da Química Geral",
+                summary: "O ano de 2020 viu uma leve retomada de temas fundamentais da Química Geral, além da contextualização usual com a saúde e o meio ambiente.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso, PPL e Digital",
+                mainThemes: ["Química Geral (Estequiometria, Ligações)", "Cinética Química (Fatores que afetam reações)", "Química Inorgânica (Ácidos e Bases)"],
+                competencyFocus: ["Competência 1 (Análise de Fenômenos)", "Competência 3 (Resolução de Problemas)"],
+                habilidades: ["EM13CNT103", "EM13CNT307"],
+                themesData: [
+                    { theme: 'Geral', percentage: 35 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 25 },
+                    { theme: 'Ambiental', percentage: 10 }
+                ]
+            },
+            {
+                year: 2019,
+                title: "ENEM 2019: Contexto e Cálculo",
+                summary: "A edição de 2019 se destacou pela forte contextualização das questões, exigindo que os alunos aplicassem o conhecimento químico em situações do dia a dia, com uma presença significativa de cálculos em Físico-Química.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Físico-Química (Soluções, Eletroquímica)", "Química Orgânica (Funções e Nomenclatura)", "Química Ambiental (Poluição)"],
+                competencyFocus: ["Competência 3 (Resolução de Problemas)", "Competência 1 (Análise de Fenômenos)"],
+                habilidades: ["EM13CNT301", "EM13CNT104"],
+                themesData: [
+                    { theme: 'Físico-Química', percentage: 35 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Geral', percentage: 25 },
+                    { theme: 'Ambiental', percentage: 10 }
+                ]
+            },
+            {
+                year: 2018,
+                title: "ENEM 2018: A Química na Indústria",
+                summary: "Questões contextualizadas com processos industriais e a química de materiais foram proeminentes em 2018, evidenciando a aplicação prática da disciplina.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química de Polímeros", "Reações Inorgânicas", "Equilíbrio Químico Industrial"],
+                competencyFocus: ["Competência 3 (Tecnologia e Sociedade)", "Competência 1 (Transformações Químicas)"],
+                habilidades: ["EM13CNT307", "EM13CNT101"],
+                themesData: [
+                    { theme: 'Orgânica', percentage: 35 },
+                    { theme: 'Geral', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2017,
+                title: "ENEM 2017: A Química da Vida",
+                summary: "Em 2017, a prova de Química trouxe um número considerável de questões relacionadas à química orgânica presente em sistemas biológicos e alimentos.",
+                quimicaQuestions: 14,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Orgânica (Biomoléculas)", "Cinética Enzimática", "Equilíbrio Ácido-Base (pH biológico)"],
+                competencyFocus: ["Competência 2 (Dinâmica da Vida)", "Competência 1 (Fenômenos Naturais)"],
+                habilidades: ["EM13CNT207", "EM13CNT101"],
+                themesData: [
+                    { theme: 'Orgânica', percentage: 40 },
+                    { theme: 'Físico-Química', percentage: 25 },
+                    { theme: 'Geral', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2016,
+                title: "ENEM 2016: Desafios Ambientais",
+                summary: "Questões sobre o uso sustentável de recursos e impactos ambientais foram temas centrais na prova de 2016, reforçando a abordagem interdisciplinar da Química.",
+                quimicaQuestions: 16,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Ambiental (Descarte de Resíduos, Poluição do Ar)", "Eletroquímica (Células Solares)", "Reações Orgânicas"],
+                competencyFocus: ["Competência 3 (Soluções Sustentáveis)", "Competência 1 (Impacto Socioambiental)"],
+                habilidades: ["EM13CNT307", "EM13CNT104"],
+                themesData: [
+                    { theme: 'Ambiental', percentage: 35 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 20 },
+                    { theme: 'Geral', percentage: 15 }
+                ]
+            },
+            {
+                year: 2015,
+                title: "ENEM 2015: Química no Cotidiano e Indústria",
+                summary: "A prova de 2015 explorou a química presente em produtos do dia a dia e processos industriais, com questões sobre separação de misturas e materiais.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Separação de Misturas", "Química dos Materiais (Polímeros)", "Termoquímica (Combustíveis)"],
+                competencyFocus: ["Competência 3 (Aplicações Tecnológicas)", "Competência 1 (Transformações)"],
+                habilidades: ["EM13CNT301", "EM13CNT103"],
+                themesData: [
+                    { theme: 'Geral', percentage: 30 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 25 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2014,
+                title: "ENEM 2014: Foco em Físico-Química",
+                summary: "2014 teve uma ênfase notável em conceitos de Físico-Química, como equilíbrios e soluções, exigindo boa compreensão de gráficos e cálculos.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Equilíbrio Químico (pH, Constantes)", "Soluções (Propriedades Coligativas)", "Termoquímica"],
+                competencyFocus: ["Competência 3 (Resolução de Problemas)", "Competência 1 (Fenômenos)"],
+                habilidades: ["EM13CNT301", "EM13CNT101"],
+                themesData: [
+                    { theme: 'Físico-Química', percentage: 40 },
+                    { theme: 'Geral', percentage: 25 },
+                    { theme: 'Orgânica', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2013,
+                title: "ENEM 2013: Abordagem Interdisciplinar",
+                summary: "A prova de 2013 se destacou pela forte interdisciplinaridade, conectando a Química a temas de Biologia e Física, especialmente em questões ambientais e energéticas.",
+                quimicaQuestions: 14,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Ambiental (Esgoto, Resíduos)", "Eletroquímica (Pilhas e Corrosão)", "Química Orgânica (Funções)"],
+                competencyFocus: ["Competência 1 (Análise de Fenômenos)", "Competência 3 (Impacto Socioambiental)"],
+                habilidades: ["EM13CNT104", "EM13CNT307"],
+                themesData: [
+                    { theme: 'Ambiental', percentage: 35 },
+                    { theme: 'Orgânica', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 20 },
+                    { theme: 'Geral', percentage: 15 }
+                ]
+            },
+             {
+                year: 2012,
+                title: "ENEM 2012: Química no Dia a Dia",
+                summary: "As questões de 2012 tiveram um foco claro na aplicação dos conceitos de Química em situações cotidianas, como produtos de limpeza, alimentos e materiais.",
+                quimicaQuestions: 16,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Orgânica (Propriedades, Reações em produtos)", "Química Geral (Misturas e Separação)", "Soluções"],
+                competencyFocus: ["Competência 3 (Contextualização)", "Competência 1 (Transformações Químicas)"],
+                habilidades: ["EM13CNT301", "EM13CNT103"],
+                themesData: [
+                    { theme: 'Orgânica', percentage: 35 },
+                    { theme: 'Geral', percentage: 30 },
+                    { theme: 'Físico-Química', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 15 }
+                ]
+            },
+            {
+                year: 2011,
+                title: "ENEM 2011: Fundamentos e Meio Ambiente",
+                summary: "Em 2011, a prova de Química cobrou intensamente os fundamentos da Química Geral e a relação da disciplina com questões ambientais.",
+                quimicaQuestions: 15,
+                aplicacaoType: "Impresso e PPL",
+                mainThemes: ["Química Geral (Estrutura Atômica, Ligações)", "Química Ambiental (Poluição, Chuva Ácida)", "Físico-Química (Cinética)"],
+                competencyFocus: ["Competência 1 (Análise de Fenômenos)", "Competência 3 (Problemas Ambientais)"],
+                habilidades: ["EM13CNT101", "EM13CNT307"],
+                themesData: [
+                    { theme: 'Geral', percentage: 35 },
+                    { theme: 'Físico-Química', percentage: 25 },
+                    { theme: 'Orgânica', percentage: 20 },
+                    { theme: 'Ambiental', percentage: 20 }
+                ]
+            }
+        ];
+
+        // Dynamic generation of year buttons
+        const yearButtonsContainer = document.querySelector('.grid.gap-4.mb-8');
+        enemByYearAnalysisData.sort((a, b) => b.year - a.year).forEach(data => {
+            const button = document.createElement('button');
+            button.className = 'bg-[#EDC951] text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out toggle-button';
+            button.setAttribute('data-target', `yearly-analysis-output`); // All buttons target the same content div
+            button.setAttribute('data-year', data.year); // Store year data on button
+            button.innerHTML = `<span>${data.year}</span> <span class="toggle-icon text-xl ml-2">&#x25B6;</span>`;
+            yearButtonsContainer.appendChild(button);
+        });
+
+        document.querySelectorAll('.toggle-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const targetId = button.dataset.target;
+                const targetContent = document.getElementById(targetId);
+                const currentYear = parseInt(button.dataset.year); // Get the year from the clicked button
+                
+                // Find the specific year data
+                const yearData = enemByYearAnalysisData.find(d => d.year === currentYear);
+
+                const toggleIcon = button.querySelector('.toggle-icon');
+                
+                // Close all other accordions (except the one being clicked if it's already active)
+                document.querySelectorAll('.accordion-content.active').forEach(content => {
+                    // Check if the content is the yearly-analysis-output AND it's not the one we're about to activate
+                    if (content.id === 'yearly-analysis-output' && content.dataset.activeYear !== String(currentYear)) {
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                        content.classList.add('hidden'); // Hide content when not active
+                        if (yearlyThemesChartInstance) {
+                            yearlyThemesChartInstance.destroy();
+                            yearlyThemesChartInstance = null;
+                        }
+                    } else if (content.id !== 'yearly-analysis-output') { // For other accordions like skills or modalities
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                        const otherToggleButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
+                        if (otherToggleButton) {
+                            otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
+                        }
+                    }
+                });
+                
+                // If this is the yearly analysis content being toggled
+                if (targetContent.id === 'yearly-analysis-output') {
+                    if (targetContent.classList.contains('active') && targetContent.dataset.activeYear === String(currentYear)) {
+                        // If already active for this year, close it
+                        targetContent.classList.remove('active');
+                        toggleIcon.classList.remove('active');
+                        targetContent.style.maxHeight = null;
+                        targetContent.classList.add('hidden'); // Hide content when closed
+                        if (yearlyThemesChartInstance) {
+                            yearlyThemesChartInstance.destroy();
+                            yearlyThemesChartInstance = null;
+                        }
+                        targetContent.removeAttribute('data-active-year');
+                    } else {
+                        // Activate and show content for this year
+                        targetContent.classList.remove('hidden'); // Show before populating to calculate scrollHeight
+                        
+                        // Populate yearly analysis data
+                        document.getElementById('selectedYear').textContent = yearData.year;
+                        document.getElementById('yearSummary').textContent = yearData.summary;
+                        document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
+                        document.getElementById('yearApplicationType').textContent = yearData.aplicacaoType;
+                        document.getElementById('yearMainThemes').textContent = yearData.mainThemes.join(', ');
+                        document.getElementById('yearCompetencyFocus').textContent = yearData.competencyFocus.join(', ');
+                        document.getElementById('yearHabilidades').textContent = yearData.habilidades.join(', ');
+
+                        // Destroy previous chart if exists
+                        if (yearlyThemesChartInstance) {
+                            yearlyThemesChartInstance.destroy();
+                            yearlyThemesChartInstance = null;
+                        }
+
+                        // Create a new canvas element for the chart
+                        const chartCanvasContainer = document.querySelector('#yearly-analysis-output .chart-container');
+                        chartCanvasContainer.innerHTML = '<canvas id="yearlyThemesChart"></canvas>';
+                        const ctx = document.getElementById('yearlyThemesChart').getContext('2d');
+
+                        // Render the new pie chart for the specific year
+                        yearlyThemesChartInstance = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: yearData.themesData.map(d => wrapLabel(d.theme)),
+                                datasets: [{
+                                    label: '% de Questões',
+                                    data: yearData.themesData.map(d => d.percentage),
+                                    backgroundColor: energeticPlayfulPalette,
+                                    borderColor: '#FFFFFF',
+                                    borderWidth: 2
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'right',
+                                        align: 'center',
+                                        labels: {
+                                            boxWidth: 20,
+                                            padding: 10,
+                                            font: {
+                                                size: 12
+                                            }
+                                        }
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: tooltipTitleCallback
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        targetContent.classList.add('active');
+                        toggleIcon.classList.add('active');
+                        targetContent.style.maxHeight = targetContent.scrollHeight + "px"; // Set max-height dynamically
+                        targetContent.dataset.activeYear = currentYear; // Store which year is active
+                    }
+                } else { // For other accordions (skills, modalities)
+                    if (targetContent.classList.contains('active')) {
+                        targetContent.classList.remove('active');
+                        toggleIcon.classList.remove('active');
+                        targetContent.style.maxHeight = null;
+                    } else {
+                        targetContent.classList.add('active');
+                        toggleIcon.classList.add('active');
+                        targetContent.style.maxHeight = targetContent.scrollHeight + "px"; // Set max-height dynamically
+                    }
+                }
+            });
+        });
+
+        document.getElementById('generateQuestionBtn').addEventListener('click', () => {
+            const topic = document.getElementById('topicInput').value.trim();
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const questionOutput = document.getElementById('questionOutput');
+            const noQuestionFound = document.getElementById('noQuestionFound');
+            const questionYear = document.getElementById('questionYear');
+            const questionType = document.getElementById('questionType');
+            const questionDetailedTopic = document.getElementById('questionDetailedTopic');
+            const questionCompetence = document.getElementById('questionCompetence');
+            const questionSkill = document.getElementById('questionSkill');
+            const questionText = document.getElementById('questionText');
+            const alternativesList = document.getElementById('alternativesList');
+            const correctAnswer = document.getElementById('correctAnswer');
+
+            loadingIndicator.classList.remove('hidden');
+            questionOutput.classList.add('hidden');
+            noQuestionFound.classList.add('hidden');
+
+            setTimeout(() => {
+                const filteredQuestions = pastQuestionsData.filter(q => 
+                    q.tema.toLowerCase().includes(topic.toLowerCase())
+                );
+
+                if (filteredQuestions.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
+                    const selectedQuestion = filteredQuestions[randomIndex];
+
+                    questionYear.textContent = selectedQuestion.ano;
+                    questionType.textContent = selectedQuestion.tipo_aplicacao;
+                    questionDetailedTopic.textContent = selectedQuestion.tema_detalhado;
+                    questionCompetence.textContent = selectedQuestion.competencia;
+                    questionSkill.textContent = selectedQuestion.habilidade;
+                    questionText.textContent = selectedQuestion.questao;
+                    alternativesList.innerHTML = selectedQuestion.alternativas.map((alt, index) => `<li>${alt}</li>`).join('');
+                    correctAnswer.textContent = selectedQuestion.resposta_correta;
+                    questionOutput.classList.remove('hidden');
+                } else {
+                    noQuestionFound.classList.remove('hidden');
+                }
+                loadingIndicator.classList.add('hidden');
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
