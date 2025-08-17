@@ -16,15 +16,20 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Still useful for desktop scaling */
             margin-left: auto;
             margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
+            height: 300px; /* A slightly smaller base height for general use */
+            min-height: 200px; /* Ensure it's not too small */
+            max-height: 40vh; /* Limit for very tall screens, for mobile charts */
+            /* aspect-ratio: 1 / 1; /* Removed as it applies to all charts, but useful for pie charts */
         }
+        /* Specific styles for chart containers on larger screens */
         @media (min-width: 768px) {
             .chart-container {
-                height: 450px;
+                height: 450px; /* Taller on desktop */
+                max-height: 450px; /* Cap for desktop */
+                /* aspect-ratio: auto; /* Allow aspect ratio to vary on desktop if needed */
             }
         }
         .accordion-content {
@@ -62,7 +67,8 @@
                 <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="h-24 mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
 
                 <!-- Links para Redes Sociais -->
-                <div class="flex items-center space-x-4">
+                <!-- Use flex-col on smaller screens, and specific spacing for mobile vs desktop -->
+                <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
                     <!-- Instagram Link -->
                     <a href="https://instagram.com/eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
@@ -248,7 +254,7 @@
             </section>
 
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 class="text-2xl font-bold text-center text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
                 <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
                     <!-- Botões dos anos gerados dinamicamente por JS -->
@@ -384,7 +390,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        position: 'bottom', /* Changed to bottom for better mobile display */
                     },
                     tooltip: {
                         callbacks: {
@@ -971,7 +977,7 @@
                                 maintainAspectRatio: false,
                                 plugins: {
                                     legend: {
-                                        position: 'right',
+                                        position: 'bottom', // Changed from 'right' to 'bottom' for better mobile view
                                         align: 'center',
                                         labels: {
                                             boxWidth: 20,
