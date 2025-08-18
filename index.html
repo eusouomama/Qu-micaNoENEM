@@ -364,10 +364,10 @@
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
                         <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
                         <div id="questionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
-                        <p id="questionText" class="text-gray-800 mb-4"></p>
-                        <p class="font-bold text-lg text-[#6A4A3C] mb-2">Alternativas:</p>
+                        <p id="questionText" class="text-gray-800 mb-4 font-medium"></p>
+                        <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
                         <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
-                        <p class="font-bold text-lg text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
+                        <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
                         <p id="correctAnswer" class="text-gray-800"></p>
                     </div>
                     <div id="noQuestionFound" class="mt-6 text-center text-gray-600 hidden">
@@ -1950,43 +1950,53 @@
             }
         });
 
+        // Updated fullExamPDFLinks with INEP ZIP files and 2024 direct PDFs
         const fullExamPDFLinks = {
-            "2011": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1RG_EkxjAnfFyLyToBxclDD87VE1vcws_/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1KyzJD8S9M2QcvPo-32s-gtjwjjO9MIy6/view?usp=drive_link"
+            "2024": {
+                "ENEM Impresso (1º Dia - Amarelo)": "https://riep.inep.gov.br/items/ef756e8a-327c-489e-bd10-24324aa9d3f5/Cadernodeprova_dia1_amarelo.pdf",
+                "ENEM Impresso (2º Dia - Amarelo)": "https://riep.inep.gov.br/items/ef756e8a-327c-489e-bd10-24324aa9d3f5/Cadernodeprova_dia2_amarelo.pdf",
+                "ENEM PPL (1º Dia - Azul)": "https://static.estrategiavestibulares.com.br/portal/enem-reaplicacao/provas-pdf/Enem_Reaplicacao_2024_Dia_1_Azul.pdf",
+                "ENEM PPL (2º Dia - Azul)": "https://static.estrategiavestibulares.com.br/portal/enem-reaplicacao/provas-pdf/Enem_Reaplicacao_2024_Dia_2_Azul.pdf"
             },
-            "2012": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/171EHxzfWQmhdZ1LXnd3afAUS7Zng_IrM/view?usp=drive_link",
-                "ENEM PPL": "https://docs.google.com/viewer?url=https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos/2012/PPL_2012_Dia_1_AZUL.pdf" // Mantido como exemplo oficial do INEP
-            },
-            "2013": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1Cpc5Kmf1yH7tK_P7ISnUdhGUrePRbY8J/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1WoW_tgFeHOL4kaeAbiOz3Q6rToKpIbUz/view?usp=drive_link"
-            },
-            "2014": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1vjr6mWWIQogYVy6XOhl64-W_uEP-MLnM/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/19c2--WnKKt3V-atPZDt1JnN9XSqrE-A7/view?usp=drive_link"
-            },
-            "2015": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1WV1kRu3zt5m_z1Hh4mfQRZY0aLZ9iosh/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1w23jyAyUngIyhUl6dUXCi6UnH5HnjWjk/view?usp=drive_link"
-            },
-            "2016": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1C3jwCcUvfzNpvhJtR8OyW0Bk4XEq0iG4/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1lD0o_Rjc0bb8xrhX3z9AOklSPMkjMTRz/view?usp=drive_link"
-            },
-            "2017": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1XqVFeMDiAcDCi6zMhXNDTM1n-i6ocg1g/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1JD8oKgILq7MOAa-T8V-D2DIuuyM5hSLD/view?usp=drive_link"
-            },
-            "2018": {
-                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1bk9-92HmU_1kibZjtLwt5Al08tz2jN6H/view?usp=drive_link",
-                "ENEM PPL": "https://drive.google.com/file/d/1FdX271UG-uOjbUtWn2liAn9_gFf0cHmj/view?usp=drive_link"
+            "2023": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2023/enem_2023_provas_e_gabaritos.zip"
             },
             "2022": {
-                "ENEM PPL": "https://drive.google.com/file/d/1zmrBc7kXz_VVJkfurMj514wSXQLXdTUu/view?usp=drive_link"
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2022/enem_2022_provas_e_gabaritos.zip"
+            },
+            "2021": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2021/enem_2021_provas_e_gabaritos.zip"
+            },
+            "2020": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020/enem_2020_provas_e_gabaritos.zip"
+            },
+            "2019": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2019/enem_2019_provas_e_gabaritos.zip"
+            },
+            "2018": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2018/enem_2018_provas_e_gabaritos.zip"
+            },
+            "2017": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2017/enem_2017_provas_e_gabaritos.zip"
+            },
+            "2016": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2016/enem_2016_provas_e_gabaritos.zip"
+            },
+            "2015": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2015/enem_2015_provas_e_gabaritos.zip"
+            },
+            "2014": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2014/enem_2014_provas_e_gabaritos.zip"
+            },
+            "2013": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2013/enem_2013_provas_e_gabaritos.zip"
+            },
+            "2012": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2012/enem_2012_provas_e_gabaritos.zip"
+            },
+            "2011": {
+                "ENEM Provas e Gabaritos (ZIP)": "https://download.inep.gov.br/enem/provas_e_gabaritos/2011/enem_2011_provas_e_gabaritos.zip"
             }
-            // Adicione mais anos e tipos de prova aqui
         };
 
         const fullExamsContainer = document.getElementById('full-exams-container');
@@ -2017,7 +2027,9 @@
             let listHtml = `<ul class="list-disc list-inside text-gray-700 pl-4">`;
             for (const type in yearData) {
                 const link = yearData[type];
-                listHtml += `<li><a href="${link}" target="_blank" class="text-[#EB6841] hover:underline">${type}</a></li>`;
+                // Check if it's a ZIP file or a direct PDF
+                const isZip = link.endsWith('.zip');
+                listHtml += `<li><a href="${link}" target="_blank" class="text-[#EB6841] hover:underline">${type} ${isZip ? '(Download ZIP)' : ''}</a></li>`;
             }
             listHtml += `</ul>`;
             contentDiv.innerHTML = listHtml;
@@ -2034,7 +2046,7 @@
 
                 // Close all other accordions (skills, modalities, yearly analysis)
                 document.querySelectorAll('.accordion-content.active').forEach(content => {
-                    if (content.id !== targetId) { // Do not close self
+                    if (content.id !== targetId && content.id !== 'yearly-analysis-output') { // Do not close self or yearly analysis
                         content.classList.remove('active');
                         content.style.maxHeight = null;
                         content.classList.add('hidden');
