@@ -1,3 +1,25 @@
+<!-- Chosen Palette: Energetic & Playful (based on original GitHub Pages aesthetics) -->
+<!-- Application Structure Plan: The SPA maintains the original single-page scrollable design and visual aesthetic from the user's provided GitHub Pages link. A new thematic section, "Vagas de Medicina no ENEM: UFAL," is added after the "Modalidades de Aplicação" section, mirroring the existing card-like structure and interaction patterns. This section features a clear heading and an interactive button. Clicking this button reveals a detailed HTML table displaying UFAL's Medicine vacancies, categorized by Ampla Concorrência and various quota types (Renda <= 1 Salário Mínimo and Independentemente da Renda, with sub-breakdowns, campus, and semester info). This interactive approach aligns with the user's preference for revealing content on demand, ensuring a clean initial view and enhancing user exploration of specific data points within the established design. -->
+<!-- Visualization & Content Choices:
+- UFAL Medicine Vacancy Data:
+    - Goal: Inform (specific data points: number of vacancies per category, campus, and semester).
+    - Viz/Presentation Method: HTML Table within a collapsible/expandable section, styled to match the original site's clean table design.
+    - Interaction: A button with a 'toggle-button' class controls the visibility of the 'accordion-content' div containing the table. This is consistent with how existing sections (like "Habilidades Essenciais para o ENEM") are implemented in the original design.
+    - Justification: A well-structured table is optimal for presenting detailed, categorical numerical data, ensuring clarity for complex quota information. The collapsible design prevents information overload, enhancing readability and user focus while maintaining the original site's user experience.
+    - Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript for the dynamic toggle functionality.
+- Charts (Areas, Cognitive, Topics, Yearly Themes):
+    - Goal: Inform, Compare, Change.
+    - Viz/Presentation Method: Chart.js Canvas charts.
+    - Interaction: Static presentation for main overview charts; dynamic updates for yearly themes based on button clicks.
+    - Justification: Chart.js offers responsive, interactive charting capabilities suitable for displaying distributions, comparisons, and trends effectively within the infographic. Label wrapping and custom tooltip callbacks enhance data readability for longer labels.
+    - Library/Method: Chart.js via CDN, Vanilla JavaScript for dynamic data handling and updates.
+- General Textual Content & Sections:
+    - Goal: Inform, Organize.
+    - Viz/Presentation Method: HTML text blocks, lists, and semantic sections.
+    - Interaction: Accordion patterns for "Habilidades Essenciais" and "Modalidades de Aplicação" for progressive disclosure.
+    - Justification: Clear text provides essential context and narrative, guiding the user through the data story. Accordions manage complexity, allowing users to delve into details when desired, consistent with the original design.
+    - Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript for accordion logic.
+- Confirmation: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -67,13 +89,11 @@
                 <!-- Links para Redes Sociais -->
                 <!-- Use flex-col on smaller screens, and specific spacing for mobile vs desktop -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
-                    <!-- Instagram Link -->
                     <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
                         <span class="font-semibold">@eusouomama</span>
                     </a>
                     
-                    <!-- YouTube Link -->
                     <a href="https://www.youtube.com/@eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
                         <span class="font-semibold">Química do Mamá</span>
@@ -120,11 +140,11 @@
                 <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais Recorrentes</h3>
                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
                 <ul class="list-disc list-inside text-left text-gray-700 mx-auto max-w-prose mb-6">
-                    <li>**Funções Orgânicas:** Com 35 questões, é um dos temas mais dominantes.</li>
-                    <li>**Reações Orgânicas:** Presente em 27 questões, fundamental para entender transformações.</li>
-                    <li>**Aplicações da Cinética Química:** Cobrada em 24 questões, essencial para processos e velocidade de reação.</li>
-                    <li>**Eletroquímica (Pilhas):** Apareceu em 19 questões, focando em geração de energia.</li>
-                    <li>**Separação de Misturas:** Também com 19 questões, demonstra a importância da Química no cotidiano.</li>
+                    <li>Funções Orgânicas: Com 35 questões, é um dos temas mais dominantes.</li>
+                    <li>Reações Orgânicas: Presente em 27 questões, fundamental para entender transformações.</li>
+                    <li>Aplicações da Cinética Química: Cobrada em 24 questões, essencial para processos e velocidade de reação.</li>
+                    <li>Eletroquímica (Pilhas): Apareceu em 19 questões, focando em geração de energia.</li>
+                    <li>Separação de Misturas: Também com 19 questões, demonstra a importância da Química no cotidiano.</li>
                 </ul>
                 <div class="w-full max-w-4xl mx-auto h-[500px] md:h-[600px] relative">
                     <canvas id="topicsChart"></canvas>
@@ -133,12 +153,11 @@
             
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Coerência e Previsibilidade do Exame</h2>
-                <p class="text-lg text-gray-600 mb-4">A prova de Química no ENEM demonstra uma notável consistência e previsibilidade ao longo dos anos e em suas diferentes modalidades de aplicação.</p>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
                     <div class="flex flex-col items-center">
                         <span class="text-6xl font-black text-[#EB6841]">~15</span>
-                        <p class="text-xl font-bold text-[#6A4A3C]">Questões/Ano</p>
-                        <p class="text-sm text-gray-500">Número estável em todas as edições, incluindo PPL e Digital.</p>
+                        <p class="text-xl font-bold text-[#6A4A3C]">Questões<br>por edição
                     </div>
                     <div class="text-4xl font-bold text-[#00A0B0] transform md:rotate-0 rotate-90">&harr;</div>
                     <div class="flex flex-col items-center">
@@ -256,6 +275,22 @@
                 </div>
             </section>
 
+            <!-- Nova Seção de Vagas de Medicina - Unificada -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Vagas de Medicina no ENEM</h2>
+                <p class="text-lg text-gray-600 mb-6">Selecione a universidade e o campus para visualizar as vagas e notas de corte para o curso de Medicina:</p>
+                <div class="flex justify-center mb-6">
+                    <select id="universityCampusSelector" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] text-gray-800">
+                        <option value="">Selecione uma Universidade e Campus</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div id="vagas-display" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <!-- A tabela com as vagas e notas de corte será injetada aqui pelo JavaScript -->
+                </div>
+            </section>
+            <!-- Fim da Nova Seção de Vagas de Medicina - Unificada -->
+
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
                 <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
@@ -333,13 +368,14 @@
             const lines = [];
             let currentLine = '';
 
-            words.forEach(word => {
-                if ((currentLine + word).length > maxLength) {
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
                     lines.push(currentLine.trim());
-                    currentLine = '';
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
                 }
-                currentLine += word + ' ';
-            });
+            }
             lines.push(currentLine.trim());
             return lines;
         };
@@ -653,7 +689,7 @@
                 ],
                 resposta_correta: 'C) O número de nêutrons.'
             },
-            { // Nova questão
+            {
                 tema: 'Ligações Químicas',
                 ano: '2022',
                 tipo_aplicacao: 'ENEM Impresso',
@@ -670,7 +706,7 @@
                 ],
                 resposta_correta: 'C) CO2'
             },
-            { // Nova questão
+            {
                 tema: 'Equilíbrio Químico',
                 ano: '2021',
                 tipo_aplicacao: 'ENEM PPL',
@@ -687,7 +723,7 @@
                 ],
                 resposta_correta: 'B) Aumenta, pois o equilíbrio se desloca para os produtos.'
             },
-            { // Nova questão
+            {
                 tema: 'Funções Inorgânicas',
                 ano: '2020',
                 tipo_aplicacao: 'ENEM Impresso',
@@ -704,7 +740,7 @@
                 ],
                 resposta_correta: 'B) Hidróxido de sódio (NaOH)'
             },
-            { // Nova questão
+            {
                 tema: 'Reações Orgânicas',
                 ano: '2019',
                 tipo_aplicacao: 'ENEM Digital',
@@ -721,7 +757,7 @@
                 ],
                 resposta_correta: 'D) Éster'
             },
-            { // Nova questão
+            {
                 tema: 'Bioquímica',
                 ano: '2023',
                 tipo_aplicacao: 'ENEM Impresso',
@@ -967,44 +1003,495 @@
             }
         ];
 
-        // Dynamic generation of year buttons
-        const yearButtonsContainer = document.querySelector('.grid.gap-4.mb-8');
-        enemByYearAnalysisData.sort((a, b) => b.year - a.year).forEach(data => {
-            const button = document.createElement('button');
-            button.className = 'bg-[#EDC951] text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out toggle-button';
-            button.setAttribute('data-target', `yearly-analysis-output`); // All buttons target the same content div
-            button.setAttribute('data-year', data.year); // Store year data on button
-            button.innerHTML = `<span>${data.year}</span> <span class="toggle-icon text-xl ml-2">&#x25B6;</span>`;
-            yearButtonsContainer.appendChild(button);
+        // Nova estrutura de dados para todas as universidades e campi
+        const universityData = {
+            "ufal": {
+                name: "Universidade Federal de Alagoas",
+                acronym: "UFAL",
+                state: "AL",
+                campuses: {
+                    "arapiraca": {
+                        campusName: "Arapiraca",
+                        ingresso: "1º Semestre",
+                        totalVagas: 30,
+                        amplaConcorrencia: { vagas: 14, notaCorte: "789,14" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 6, notaCorte: "733,70" },
+                            quilombola: { vagas: 1, notaCorte: "744,72" },
+                            pcd: { vagas: 1, notaCorte: "694,06" },
+                            escolaPublica: { vagas: 1, notaCorte: "783,13" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 5, notaCorte: "749,06" },
+                            pcd: { vagas: 1, notaCorte: "734,96" },
+                            escolaPublica: { vagas: 1, notaCorte: "786,36" }
+                        }
+                    },
+                    "ac-simoes": {
+                        campusName: "A.C. Simões",
+                        ingresso: "1º Semestre",
+                        totalVagas: 100, // 50 AC + 18 PPI R1 + 1 Quil R1 + 3 PcD R1 + 3 EP R1 + 18 PPI IR + 3 PcD IR + 4 EP IR = 100
+                        amplaConcorrencia: { vagas: 50, notaCorte: "791,58" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 18, notaCorte: "730,32" },
+                            quilombola: { vagas: 1, notaCorte: "734,96" },
+                            pcd: { vagas: 3, notaCorte: "711,26" },
+                            escolaPublica: { vagas: 3, notaCorte: "773,36" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 18, notaCorte: "742,14" },
+                            pcd: { vagas: 3, notaCorte: "736,52" },
+                            escolaPublica: { vagas: 4, notaCorte: "786,82" }
+                        }
+                    }
+                }
+            },
+            "ufam": {
+                name: "Universidade Federal do Amazonas",
+                acronym: "UFAM",
+                state: "AM",
+                campuses: {
+                    "manaus": {
+                        campusName: "Manaus",
+                        ingresso: "2º Semestre",
+                        totalVagas: 56, // 23 AC + 11 PP R1 + 2 Ind R1 + 1 Quil R1 + 2 PcD R1 + 1 EP R1 + 11 PP IR + 2 Ind IR + 2 PcD IR + 1 EP IR = 56
+                        amplaConcorrencia: { vagas: 23, notaCorte: "785,79" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 11, notaCorte: "727,10" },
+                            indigenas: { vagas: 2, notaCorte: "705,18" },
+                            quilombola: { vagas: 1, notaCorte: "687,95" },
+                            pcd: { vagas: 2, notaCorte: "732,84" },
+                            escolaPublica: { vagas: 1, notaCorte: "762,61" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 11, notaCorte: "743,49" },
+                            indigenas: { vagas: 2, notaCorte: "723,55" },
+                            pcd: { vagas: 2, notaCorte: "739,30" },
+                            escolaPublica: { vagas: 1, notaCorte: "781,36" }
+                        }
+                    }
+                }
+            },
+            "undf": {
+                name: "Universidade do Distrito Federal",
+                acronym: "UNDF",
+                state: "DF",
+                campuses: {
+                    "escs": { // Chave simplificada
+                        campusName: "ESCS", // Nome simplificado
+                        ingresso: "1º Semestre", 
+                        totalVagas: 80, // 48 AC + 18 Esc Pub + 7 Esc Pub PP + 7 Esc Pub Renda <= 2 SM = 80
+                        amplaConcorrencia: { vagas: 48, notaCorte: "788,55" },
+                        cotasEspecificas: [ // Use a list for less common, more specific quota types
+                            {
+                                name: "Estudantes oriundos de Escolas Públicas",
+                                vagas: 18,
+                                notaCorte: "754,77",
+                                descricao: "Vagas reservadas para candidatos estudantes oriundos de Escolas Públicas integrantes da estrutura da Secretaria de Estado de Educação, unidade integrante do Governo do Estado ou Municípios, vinculadas pedagógica e administrativamente às respectivas Diretorias Regionais de Ensino."
+                            },
+                            {
+                                name: "Escola Pública (Pretos/Pardos)",
+                                vagas: 7,
+                                notaCorte: "722,11",
+                                descricao: "Vagas reservadas para candidatos estudantes oriundos de Escolas Públicas, autodeclarados pretos ou pardos."
+                            },
+                            {
+                                name: "Escola Pública (Renda ≤ 2 Salários Mínimos)",
+                                vagas: 7,
+                                notaCorte: "745,73",
+                                descricao: "Vagas reservadas para candidatos estudantes oriundos de Escolas Públicas, com renda familiar de até 02 (dois) salários mínimos."
+                            }
+                        ]
+                    }
+                }
+            },
+            "ufes": { // Nova universidade adicionada
+                name: "Universidade Federal do Espírito Santo",
+                acronym: "UFES",
+                state: "ES",
+                campuses: {
+                    "thomaz": { // Chave simplificada
+                        campusName: "Thomaz Tomazzi", // Nome completo mantido
+                        ingresso: "1º e 2º Semestre", // Para indicar que as vagas são divididas entre os semestres
+                        totalVagas: 80, // 40 vagas por semestre * 2 semestres
+                        amplaConcorrencia: { vagas: 40, notaCorte: "807,15" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 13, notaCorte: "735,19" },
+                            quilombola: { vagas: 1, notaCorte: "703,23" },
+                            pcd: { vagas: 2, notaCorte: "719,15" },
+                            escolaPublica: { vagas: 4, notaCorte: "781,47" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 13, notaCorte: "767,73" },
+                            pcd: { vagas: 2, notaCorte: "772,05" },
+                            escolaPublica: { vagas: 5, notaCorte: "800,86" }
+                        }
+                    }
+                }
+            },
+            "ufscar": { // Nova universidade
+                name: "Universidade Federal de São Carlos",
+                acronym: "UFSCAR",
+                state: "SP",
+                campuses: {
+                    "saocarlos": { // Alterado aqui para evitar hífens na chave do campus
+                        campusName: "São Carlos", // Mantido para exibição
+                        ingresso: "1º Semestre",
+                        totalVagas: 40,
+                        amplaConcorrencia: { vagas: 20, notaCorte: "804,91" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 5, notaCorte: "747,29" },
+                            quilombola: { vagas: 1, notaCorte: "724,46" },
+                            pcd: { vagas: 3, notaCorte: "723,68" },
+                            escolaPublica: { vagas: 1, notaCorte: "784,33" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 5, notaCorte: "760,61" },
+                            pcd: { vagas: 3, notaCorte: "755,88" },
+                            escolaPublica: { vagas: 2, notaCorte: "800,44" }
+                        }
+                    }
+                }
+            },
+            "unifalmg": { // Alterado aqui para evitar hífens na chave da universidade
+                name: "Universidade Federal de Alfenas",
+                acronym: "UNIFAL-MG",
+                state: "MG",
+                campuses: {
+                    "alfenas": {
+                        campusName: "Alfenas", // Mantido para exibição
+                        ingresso: "1º Semestre",
+                        totalVagas: 60,
+                        amplaConcorrencia: { vagas: 30, notaCorte: "803,99" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 9, notaCorte: "734,08" },
+                            quilombola: { vagas: 1, notaCorte: "712,08" },
+                            pcd: { vagas: 2, notaCorte: "719,18" },
+                            escolaPublica: { vagas: 3, notaCorte: "774,87" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 9, notaCorte: "749,65" },
+                            pcd: { vagas: 2, notaCorte: "751,85" }, 
+                            escolaPublica: { vagas: 4, notaCorte: "794,02" }
+                        }
+                    }
+                }
+            },
+            "ufmg": { // Nova universidade
+                name: "Universidade Federal de Minas Gerais",
+                acronym: "UFMG",
+                state: "MG",
+                campuses: {
+                    "principal": { // Campus Principal
+                        campusName: "Campus Principal",
+                        ingresso: "1º e 2º Semestre",
+                        totalVagas: 320, // 160 por semestre * 2
+                        amplaConcorrencia: { vagas: 160, notaCorte: "812,48" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 48, notaCorte: "735,82" },
+                            quilombola: { vagas: 1, notaCorte: "750,92" },
+                            pcd: { vagas: 7, notaCorte: "733,24" },
+                            escolaPublica: { vagas: 24, notaCorte: "777,60" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 48, notaCorte: "756,66" },
+                            pcd: { vagas: 7, notaCorte: "755,34" },
+                            quilombola: { vagas: 1, notaCorte: "765,96" },
+                            escolaPublica: { vagas: 24, notaCorte: "801,38" }
+                        }
+                    }
+                }
+            },
+            "ufvjm": { // Nova universidade com múltiplos campi
+                name: "Universidade Federal dos Vales do Jequitinhonha e Mucuri",
+                acronym: "UFVJM",
+                state: "MG",
+                campuses: {
+                    "diamantina": {
+                        campusName: "Diamantina",
+                        ingresso: "1º e 2º Semestre",
+                        totalVagas: 30, // 15 por semestre * 2
+                        amplaConcorrencia: { vagas: 15, notaCorte: "800,20" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 5, notaCorte: "741,55" },
+                            quilombola: { vagas: 1, notaCorte: "731,48" },
+                            pcd: { vagas: 1, notaCorte: "724,78" },
+                            escolaPublica: { vagas: 1, notaCorte: "777,06" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 5, notaCorte: "758,63" },
+                            pcd: { vagas: 1, notaCorte: "737,76" },
+                            escolaPublica: { vagas: 1, notaCorte: "788,47" }
+                        }
+                    },
+                    "mucuri": {
+                        campusName: "Mucuri",
+                        ingresso: "1º e 2º Semestre",
+                        totalVagas: 30, // 15 por semestre * 2
+                        amplaConcorrencia: { vagas: 15, notaCorte: "797,83" },
+                        cotasRendaMenor1SM: {
+                            ppi: { vagas: 5, notaCorte: "735,06" },
+                            quilombola: { vagas: 1, notaCorte: "713,18" },
+                            pcd: { vagas: 1, notaCorte: "703,41" },
+                            escolaPublica: { vagas: 1, notaCorte: "778,53" }
+                        },
+                        cotasIndependenteRenda: {
+                            ppi: { vagas: 5, notaCorte: "754,61" },
+                            pcd: { vagas: 1, notaCorte: "746,24" },
+                            escolaPublica: { vagas: 1, notaCorte: "796,10" }
+                        }
+                    }
+                }
+            }
+        };
+
+        const universityCampusSelector = document.getElementById('universityCampusSelector');
+        const vagasDisplay = document.getElementById('vagas-display');
+
+        // Popula o seletor de universidade e campus dinamicamente
+        for (const uniKey in universityData) {
+            const university = universityData[uniKey];
+            for (const campusKey in university.campuses) {
+                const campus = university.campuses[campusKey];
+                const option = document.createElement('option');
+                option.value = `${uniKey}-${campusKey}`;
+                option.textContent = `${university.name} - Campus ${campus.campusName}`;
+                universityCampusSelector.appendChild(option);
+            }
+        }
+
+        universityCampusSelector.addEventListener('change', () => {
+            const selectedValue = universityCampusSelector.value;
+            // console.log('selectedValue:', selectedValue); // DEBUG LOG
+            vagasDisplay.classList.remove('active');
+            vagasDisplay.style.maxHeight = null;
+            vagasDisplay.classList.add('hidden');
+            vagasDisplay.innerHTML = ''; // Limpa o conteúdo anterior
+
+            if (!selectedValue) { 
+                return; 
+            }
+
+            const parts = selectedValue.split('-', 2); // Split only on the first hyphen
+            // console.log('parts after split:', parts); // DEBUG LOG
+            const uniKey = parts[0];
+            const campusKey = parts[1];
+            
+            const university = universityData[uniKey];
+
+            // Adiciona verificação para dados da universidade
+            if (!university) {
+                console.error(`Erro: Dados da universidade não encontrados para a chave: ${uniKey}`);
+                vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados da universidade selecionada.</p>`;
+                vagasDisplay.classList.remove('hidden');
+                vagasDisplay.classList.add('active');
+                vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + "px";
+                return;
+            }
+
+            const campusData = university.campuses[campusKey];
+
+            // Adiciona verificação para dados do campus
+            if (!campusData) {
+                console.error(`Erro: Dados do campus não encontrados para a chave: ${campusKey} na universidade: ${university.name}`);
+                vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados do campus selecionado. Chave do Campus: ${campusKey}</p>`; 
+                vagasDisplay.classList.remove('hidden');
+                vagasDisplay.classList.add('active');
+                vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + "px";
+                return;
+            }
+
+
+            let tableHtml = `
+                <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">Detalhes das Vagas de Medicina na ${university.name} (Campus ${campusData.campusName})</h4>
+                <table class="w-full text-sm text-left text-gray-700 mt-4 border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 border-b border-gray-200">
+                            <th class="p-3 font-semibold text-[#00A0B0]">Modalidade</th>
+                            <th class="p-3 font-semibold text-[#00A0B0]">Vagas</th>
+                            <th class="p-3 font-semibold text-[#00A0B0]">Nota de Corte</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 font-semibold">Universidade</td>
+                            <td class="p-3" colspan="2">${university.name} (${university.acronym})</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 font-semibold">Campus</td>
+                            <td class="p-3" colspan="2">${campusData.campusName}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 font-semibold">Estado</td>
+                            <td class="p-3" colspan="2">${university.state}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 font-semibold">Ingresso</td>
+                            <td class="p-3" colspan="2">${campusData.ingresso}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 font-bold text-[#EB6841]">
+                            <td class="p-3">Ampla Concorrência (AC)</td>
+                            <td class="p-3">${campusData.amplaConcorrencia.vagas}</td>
+                            <td class="p-3">${campusData.amplaConcorrencia.notaCorte}</td>
+                        </tr>
+            `;
+
+            // Conditionally add sections based on data structure
+            if (campusData.cotasRendaMenor1SM) {
+                tableHtml += `
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="p-3 font-semibold" colspan="3">Cotas - Renda Familiar Bruta Per Capita ≤ 1 Salário Mínimo:</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">PPI (Pretos, Pardos e Indígenas)</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.ppi.vagas}</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.ppi.notaCorte}</td>
+                        </tr>
+                `;
+                if (campusData.cotasRendaMenor1SM.indigenas) { // Specific for UFAM
+                    tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Indígenas</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.indigenas.vagas}</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.indigenas.notaCorte}</td>
+                        </tr>
+                    `;
+                }
+                tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Quilombola</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.quilombola.vagas}</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.quilombola.notaCorte}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">PcD (Pessoas com Deficiência)</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.pcd.vagas}</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.pcd.notaCorte}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Escola Pública</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.escolaPublica.vagas}</td>
+                            <td class="p-3">${campusData.cotasRendaMenor1SM.escolaPublica.notaCorte}</td>
+                        </tr>
+                `;
+            }
+
+            if (campusData.cotasIndependenteRenda) {
+                tableHtml += `
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="p-3 font-semibold" colspan="3">Cotas - Independentemente da Renda:</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">PPI (Pretos, Pardos e Indígenas)</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.ppi.vagas}</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.ppi.notaCorte}</td>
+                        </tr>
+                `;
+                if (campusData.cotasIndependenteRenda.indigenas) { // Specific for UFAM
+                    tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Indígenas</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.indigenas.vagas}</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.indigenas.notaCorte}</td>
+                        </tr>
+                    `;
+                }
+                // Check if quilombola exists in cotasIndependenteRenda for UFMG
+                if (campusData.cotasIndependenteRenda.quilombola) {
+                    tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Quilombola</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.quilombola.vagas}</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.quilombola.notaCorte}</td>
+                        </tr>
+                    `;
+                }
+                tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">PcD (Pessoas com Deficiência)</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.pcd.vagas}</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.pcd.notaCorte}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">Escola Pública</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.escolaPublica.vagas}</td>
+                            <td class="p-3">${campusData.cotasIndependenteRenda.escolaPublica.notaCorte}</td>
+                        </tr>
+                `;
+            }
+
+            if (campusData.cotasEspecificas) { // Specific for UNDF
+                tableHtml += `
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="p-3 font-semibold" colspan="3">Cotas Específicas:</td>
+                        </tr>
+                `;
+                campusData.cotasEspecificas.forEach(cota => {
+                    tableHtml += `
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 pl-6">${cota.name}<br><span class="text-xs text-gray-500">${cota.descricao}</span></td>
+                            <td class="p-3">${cota.vagas}</td>
+                            <td class="p-3">${cota.notaCorte}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            tableHtml += `
+                        <tr>
+                            <td class="p-3 font-semibold text-[#00A0B0]">Total Geral de Vagas ${university.name} - ${campusData.campusName}</td>
+                            <td class="p-3 font-bold text-[#00A0B0]" colspan="2">${campusData.totalVagas}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            vagasDisplay.innerHTML = tableHtml;
+            vagasDisplay.classList.remove('hidden');
+            vagasDisplay.classList.add('active');
+            vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + "px";
         });
 
+        // Início do código original que precisa ser mantido
         document.querySelectorAll('.toggle-button').forEach(button => {
             button.addEventListener('click', (event) => {
                 const targetId = button.dataset.target;
                 const targetContent = document.getElementById(targetId);
-                const currentYear = parseInt(button.dataset.year); // Get the year from the clicked button
+                const currentYear = parseInt(button.dataset.year);
                 
-                // Find the specific year data
                 const yearData = enemByYearAnalysisData.find(d => d.year === currentYear);
 
                 const toggleIcon = button.querySelector('.toggle-icon');
                 
-                // Close all other accordions (except the one being clicked if it's already active)
+                // Close other active accordions, except if it's the target being re-clicked to close itself
                 document.querySelectorAll('.accordion-content.active').forEach(content => {
-                    // Check if the content is the yearly-analysis-output AND it's not the one we're about to activate
                     if (content.id === 'yearly-analysis-output' && content.dataset.activeYear !== String(currentYear)) {
                         content.classList.remove('active');
                         content.style.maxHeight = null;
-                        content.classList.add('hidden'); // Hide content when not active
+                        content.classList.add('hidden');
                         if (yearlyThemesChartInstance) {
                             yearlyThemesChartInstance.destroy();
                             yearlyThemesChartInstance = null;
                         }
-                    } else { // For all other accordions (skills, modalities)
-                        if (content.classList.contains('active')) { // If another accordion is active, close it
+                    } else if (content.id === targetId && content.classList.contains('active')) {
+                        // This handles the case where the same button is clicked again to close its section.
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                        content.classList.add('hidden');
+                        if (content.id === 'yearly-analysis-output' && yearlyThemesChartInstance) {
+                           yearlyThemesChartInstance.destroy();
+                           yearlyThemesChartInstance = null;
+                        }
+                        const associatedButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
+                        if (associatedButton) {
+                            associatedButton.querySelector('.toggle-icon').classList.remove('active');
+                        }
+                        return; // Exit to prevent re-opening immediately
+                    } else { 
+                        // Close any other active accordion content that is not the target
+                        if (content.classList.contains('active')) {
                             content.classList.remove('active');
                             content.style.maxHeight = null;
-                            content.classList.add('hidden'); // Ensure it's hidden when closed
+                            content.classList.add('hidden');
                             const otherToggleButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
                             if (otherToggleButton) {
                                 otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
@@ -1013,96 +1500,78 @@
                     }
                 });
                 
-                // If this is the yearly analysis content being toggled
+                // Open or re-open the target accordion
                 if (targetContent.id === 'yearly-analysis-output') {
-                    if (targetContent.classList.contains('active') && targetContent.dataset.activeYear === String(currentYear)) {
-                        // If already active for this year, close it
-                        targetContent.classList.remove('active');
-                        toggleIcon.classList.remove('active');
-                        targetContent.style.maxHeight = null;
-                        targetContent.classList.add('hidden'); // Hide content when closed
-                        if (yearlyThemesChartInstance) {
-                            yearlyThemesChartInstance.destroy();
-                            yearlyThemesChartInstance = null;
-                        }
-                        targetContent.removeAttribute('data-active-year');
-                    } else {
-                        // Activate and show content for this year
-                        targetContent.classList.remove('hidden'); // Show before populating to calculate scrollHeight
-                        
-                        // Populate yearly analysis data
-                        document.getElementById('selectedYear').textContent = yearData.year;
-                        document.getElementById('yearSummary').textContent = yearData.summary;
-                        document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
-                        document.getElementById('yearApplicationType').textContent = yearData.aplicacaoType;
-                        document.getElementById('yearMainThemes').textContent = yearData.mainThemes.join(', ');
-                        document.getElementById('yearCompetencyFocus').textContent = yearData.competencyFocus.join(', ');
-                        document.getElementById('yearHabilidades').textContent = yearData.habilidades.join(', ');
+                    targetContent.classList.remove('hidden');
+                    
+                    document.getElementById('selectedYear').textContent = yearData.year;
+                    document.getElementById('yearSummary').textContent = yearData.summary;
+                    document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
+                    document.getElementById('yearApplicationType').textContent = yearData.aplicacaoType;
+                    document.getElementById('yearMainThemes').textContent = yearData.mainThemes.join(', ');
+                    document.getElementById('yearCompetencyFocus').textContent = yearData.competencyFocus.join(', ');
+                    document.getElementById('yearHabilidades').textContent = yearData.habilidades.join(', ');
 
-                        // Destroy previous chart if exists
-                        if (yearlyThemesChartInstance) {
-                            yearlyThemesChartInstance.destroy();
-                            yearlyThemesChartInstance = null;
-                        }
+                    if (yearlyThemesChartInstance) {
+                        yearlyThemesChartInstance.destroy();
+                        yearlyThemesChartInstance = null;
+                    }
 
-                        // Create a new canvas element for the chart
-                        const chartCanvasContainer = document.querySelector('#yearly-analysis-output .chart-container');
-                        chartCanvasContainer.innerHTML = '<canvas id="yearlyThemesChart"></canvas>';
-                        const ctx = document.getElementById('yearlyThemesChart').getContext('2d');
+                    const chartCanvasContainer = document.querySelector('#yearly-analysis-output .chart-container');
+                    chartCanvasContainer.innerHTML = '<canvas id="yearlyThemesChart"></canvas>';
+                    const ctx = document.getElementById('yearlyThemesChart').getContext('2d');
 
-                        // Render the new pie chart for the specific year
-                        yearlyThemesChartInstance = new Chart(ctx, {
-                            type: 'pie',
-                            data: {
-                                labels: yearData.themesData.map(d => wrapLabel(d.theme)),
-                                datasets: [{
-                                    label: '% de Questões',
-                                    data: yearData.themesData.map(d => d.percentage),
-                                    backgroundColor: energeticPlayfulPalette,
-                                    borderColor: '#FFFFFF',
-                                    borderWidth: 2
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        position: 'bottom', // Changed from 'right' to 'bottom' for better mobile view
-                                        align: 'center',
-                                        labels: {
-                                            boxWidth: 20,
-                                            padding: 10,
-                                            font: {
-                                                size: 12
-                                            }
+                    yearlyThemesChartInstance = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: yearData.themesData.map(d => wrapLabel(d.theme)),
+                            datasets: [{
+                                label: '% de Questões',
+                                data: yearData.themesData.map(d => d.percentage),
+                                backgroundColor: energeticPlayfulPalette,
+                                borderColor: '#FFFFFF',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    align: 'center',
+                                    labels: {
+                                        boxWidth: 20,
+                                        padding: 10,
+                                        font: {
+                                            size: 12
                                         }
-                                    },
-                                    tooltip: {
-                                        callbacks: {
-                                            title: tooltipTitleCallback
-                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        title: tooltipTitleCallback
                                     }
                                 }
                             }
-                        });
+                        }
+                    });
 
-                        targetContent.classList.add('active');
-                        toggleIcon.classList.add('active');
-                        targetContent.style.maxHeight = targetContent.scrollHeight + "px"; // Set max-height dynamically
-                        targetContent.dataset.activeYear = currentYear; // Store which year is active
-                    }
-                } else { // For other accordions (skills, modalities)
+                    targetContent.classList.add('active');
+                    toggleIcon.classList.add('active');
+                    targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+                    targetContent.dataset.activeYear = currentYear;
+                } else {
                     if (targetContent.classList.contains('active')) {
                         targetContent.classList.remove('active');
                         toggleIcon.classList.remove('active');
                         targetContent.style.maxHeight = null;
-                        targetContent.classList.add('hidden'); // Add hidden when closing
+                        targetContent.classList.add('hidden');
                     } else {
-                        targetContent.classList.remove('hidden'); // Remove hidden before animating open
+                        targetContent.classList.remove('hidden');
                         targetContent.classList.add('active');
                         toggleIcon.classList.add('active');
-                        targetContent.style.maxHeight = targetContent.scrollHeight + "px"; // Set max-height dynamically
+                        targetContent.style.maxHeight = targetContent.scrollHeight + "px";
                     }
                 }
             });
