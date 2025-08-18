@@ -58,7 +58,7 @@
             transition: max-height 0.5s ease-out;
         }
         .accordion-content.active {
-            max-height: 1000px; /* Large enough to contain chart and text, will be dynamically set by JS */
+            max-height: 2500px; /* Increased to accommodate detailed question table + example question */
         }
         .toggle-button {
             cursor: pointer;
@@ -71,6 +71,14 @@
         }
         .toggle-icon.active {
             transform: rotate(90deg);
+        }
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1rem; /* mt-4 */
+            margin-bottom: 1rem; /* mb-4 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
         }
     </style>
 </head>
@@ -253,7 +261,7 @@
             </section>
             
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h3 class="text-2xl font-bold text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
                  <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
                     <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
@@ -294,7 +302,7 @@
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
                 <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8" id="yearly-buttons-container">
                     <!-- Botões dos anos gerados dinamicamente por JS -->
                 </div>
                 <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -308,6 +316,32 @@
                     <div class="chart-container mt-6">
                         <canvas id="yearlyThemesChart"></canvas>
                     </div>
+
+                    <!-- Nova seção para a tabela de questões detalhadas do ano -->
+                    <div id="yearlyDetailedQuestionsTableContainer" class="mt-8 pt-4 border-t border-gray-300">
+                        <!-- Tabela de questões detalhadas será injetada aqui -->
+                    </div>
+                    <!-- Fim da nova seção para a tabela -->
+
+                    <!-- Seção para a questão de exemplo do ano (existente) -->
+                    <div id="yearlyQuestionSection" class="mt-8 pt-4 border-t border-gray-300">
+                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span id="yearlyQuestionYearDisplay"></span>:</h5>
+                        <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
+                        <div id="yearlyQuestionContent" class="hidden">
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
+                            <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
+                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
+                            <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
+                            <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
+                            <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4"></ul>
+                            <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
+                            <p id="yearlyCorrectAnswer" class="text-gray-800 font-semibold"></p>
+                        </div>
+                        <div id="noYearlyQuestionFound" class="text-center text-gray-600 hidden">Nenhuma questão de exemplo detalhada encontrada para este ano em nossos registros.</div>
+                    </div>
+                    <!-- Fim da seção da questão de exemplo -->
+
                 </div>
             </section>
 
@@ -329,6 +363,7 @@
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="questionDetailedTopic"></span></p>
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
                         <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
+                        <div id="questionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
                         <p id="questionText" class="text-gray-800 mb-4"></p>
                         <p class="font-bold text-lg text-[#6A4A3C] mb-2">Alternativas:</p>
                         <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
@@ -340,6 +375,16 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Nova seção para Provas Completas do ENEM para Download -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8" id="full-exams-download">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔗 Provas Completas do ENEM para Download 🔗</h2>
+                <p class="text-lg text-gray-600 mb-6">Acesse as provas completas do ENEM em PDF para aprofundar seus estudos. Clique no ano para expandir e ver as modalidades disponíveis:</p>
+                <div id="full-exams-container" class="space-y-4">
+                    <!-- Conteúdo será gerado via JavaScript -->
+                </div>
+            </section>
+            <!-- Fim da Nova seção -->
 
         </main>
         
@@ -517,7 +562,8 @@
                     'D) A ponte salina permite o fluxo de elétrons.',
                     'E) A redução do Zn2+ ocorre no ânodo.'
                 ],
-                resposta_correta: 'C) Os elétrons fluem do zinco para o cobre no circuito externo.'
+                resposta_correta: 'C) Os elétrons fluem do zinco para o cobre no circuito externo.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Termoquímica',
@@ -534,7 +580,8 @@
                     'D) +76.1 kJ/mol',
                     'E) -584.5 kJ/mol'
                 ],
-                resposta_correta: 'A) -890.3 kJ/mol'
+                resposta_correta: 'A) -890.3 kJ/mol',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Funções Orgânicas',
@@ -551,7 +598,8 @@
                     'D) Metanal',
                     'E) Benzeno'
                 ],
-                resposta_correta: 'C) Acetato de isopentila'
+                resposta_correta: 'C) Acetato de isopentila',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Cinética Química',
@@ -568,7 +616,8 @@
                     'D) Aumenta, pois a energia cinética das moléculas aumenta, favorecendo colisões eficazes.',
                     'E) Não se altera, pois a velocidade é constante para cada reação.'
                 ],
-                resposta_correta: 'D) Aumenta, pois a energia cinética das moléculas aumenta, favorecendo colisões eficazes.'
+                resposta_correta: 'D) Aumenta, pois a energia cinética das moléculas aumenta, favorecendo colisões eficazes.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Soluções',
@@ -585,7 +634,8 @@
                     'D) 0.1 M',
                     'E) 10.0 M'
                 ],
-                resposta_correta: 'B) 1.0 M'
+                resposta_correta: 'B) 1.0 M',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Separação de Misturas',
@@ -602,7 +652,8 @@
                     'D) Dissolução, filtração e evaporação.',
                     'E) Peneiração, centrifugação e decantação.'
                 ],
-                resposta_correta: 'D) Dissolução, filtração e evaporação.'
+                resposta_correta: 'D) Dissolução, filtração e evaporação.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Controle de Poluição',
@@ -619,7 +670,8 @@
                     'D) Promove a proliferação de algas no ecossistema aquático.',
                     'E) Reduz a demanda bioquímica de oxigênio (DBO).'
                 ],
-                resposta_correta: 'C) Evita a alteração do pH dos corpos d\'água, protegendo a vida aquática.'
+                resposta_correta: 'C) Evita a alteração do pH dos corpos d\'água, protegendo a vida aquática.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Poluição da Água',
@@ -636,7 +688,8 @@
                     'D) Construção de barragens em rios.',
                     'E) Introdução de espécies exóticas em ecossistemas aquáticos.'
                 ],
-                resposta_correta: 'B) Descarte inadequado de esgoto doméstico e agrícola.'
+                resposta_correta: 'B) Descarte inadequado de esgoto doméstico e agrícola.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Tipos de Reações Químicas',
@@ -653,7 +706,8 @@
                     'D) Reação de dupla troca ou precipitação.',
                     'E) Reação de combustão.'
                 ],
-                resposta_correta: 'C) Reação de síntese ou adição.'
+                resposta_correta: 'C) Reação de síntese ou adição.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Entalpia das Reações',
@@ -670,7 +724,8 @@
                     'D) Irreversível, sem retorno aos reagentes.',
                     'E) De neutralização, formando sal e água.'
                 ],
-                resposta_correta: 'B) Endotérmica, absorvendo calor do ambiente.'
+                resposta_correta: 'B) Endotérmica, absorvendo calor do ambiente.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Estrutura Atômica',
@@ -687,7 +742,8 @@
                     'D) A carga elétrica do átomo.',
                     'E) A massa atômica de um próton.'
                 ],
-                resposta_correta: 'C) O número de nêutrons.'
+                resposta_correta: 'C) O número de nêutrons.',
+                imageUrl: 'https://placehold.co/400x200/B0A000/FFFFFF?text=Imagem+Exemplo+Questão' // Exemplo de imagem para essa questão
             },
             {
                 tema: 'Ligações Químicas',
@@ -704,7 +760,8 @@
                     'D) HCl',
                     'E) CH3OH'
                 ],
-                resposta_correta: 'C) CO2'
+                resposta_correta: 'C) CO2',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Equilíbrio Químico',
@@ -721,7 +778,8 @@
                     'D) Diminui, pois a temperatura do sistema aumenta.',
                     'E) Aumenta, mas o equilíbrio não é afetado.'
                 ],
-                resposta_correta: 'B) Aumenta, pois o equilíbrio se desloca para os produtos.'
+                resposta_correta: 'B) Aumenta, pois o equilíbrio se desloca para os produtos.',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Funções Inorgânicas',
@@ -738,7 +796,8 @@
                     'D) Água (H2O)',
                     'E) Amônia (NH3)'
                 ],
-                resposta_correta: 'B) Hidróxido de sódio (NaOH)'
+                resposta_correta: 'B) Hidróxido de sódio (NaOH)',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Reações Orgânicas',
@@ -755,7 +814,8 @@
                     'D) Éster',
                     'E) Cetona'
                 ],
-                resposta_correta: 'D) Éster'
+                resposta_correta: 'D) Éster',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             },
             {
                 tema: 'Bioquímica',
@@ -772,9 +832,201 @@
                     'D) Frutose e Galactose',
                     'E) Glicose e Sacarose'
                 ],
-                resposta_correta: 'C) Glicose e Galactose'
+                resposta_correta: 'C) Glicose e Galactose',
+                imageUrl: '' // Adicione o URL da imagem aqui, se houver
             }
         ];
+
+        // Removido 'pdfLink' de detailedYearlyQuestionsData para focar em links de prova completa
+        const detailedYearlyQuestionsData = [
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Reações Orgânicas", 
+                enunciado_resumo: "Questão sobre esterificação / sabões e detergentes",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Termoquímica",
+                enunciado_resumo: "Questão sobre cálculo de ΔH em gráficos",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Cinética Química",
+                enunciado_resumo: "Questão sobre fatores que influenciam velocidade",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Funções Orgânicas",
+                enunciado_resumo: "Identificação de grupos funcionais (álcool, éter etc.)",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Eletroquímica",
+                enunciado_resumo: "Questão sobre pilhas / oxidação e redução",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Química Ambiental",
+                enunciado_resumo: "Questão sobre chuva ácida / emissão de SO₂",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Soluções & Concentração",
+                enunciado_resumo: "Cálculo de molaridade",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Ligações Químicas",
+                enunciado_resumo: "Ligações intermoleculares / propriedades",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Isomeria",
+                enunciado_resumo: "Plana x geométrica",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Radioatividade",
+                enunciado_resumo: "Meia-vida",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Estequiometria",
+                enunciado_resumo: "Relações molares",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Propriedades Coligativas",
+                enunciado_resumo: "Questão sobre ebulição/congelamento",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Química Geral",
+                enunciado_resumo: "Tendências na Tabela Periódica",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Polímeros",
+                enunciado_resumo: "Polimerização por adição",
+            },
+            {
+                ano: 2012,
+                tipo: "Impressa",
+                tema: "Oxirredução Aplicada",
+                enunciado_resumo: "Agentes oxidantes/redutores",
+            },
+            {
+                ano: 2012,
+                tipo: "Digital",
+                tema: "Reações Orgânicas",
+                enunciado_resumo: "Questão sobre reações de combustão de compostos orgânicos",
+            },
+            {
+                ano: 2012,
+                tipo: "Digital",
+                tema: "Termoquímica",
+                enunciado_resumo: "Questão sobre entalpia de reação",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Biocombustíveis",
+                enunciado_resumo: "Questão sobre produção de etanol a partir de vegetais.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Polímeros",
+                enunciado_resumo: "Propriedades dos polímeros condutores.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Soluções",
+                enunciado_resumo: "Concentração.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Gases",
+                enunciado_resumo: "Gases ideais e relações estequiométricas.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Funções Inorgânicas",
+                enunciado_resumo: "Propriedades dos compostos inorgânicos, sais.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Radioatividade",
+                enunciado_resumo: "Fissão nuclear e energia nuclear.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Transformações Químicas e Energia",
+                enunciado_resumo: "Calor de reação e entalpia.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Química Orgânica",
+                enunciado_resumo: "Ligação iônica e interações eletrostáticas.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Reações Orgânicas",
+                enunciado_resumo: "Saponificação / hidrólise / produção de biodiesel.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Estequiometria",
+                enunciado_resumo: "Relações estequiométricas.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Alotropia",
+                enunciado_resumo: "Propriedades dos alótropos do carbono.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Transformações Química",
+                enunciado_resumo: "Fermentação.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Química Orgânica",
+                enunciado_resumo: "Hidrocarbonetos.",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Reações Inorgânicas",
+                enunciado_resumo: "Propriedades dos compostos orgânicos."
+            }
+        ];
+
 
         const enemByYearAnalysisData = [
             {
@@ -1220,7 +1472,7 @@
                         },
                         cotasIndependenteRenda: {
                             ppi: { vagas: 5, notaCorte: "758,63" },
-                            pcd: { vagas: 1, notaCorte: "737,76" },
+                            pcd: { vagas: 1, notaCota: "737,76" },
                             escolaPublica: { vagas: 1, notaCorte: "788,47" }
                         }
                     },
@@ -1247,6 +1499,7 @@
 
         const universityCampusSelector = document.getElementById('universityCampusSelector');
         const vagasDisplay = document.getElementById('vagas-display');
+        const yearlyButtonsContainer = document.getElementById('yearly-buttons-container'); // Get the container
 
         // Popula o seletor de universidade e campus dinamicamente
         for (const uniKey in universityData) {
@@ -1262,7 +1515,6 @@
 
         universityCampusSelector.addEventListener('change', () => {
             const selectedValue = universityCampusSelector.value;
-            // console.log('selectedValue:', selectedValue); // DEBUG LOG
             vagasDisplay.classList.remove('active');
             vagasDisplay.style.maxHeight = null;
             vagasDisplay.classList.add('hidden');
@@ -1272,14 +1524,12 @@
                 return; 
             }
 
-            const parts = selectedValue.split('-', 2); // Split only on the first hyphen
-            // console.log('parts after split:', parts); // DEBUG LOG
+            const parts = selectedValue.split('-', 2); 
             const uniKey = parts[0];
             const campusKey = parts[1];
             
             const university = universityData[uniKey];
 
-            // Adiciona verificação para dados da universidade
             if (!university) {
                 console.error(`Erro: Dados da universidade não encontrados para a chave: ${uniKey}`);
                 vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados da universidade selecionada.</p>`;
@@ -1291,7 +1541,6 @@
 
             const campusData = university.campuses[campusKey];
 
-            // Adiciona verificação para dados do campus
             if (!campusData) {
                 console.error(`Erro: Dados do campus não encontrados para a chave: ${campusKey} na universidade: ${university.name}`);
                 vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados do campus selecionado. Chave do Campus: ${campusKey}</p>`; 
@@ -1324,10 +1573,6 @@
                         <tr class="border-b border-gray-200">
                             <td class="p-3 font-semibold">Estado</td>
                             <td class="p-3" colspan="2">${university.state}</td>
-                        </tr>
-                        <tr class="border-b border-gray-200">
-                            <td class="p-3 font-semibold">Ingresso</td>
-                            <td class="p-3" colspan="2">${campusData.ingresso}</td>
                         </tr>
                         <tr class="border-b border-gray-200 font-bold text-[#EB6841]">
                             <td class="p-3">Ampla Concorrência (AC)</td>
@@ -1451,44 +1696,29 @@
             vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + "px";
         });
 
-        // Início do código original que precisa ser mantido
-        document.querySelectorAll('.toggle-button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const targetId = button.dataset.target;
-                const targetContent = document.getElementById(targetId);
-                const currentYear = parseInt(button.dataset.year);
-                
-                const yearData = enemByYearAnalysisData.find(d => d.year === currentYear);
+        // Loop para criar os botões de ano dinamicamente
+        enemByYearAnalysisData.forEach(yearData => {
+            const yearButton = document.createElement('button');
+            yearButton.classList.add('p-3', 'border-2', 'border-[#EDC951]', 'rounded-lg', 'text-center', 'hover:bg-[#EDC951]', 'hover:text-white', 'transition', 'duration-300', 'ease-in-out', 'yearly-toggle-button'); // Added new class
+            yearButton.setAttribute('data-year', yearData.year);
+            yearButton.innerHTML = `<span class="text-xl font-bold">${yearData.year}</span><span class="toggle-icon text-2xl ml-2">&#x25B6;</span>`;
+            yearlyButtonsContainer.appendChild(yearButton);
+        });
 
-                const toggleIcon = button.querySelector('.toggle-icon');
-                
-                // Close other active accordions, except if it's the target being re-clicked to close itself
-                document.querySelectorAll('.accordion-content.active').forEach(content => {
-                    if (content.id === 'yearly-analysis-output' && content.dataset.activeYear !== String(currentYear)) {
-                        content.classList.remove('active');
-                        content.style.maxHeight = null;
-                        content.classList.add('hidden');
-                        if (yearlyThemesChartInstance) {
-                            yearlyThemesChartInstance.destroy();
-                            yearlyThemesChartInstance = null;
-                        }
-                    } else if (content.id === targetId && content.classList.contains('active')) {
-                        // This handles the case where the same button is clicked again to close its section.
-                        content.classList.remove('active');
-                        content.style.maxHeight = null;
-                        content.classList.add('hidden');
-                        if (content.id === 'yearly-analysis-output' && yearlyThemesChartInstance) {
-                           yearlyThemesChartInstance.destroy();
-                           yearlyThemesChartInstance = null;
-                        }
-                        const associatedButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
-                        if (associatedButton) {
-                            associatedButton.querySelector('.toggle-icon').classList.remove('active');
-                        }
-                        return; // Exit to prevent re-opening immediately
-                    } else { 
-                        // Close any other active accordion content that is not the target
-                        if (content.classList.contains('active')) {
+        // Event delegation for yearly analysis buttons
+        document.body.addEventListener('click', (event) => {
+            const button = event.target.closest('.yearly-toggle-button'); // Target only year buttons
+            if (!button) {
+                // Handle other generic toggle buttons if they exist
+                const generalToggleButton = event.target.closest('.toggle-button');
+                if (generalToggleButton && !generalToggleButton.classList.contains('yearly-toggle-button')) {
+                    const targetId = generalToggleButton.dataset.target;
+                    const targetContent = document.getElementById(targetId);
+                    const toggleIcon = generalToggleButton.querySelector('.toggle-icon');
+
+                    // Close all other active accordion sections EXCEPT the yearly analysis section and full exams section
+                    document.querySelectorAll('.accordion-content.active').forEach(content => {
+                        if (content.id !== targetId && content.id !== 'yearly-analysis-output' && content.id !== 'full-exams-container-inner') {
                             content.classList.remove('active');
                             content.style.maxHeight = null;
                             content.classList.add('hidden');
@@ -1497,71 +1727,8 @@
                                 otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
                             }
                         }
-                    }
-                });
-                
-                // Open or re-open the target accordion
-                if (targetContent.id === 'yearly-analysis-output') {
-                    targetContent.classList.remove('hidden');
-                    
-                    document.getElementById('selectedYear').textContent = yearData.year;
-                    document.getElementById('yearSummary').textContent = yearData.summary;
-                    document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
-                    document.getElementById('yearApplicationType').textContent = yearData.aplicacaoType;
-                    document.getElementById('yearMainThemes').textContent = yearData.mainThemes.join(', ');
-                    document.getElementById('yearCompetencyFocus').textContent = yearData.competencyFocus.join(', ');
-                    document.getElementById('yearHabilidades').textContent = yearData.habilidades.join(', ');
-
-                    if (yearlyThemesChartInstance) {
-                        yearlyThemesChartInstance.destroy();
-                        yearlyThemesChartInstance = null;
-                    }
-
-                    const chartCanvasContainer = document.querySelector('#yearly-analysis-output .chart-container');
-                    chartCanvasContainer.innerHTML = '<canvas id="yearlyThemesChart"></canvas>';
-                    const ctx = document.getElementById('yearlyThemesChart').getContext('2d');
-
-                    yearlyThemesChartInstance = new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: yearData.themesData.map(d => wrapLabel(d.theme)),
-                            datasets: [{
-                                label: '% de Questões',
-                                data: yearData.themesData.map(d => d.percentage),
-                                backgroundColor: energeticPlayfulPalette,
-                                borderColor: '#FFFFFF',
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: 'bottom',
-                                    align: 'center',
-                                    labels: {
-                                        boxWidth: 20,
-                                        padding: 10,
-                                        font: {
-                                            size: 12
-                                        }
-                                    }
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        title: tooltipTitleCallback
-                                    }
-                                }
-                            }
-                        }
                     });
 
-                    targetContent.classList.add('active');
-                    toggleIcon.classList.add('active');
-                    targetContent.style.maxHeight = targetContent.scrollHeight + "px";
-                    targetContent.dataset.activeYear = currentYear;
-                } else {
                     if (targetContent.classList.contains('active')) {
                         targetContent.classList.remove('active');
                         toggleIcon.classList.remove('active');
@@ -1574,8 +1741,324 @@
                         targetContent.style.maxHeight = targetContent.scrollHeight + "px";
                     }
                 }
+                return; // Exit if not a year button or a general toggle button
+            }
+
+            const targetId = 'yearly-analysis-output'; // Fixed target ID for yearly analysis
+            const targetContent = document.getElementById(targetId);
+            const currentYear = parseInt(button.dataset.year);
+            
+            const yearData = enemByYearAnalysisData.find(d => d.year === currentYear);
+
+            const toggleIcon = button.querySelector('.toggle-icon');
+            
+            // Close all other active accordion sections (skills, modalities, other years)
+            document.querySelectorAll('.accordion-content.active').forEach(content => {
+                if (content.id !== targetId || content.dataset.activeYear !== String(currentYear)) {
+                    content.classList.remove('active');
+                    content.style.maxHeight = null;
+                    content.classList.add('hidden');
+                    const associatedButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
+                     // Also toggle icon if it's a general toggle button
+                    if (associatedButton) {
+                        associatedButton.querySelector('.toggle-icon').classList.remove('active');
+                    }
+                }
+                // Destroy chart if it's the yearly chart
+                if (content.id === 'yearly-analysis-output' && yearlyThemesChartInstance) {
+                    yearlyThemesChartInstance.destroy();
+                    yearlyThemesChartInstance = null;
+                }
+            });
+
+            // Toggle the clicked year's content
+            if (targetContent.classList.contains('active') && targetContent.dataset.activeYear === String(currentYear)) {
+                // If it's already active and it's the same year, close it
+                targetContent.classList.remove('active');
+                targetContent.style.maxHeight = null;
+                targetContent.classList.add('hidden');
+                toggleIcon.classList.remove('active');
+                if (yearlyThemesChartInstance) {
+                    yearlyThemesChartInstance.destroy();
+                    yearlyThemesChartInstance = null;
+                }
+                targetContent.removeAttribute('data-active-year');
+            } else {
+                // Open the selected year's content
+                targetContent.classList.remove('hidden');
+                
+                document.getElementById('selectedYear').textContent = yearData.year;
+                document.getElementById('yearSummary').textContent = yearData.summary;
+                document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
+                document.getElementById('yearApplicationType').textContent = yearData.aplicacaoType;
+                document.getElementById('yearMainThemes').textContent = yearData.mainThemes.join(', ');
+                document.getElementById('yearCompetencyFocus').textContent = yearData.competencyFocus.join(', ');
+                document.getElementById('yearHabilidades').textContent = yearData.habilidades.join(', ');
+
+                // Re-initialize chart
+                if (yearlyThemesChartInstance) {
+                    yearlyThemesChartInstance.destroy();
+                    yearlyThemesChartInstance = null;
+                }
+
+                const chartCanvasContainer = document.querySelector('#yearly-analysis-output .chart-container');
+                chartCanvasContainer.innerHTML = '<canvas id="yearlyThemesChart"></canvas>';
+                const ctx = document.getElementById('yearlyThemesChart').getContext('2d');
+
+                yearlyThemesChartInstance = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: yearData.themesData.map(d => wrapLabel(d.theme)),
+                        datasets: [{
+                            label: '% de Questões',
+                            data: yearData.themesData.map(d => d.percentage),
+                            backgroundColor: energeticPlayfulPalette,
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                align: 'center',
+                                labels: {
+                                    boxWidth: 20,
+                                    padding: 10,
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Load and display detailed questions table for the selected year
+                const yearlyDetailedQuestionsTableContainer = document.getElementById('yearlyDetailedQuestionsTableContainer');
+                
+                // Construct the combined array directly for display
+                const questionsForDisplay = detailedYearlyQuestionsData.filter(q => q.ano === currentYear);
+
+                if (questionsForDisplay.length > 0) {
+                    let tableHtml = `
+                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questões Detalhadas da Prova de Química do ENEM ${currentYear}:</h5>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-700 mt-4 border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-100 border-b border-gray-200">
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Ano</th>
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Tipo</th>
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Tema</th>
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Enunciado (Resumo)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+                    questionsForDisplay.forEach(q => {
+                        tableHtml += `
+                            <tr class="border-b border-gray-200">
+                                <td class="p-3">${q.ano}</td>
+                                <td class="p-3">${q.tipo}</td>
+                                <td class="p-3">${q.tema}</td>
+                                <td class="p-3">${q.enunciado_resumo}</td>
+                            </tr>
+                        `;
+                    });
+                    tableHtml += `
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    yearlyDetailedQuestionsTableContainer.innerHTML = tableHtml;
+                    yearlyDetailedQuestionsTableContainer.classList.remove('hidden');
+                } else {
+                    yearlyDetailedQuestionsTableContainer.innerHTML = `<p class="text-center text-gray-600">Nenhuma informação detalhada de questões disponível para o ENEM ${currentYear}.</p>`;
+                    yearlyDetailedQuestionsTableContainer.classList.remove('hidden');
+                }
+
+
+                // Load and display example question for the selected year (from pastQuestionsData)
+                const yearlyQuestionSection = document.getElementById('yearlyQuestionSection');
+                const yearlyQuestionLoading = document.getElementById('yearlyQuestionLoading');
+                const yearlyQuestionContent = document.getElementById('yearlyQuestionContent');
+                const noYearlyQuestionFound = document.getElementById('noYearlyQuestionFound');
+                const yearlyQuestionImageContainer = document.getElementById('yearlyQuestionImageContainer');
+
+
+                yearlyQuestionLoading.classList.remove('hidden');
+                yearlyQuestionContent.classList.add('hidden');
+                noYearlyQuestionFound.classList.add('hidden');
+                yearlyQuestionImageContainer.innerHTML = ''; // Clear previous image
+
+                // Simulate loading
+                setTimeout(() => {
+                    // Filter from the comprehensive pastQuestionsData (which has full questions)
+                    const questionsForExample = pastQuestionsData.filter(q => q.ano === String(currentYear));
+                    if (questionsForExample.length > 0) {
+                        const randomQuestion = questionsForExample[Math.floor(Math.random() * questionsForExample.length)];
+                        
+                        document.getElementById('yearlyQuestionYearDisplay').textContent = randomQuestion.ano;
+                        document.getElementById('yearlyQuestionDetailedTopic').textContent = randomQuestion.tema_detalhado;
+                        document.getElementById('yearlyQuestionCompetence').textContent = randomQuestion.competencia;
+                        document.getElementById('yearlyQuestionSkill').textContent = randomQuestion.habilidade;
+                        document.getElementById('yearlyQuestionText').textContent = randomQuestion.questao;
+                        
+                        const yearlyAlternativesList = document.getElementById('yearlyAlternativesList');
+                        yearlyAlternativesList.innerHTML = randomQuestion.alternativas.map(alt => `<li>${alt}</li>`).join('');
+                        
+                        document.getElementById('yearlyCorrectAnswer').textContent = randomQuestion.resposta_correta;
+
+                        // Display image if available
+                        if (randomQuestion.imageUrl) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = randomQuestion.imageUrl;
+                            imgElement.alt = `Imagem da Questão do ENEM ${randomQuestion.ano}`;
+                            imgElement.classList.add('question-image'); // Add styling class
+                            imgElement.onerror = function() {
+                                this.onerror=null;
+                                this.src=`https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
+                                this.alt="Imagem da questão não disponível";
+                            };
+                            yearlyQuestionImageContainer.appendChild(imgElement);
+                        }
+
+
+                        yearlyQuestionContent.classList.remove('hidden');
+                        noYearlyQuestionFound.classList.add('hidden');
+                    } else {
+                        yearlyQuestionContent.classList.add('hidden');
+                        noYearlyQuestionFound.classList.remove('hidden');
+                    }
+                    yearlyQuestionLoading.classList.add('hidden');
+                }, 500); // Small delay for loading effect
+
+                targetContent.classList.add('active');
+                toggleIcon.classList.add('active');
+                targetContent.dataset.activeYear = currentYear; // Store the active year
+                // Update maxHeight after content is loaded
+                setTimeout(() => {
+                    targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+                }, 510); // Slightly more than loading delay
+            }
+        });
+
+        const fullExamPDFLinks = {
+            "2011": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1RG_EkxjAnfFyLyToBxclDD87VE1vcws_/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1KyzJD8S9M2QcvPo-32s-gtjwjjO9MIy6/view?usp=drive_link"
+            },
+            "2012": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/171EHxzfWQmhdZ1LXnd3afAUS7Zng_IrM/view?usp=drive_link",
+                "ENEM PPL": "https://docs.google.com/viewer?url=https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos/2012/PPL_2012_Dia_1_AZUL.pdf" // Mantido como exemplo oficial do INEP
+            },
+            "2013": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1Cpc5Kmf1yH7tK_P7ISnUdhGUrePRbY8J/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1WoW_tgFeHOL4kaeAbiOz3Q6rToKpIbUz/view?usp=drive_link"
+            },
+            "2014": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1vjr6mWWIQogYVy6XOhl64-W_uEP-MLnM/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/19c2--WnKKt3V-atPZDt1JnN9XSqrE-A7/view?usp=drive_link"
+            },
+            "2015": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1WV1kRu3zt5m_z1Hh4mfQRZY0aLZ9iosh/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1w23jyAyUngIyhUl6dUXCi6UnH5HnjWjk/view?usp=drive_link"
+            },
+            "2016": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1C3jwCcUvfzNpvhJtR8OyW0Bk4XEq0iG4/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1lD0o_Rjc0bb8xrhX3z9AOklSPMkjMTRz/view?usp=drive_link"
+            },
+            "2017": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1XqVFeMDiAcDCi6zMhXNDTM1n-i6ocg1g/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1JD8oKgILq7MOAa-T8V-D2DIuuyM5hSLD/view?usp=drive_link"
+            },
+            "2018": {
+                "ENEM Impresso (1ª aplicação)": "https://drive.google.com/file/d/1bk9-92HmU_1kibZjtLwt5Al08tz2jN6H/view?usp=drive_link",
+                "ENEM PPL": "https://drive.google.com/file/d/1FdX271UG-uOjbUtWn2liAn9_gFf0cHmj/view?usp=drive_link"
+            },
+            "2022": {
+                "ENEM PPL": "https://drive.google.com/file/d/1zmrBc7kXz_VVJkfurMj514wSXQLXdTUu/view?usp=drive_link"
+            }
+            // Adicione mais anos e tipos de prova aqui
+        };
+
+        const fullExamsContainer = document.getElementById('full-exams-container');
+
+        // Populate the full exams section
+        // Clear previous content to avoid duplicates if this script runs multiple times
+        fullExamsContainer.innerHTML = '';
+        const sortedYears = Object.keys(fullExamPDFLinks).sort((a, b) => parseInt(b) - parseInt(a)); // Sort years in descending order
+
+        sortedYears.forEach(year => {
+            const yearData = fullExamPDFLinks[year];
+            const yearAccordion = document.createElement('div');
+            yearAccordion.classList.add('p-4', 'bg-gray-50', 'rounded-lg', 'shadow-sm', 'border', 'border-gray-200');
+
+            const toggleButton = document.createElement('div');
+            toggleButton.classList.add('toggle-button', 'text-left');
+            toggleButton.setAttribute('data-target', `full-exam-content-${year}`);
+            toggleButton.innerHTML = `
+                <h4 class="font-bold text-lg text-[#6A4A3C]">Provas do ENEM ${year} <span class="text-xs font-normal text-gray-500 ml-2">(Clique para expandir)</span></h4>
+                <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
+            `;
+            yearAccordion.appendChild(toggleButton);
+
+            const contentDiv = document.createElement('div');
+            contentDiv.id = `full-exam-content-${year}`;
+            contentDiv.classList.add('accordion-content', 'hidden', 'mt-2');
+
+            let listHtml = `<ul class="list-disc list-inside text-gray-700 pl-4">`;
+            for (const type in yearData) {
+                const link = yearData[type];
+                listHtml += `<li><a href="${link}" target="_blank" class="text-[#EB6841] hover:underline">${type}</a></li>`;
+            }
+            listHtml += `</ul>`;
+            contentDiv.innerHTML = listHtml;
+            yearAccordion.appendChild(contentDiv);
+            fullExamsContainer.appendChild(yearAccordion);
+        });
+
+        // Add event listeners for the new full exams section accordions
+        document.querySelectorAll('#full-exams-download .toggle-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const targetId = button.dataset.target;
+                const targetContent = document.getElementById(targetId);
+                const toggleIcon = button.querySelector('.toggle-icon');
+
+                // Close all other accordions (skills, modalities, yearly analysis)
+                document.querySelectorAll('.accordion-content.active').forEach(content => {
+                    if (content.id !== targetId) { // Do not close self
+                        content.classList.remove('active');
+                        content.style.maxHeight = null;
+                        content.classList.add('hidden');
+                        const otherToggleButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
+                        if (otherToggleButton) {
+                            otherToggleButton.querySelector('.toggle-icon').classList.remove('active');
+                        }
+                    }
+                });
+
+                if (targetContent.classList.contains('active')) {
+                    targetContent.classList.remove('active');
+                    toggleIcon.classList.remove('active');
+                    targetContent.style.maxHeight = null;
+                    targetContent.classList.add('hidden');
+                } else {
+                    targetContent.classList.remove('hidden');
+                    targetContent.classList.add('active');
+                    toggleIcon.classList.add('active');
+                    targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+                }
             });
         });
+
 
         document.getElementById('generateQuestionBtn').addEventListener('click', () => {
             const topic = document.getElementById('topicInput').value.trim();
@@ -1590,10 +2073,12 @@
             const questionText = document.getElementById('questionText');
             const alternativesList = document.getElementById('alternativesList');
             const correctAnswer = document.getElementById('correctAnswer');
+            const questionImageContainer = document.getElementById('questionImageContainer'); // Get image container
 
             loadingIndicator.classList.remove('hidden');
             questionOutput.classList.add('hidden');
             noQuestionFound.classList.add('hidden');
+            questionImageContainer.innerHTML = ''; // Clear previous image
 
             setTimeout(() => {
                 const filteredQuestions = pastQuestionsData.filter(q => 
@@ -1613,6 +2098,21 @@
                     questionText.textContent = selectedQuestion.questao;
                     alternativesList.innerHTML = selectedQuestion.alternativas.map((alt, index) => `<li>${alt}</li>`).join('');
                     correctAnswer.textContent = selectedQuestion.resposta_correta;
+
+                    // Display image if available
+                    if (selectedQuestion.imageUrl) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = selectedQuestion.imageUrl;
+                        imgElement.alt = `Imagem da Questão do ENEM ${selectedQuestion.ano}`;
+                        imgElement.classList.add('question-image'); // Add styling class
+                        imgElement.onerror = function() {
+                            this.onerror=null;
+                            this.src=`https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
+                            this.alt="Imagem da questão não disponível";
+                        };
+                        questionImageContainer.appendChild(imgElement);
+                    }
+
                     questionOutput.classList.remove('hidden');
                 } else {
                     noQuestionFound.classList.remove('hidden');
