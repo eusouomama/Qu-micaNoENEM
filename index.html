@@ -1,25 +1,3 @@
-<!-- Chosen Palette: Energetic & Playful (based on original GitHub Pages aesthetics) -->
-<!-- Application Structure Plan: The SPA maintains the original single-page scrollable design and visual aesthetic from the user's provided GitHub Pages link. A new thematic section, "Vagas de Medicina no ENEM: UFAL," is added after the "Modalidades de Aplicação" section, mirroring the existing card-like structure and interaction patterns. This section features a clear heading and an interactive button. Clicking this button reveals a detailed HTML table displaying UFAL's Medicine vacancies, categorized by Ampla Concorrência and various quota types (Renda <= 1 Salário Mínimo and Independentemente da Renda, with sub-breakdowns, campus, and semester info). This interactive approach aligns with the user's preference for revealing content on demand, ensuring a clean initial view and enhancing user exploration of specific data points within the established design. -->
-<!-- Visualization & Content Choices:
-- UFAL Medicine Vacancy Data:
-    - Goal: Inform (specific data points: number of vacancies per category, campus, and semester).
-    - Viz/Presentation Method: HTML Table within a collapsible/expandable section, styled to match the original site's clean table design.
-    - Interaction: A button with a 'toggle-button' class controls the visibility of the 'accordion-content' div containing the table. This is consistent with how existing sections (like "Habilidades Essenciais para o ENEM") are implemented in the original design.
-    - Justification: A well-structured table is optimal for presenting detailed, categorical numerical data, ensuring clarity for complex quota information. The collapsible design prevents information overload, enhancing readability and user focus while maintaining the original site's user experience.
-    - Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript for the dynamic toggle functionality.
-- Charts (Areas, Cognitive, Topics, Yearly Themes):
-    - Goal: Inform, Compare, Change.
-    - Viz/Presentation Method: Chart.js Canvas charts.
-    - Interaction: Static presentation for main overview charts; dynamic updates for yearly themes based on button clicks.
-    - Justification: Chart.js offers responsive, interactive charting capabilities suitable for displaying distributions, comparisons, and trends effectively within the infographic. Label wrapping and custom tooltip callbacks enhance data readability for longer labels.
-    - Library/Method: Chart.js via CDN, Vanilla JavaScript for dynamic data handling and updates.
-- General Textual Content & Sections:
-    - Goal: Inform, Organize.
-    - Viz/Presentation Method: HTML text blocks, lists, and semantic sections.
-    - Interaction: Accordion patterns for "Habilidades Essenciais" and "Modalidades de Aplicação" for progressive disclosure.
-    - Justification: Clear text provides essential context and narrative, guiding the user through the data story. Accordions manage complexity, allowing users to delve into details when desired, consistent with the original design.
-    - Library/Method: Pure HTML/CSS (Tailwind) and Vanilla JavaScript for accordion logic.
-- Confirmation: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -137,7 +115,7 @@
 
                 <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
                     <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">A Filosofia do Exame: Foco Cognitivo</h3>
-                     <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para interpretar fenômenos e solucionar problemas práticos.</p>
+                    <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para interpretar fenômenos e solucionar problemas práticos.</p>
                     <div class="chart-container flex-grow">
                         <canvas id="cognitiveChart"></canvas>
                     </div>
@@ -262,7 +240,7 @@
             
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
-                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
                     <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
                         <span class="text-2xl font-bold">ENEM 1ª aplicação</span>
@@ -310,7 +288,7 @@
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span id="yearSummary"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span id="yearChemistryQuestions"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearApplicationType"></span></p>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
+                    <p class="text-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
                     <p class="text-gray-800 mb-4"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
                     <div class="chart-container mt-6">
@@ -329,7 +307,7 @@
                         <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
                         <div id="yearlyQuestionContent" class="hidden">
                             <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
+                            <p class="text-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
                             <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
                             <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
                             <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
@@ -543,8 +521,8 @@
                         }
                     },
                     y: {
-                       ticks: {
-                           color: '#6A4A3C'
+                        ticks: {
+                            color: '#6A4A3C'
                         },
                         grid: {
                           display: false
@@ -855,193 +833,670 @@
             }
         ];
 
-        // Removido 'pdfLink' de detailedYearlyQuestionsData para focar em links de prova completa
+        // Detailed questions data for each year
         const detailedYearlyQuestionsData = [
+            // ENEM 2011 Data
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Ligações Químicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Isomeria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Radioatividade",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "Impressa",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Ligações Químicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Isomeria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Radioatividade",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2011,
+                tipo: "PPL",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            // ENEM 2012 Data
             {
                 ano: 2012,
                 tipo: "Impressa",
-                tema: "Reações Orgânicas", 
-                enunciado_resumo: "Questão sobre esterificação / sabões e detergentes",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Termoquímica",
-                enunciado_resumo: "Questão sobre cálculo de ΔH em gráficos",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Cinética Química",
-                enunciado_resumo: "Questão sobre fatores que influenciam velocidade",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Funções Orgânicas",
-                enunciado_resumo: "Identificação de grupos funcionais (álcool, éter etc.)",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Eletroquímica",
-                enunciado_resumo: "Questão sobre pilhas / oxidação e redução",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Química Ambiental",
-                enunciado_resumo: "Questão sobre chuva ácida / emissão de SO₂",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
-                tema: "Soluções & Concentração",
-                enunciado_resumo: "Cálculo de molaridade",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Ligações Químicas",
-                enunciado_resumo: "Ligações intermoleculares / propriedades",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Isomeria",
-                enunciado_resumo: "Plana x geométrica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Radioatividade",
-                enunciado_resumo: "Meia-vida",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "Impressa",
                 tema: "Estequiometria",
-                enunciado_resumo: "Relações molares",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
-                tipo: "Impressa",
-                tema: "Propriedades Coligativas",
-                enunciado_resumo: "Questão sobre ebulição/congelamento",
-            },
-            {
-                ano: 2012,
-                tipo: "Impressa",
-                tema: "Química Geral",
-                enunciado_resumo: "Tendências na Tabela Periódica",
-            },
-            {
-                ano: 2012,
-                tipo: "Impressa",
-                tema: "Polímeros",
-                enunciado_resumo: "Polimerização por adição",
-            },
-            {
-                ano: 2012,
-                tipo: "Impressa",
-                tema: "Oxirredução Aplicada",
-                enunciado_resumo: "Agentes oxidantes/redutores",
-            },
-            {
-                ano: 2012,
-                tipo: "Digital",
+                tipo: "PPL",
                 tema: "Reações Orgânicas",
-                enunciado_resumo: "Questão sobre reações de combustão de compostos orgânicos",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
-                tipo: "Digital",
+                tipo: "PPL",
                 tema: "Termoquímica",
-                enunciado_resumo: "Questão sobre entalpia de reação",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
-                tema: "Biocombustíveis",
-                enunciado_resumo: "Questão sobre produção de etanol a partir de vegetais.",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
-                tema: "Polímeros",
-                enunciado_resumo: "Propriedades dos polímeros condutores.",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
-                tema: "Soluções",
-                enunciado_resumo: "Concentração.",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
-                tema: "Gases",
-                enunciado_resumo: "Gases ideais e relações estequiométricas.",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
-                tema: "Funções Inorgânicas",
-                enunciado_resumo: "Propriedades dos compostos inorgânicos, sais.",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Ligações Químicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2012,
+                tipo: "PPL",
+                tema: "Isomeria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
                 tema: "Radioatividade",
-                enunciado_resumo: "Fissão nuclear e energia nuclear.",
-            },
-            {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Transformações Químicas e Energia",
-                enunciado_resumo: "Calor de reação e entalpia.",
-            },
-            {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Química Orgânica",
-                enunciado_resumo: "Ligação iônica e interações eletrostáticas.",
-            },
-            {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Reações Orgânicas",
-                enunciado_resumo: "Saponificação / hidrólise / produção de biodiesel.",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
                 ano: 2012,
                 tipo: "PPL",
                 tema: "Estequiometria",
-                enunciado_resumo: "Relações estequiométricas.",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            // ENEM 2013 Data
+            {
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Alotropia",
-                enunciado_resumo: "Propriedades dos alótropos do carbono.",
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Transformações Química",
-                enunciado_resumo: "Fermentação.",
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
-                ano: 2012,
-                tipo: "PPL",
-                tema: "Química Orgânica",
-                enunciado_resumo: "Hidrocarbonetos.",
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             },
             {
-                ano: 2012,
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "Impressa",
+                tema: "Radioatividade",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
                 tipo: "PPL",
-                tema: "Reações Inorgânicas",
-                enunciado_resumo: "Propriedades dos compostos orgânicos."
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2013,
+                tipo: "PPL",
+                tema: "Radioatividade",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            // ENEM 2014 Data
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "Impressa",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2014,
+                tipo: "PPL",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            // ENEM 2015 Data
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "Impressa",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Reações Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Funções Orgânicas",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Termoquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Eletroquímica",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Química Ambiental",
+                competencia: "Competência de Área 7",
+                habilidade: "H25",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Cinética Química",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Soluções e Concentração",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
+            },
+            {
+                ano: 2015,
+                tipo: "PPL",
+                tema: "Estequiometria",
+                competencia: "Competência de Área 7",
+                habilidade: "H24",
             }
         ];
 
@@ -1875,7 +2330,8 @@
                                         <th class="p-3 font-semibold text-[#00A0B0]">Ano</th>
                                         <th class="p-3 font-semibold text-[#00A0B0]">Tipo</th>
                                         <th class="p-3 font-semibold text-[#00A0B0]">Tema</th>
-                                        <th class="p-3 font-semibold text-[#00A0B0]">Enunciado (Resumo)</th>
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Competência</th>
+                                        <th class="p-3 font-semibold text-[#00A0B0]">Habilidade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1886,7 +2342,8 @@
                                 <td class="p-3">${q.ano}</td>
                                 <td class="p-3">${q.tipo}</td>
                                 <td class="p-3">${q.tema}</td>
-                                <td class="p-3">${q.enunciado_resumo}</td>
+                                <td class="p-3">${q.competencia}</td>
+                                <td class="p-3">${q.habilidade}</td>
                             </tr>
                         `;
                     });
