@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,75 +14,105 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Still useful for desktop scaling */
+            max-width: 600px;
+            /* Still useful for desktop scaling */
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* A slightly smaller base height for general use */
-            min-height: 200px; /* Ensure it's not too small */
-            max-height: 40vh; /* Limit for very tall screens, for mobile charts */
+            height: 300px;
+            /* A slightly smaller base height for general use */
+            min-height: 200px;
+            /* Ensure it's not too small */
+            max-height: 40vh;
+            /* Limit for very tall screens, for mobile charts */
         }
+
         /* Specific styles for chart containers on larger screens */
         @media (min-width: 768px) {
             .chart-container {
-                height: 450px; /* Taller on desktop */
-                max-height: 450px; /* Cap for desktop */
+                height: 450px;
+                /* Taller on desktop */
+                max-height: 450px;
+                /* Cap for desktop */
             }
         }
+
         .accordion-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
         }
+
         .accordion-content.active {
-            max-height: 2500px; /* Increased to accommodate detailed question table + example question */
+            max-height: 2500px;
+            /* Increased to accommodate detailed question table + example question */
         }
+
         .toggle-button {
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .toggle-icon {
             transition: transform 0.3s ease-out;
         }
+
         .toggle-icon.active {
             transform: rotate(90deg);
         }
+
         .question-image {
             max-width: 100%;
             height: auto;
-            border-radius: 0.5rem; /* rounded-lg */
-            margin-top: 1rem; /* mt-4 */
-            margin-bottom: 1rem; /* mb-4 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            margin-top: 1rem;
+            /* mt-4 */
+            margin-bottom: 1rem;
+            /* mb-4 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* shadow-md */
         }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
     <div class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wider">Química no ENEM: Seu Roteiro de Estudos</h1>
-            <p class="text-lg md:text-xl text-[#6A4A3C] mt-2">Uma análise aprofundada de conteúdos, habilidades e oportunidades de ingresso em Medicina.</p>
+            <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wider">Química no ENEM: Seu
+                Roteiro de Estudos</h1>
+            <p class="text-lg md:text-xl text-[#6A4A3C] mt-2">Uma análise aprofundada de conteúdos, habilidades e
+                oportunidades de ingresso em Medicina.</p>
 
             <div class="mt-6 flex flex-col items-center space-y-4">
                 <!-- Imagem da Sua Marca -->
-                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="h-24 mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca"
+                    class="h-24 mx-auto"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
 
                 <!-- Links para Redes Sociais -->
                 <!-- Use flex-col on smaller screens, and specific spacing for mobile vs desktop -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
-                    <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
+                    <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank"
+                        class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png"
+                            alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full"
+                            onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
                         <span class="font-semibold">@eusouomama</span>
                     </a>
-                    
-                    <a href="https://www.youtube.com/@eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
+
+                    <a href="https://www.youtube.com/@eusouomama" target="_blank"
+                        class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png"
+                            alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full"
+                            onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
                         <span class="font-semibold">Química do Mamá</span>
                     </a>
                 </div>
@@ -90,32 +121,40 @@
         </header>
 
         <main class="space-y-10">
-            
+
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-2">Um Pilar Consistente na Prova</h2>
-                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível
+                    na prova de Ciências da Natureza.</p>
                 <div class="flex justify-center items-center">
                     <div class="text-8xl font-black text-[#EB6841]">~15</div>
                     <div class="text-2xl font-bold text-left ml-4 text-[#6A4A3C]">
                         Questões<br>por edição
                     </div>
                 </div>
-                <p class="mt-4 text-sm text-gray-500">Isso representa aproximadamente 1/3 da prova de Ciências da Natureza, destacando a importância estratégica de um preparo focado.</p>
+                <p class="mt-4 text-sm text-gray-500">Isso representa aproximadamente 1/3 da prova de Ciências da
+                    Natureza, destacando a importância estratégica de um preparo focado.</p>
             </section>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
-                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">O Panorama Geral: Distribuição por Área</h3>
-                    <p class="text-center text-gray-600 mb-4 text-sm">A prova do ENEM concentra-se em três grandes pilares da Química, que juntos, somam quase 80% de todas as questões. O foco está nos fundamentos, nas transformações de energia e nos compostos do cotidiano.</p>
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">O Panorama Geral: Distribuição por
+                        Área</h3>
+                    <p class="text-center text-gray-600 mb-4 text-sm">A prova do ENEM concentra-se em três grandes
+                        pilares da Química, que juntos, somam quase 80% de todas as questões. O foco está nos
+                        fundamentos, nas transformações de energia e nos compostos do cotidiano.</p>
                     <div class="chart-container flex-grow">
                         <canvas id="areasChart"></canvas>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
-                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">A Filosofia do Exame: Foco Cognitivo</h3>
-                    <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para interpretar fenômenos e solucionar problemas práticos.</p>
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">A Filosofia do Exame: Foco Cognitivo
+                    </h3>
+                    <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como
+                        você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para
+                        interpretar fenômenos e solucionar problemas práticos.</p>
                     <div class="chart-container flex-grow">
                         <canvas id="cognitiveChart"></canvas>
                     </div>
@@ -123,23 +162,29 @@
             </div>
 
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais Recorrentes</h3>
-                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais
+                    Recorrentes</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro
+                    nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental
+                    para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
                 <ul class="list-disc list-inside text-left text-gray-700 mx-auto max-w-prose mb-6">
                     <li>Funções Orgânicas: Com 35 questões, é um dos temas mais dominantes.</li>
                     <li>Reações Orgânicas: Presente em 27 questões, fundamental para entender transformações.</li>
-                    <li>Aplicações da Cinética Química: Cobrada em 24 questões, essencial para processos e velocidade de reação.</li>
+                    <li>Aplicações da Cinética Química: Cobrada em 24 questões, essencial para processos e velocidade de
+                        reação.</li>
                     <li>Eletroquímica (Pilhas): Apareceu em 19 questões, focando em geração de energia.</li>
-                    <li>Separação de Misturas: Também com 19 questões, demonstra a importância da Química no cotidiano.</li>
+                    <li>Separação de Misturas: Também com 19 questões, demonstra a importância da Química no cotidiano.
+                    </li>
                 </ul>
                 <div class="w-full max-w-4xl mx-auto h-[500px] md:h-[600px] relative">
                     <canvas id="topicsChart"></canvas>
                 </div>
             </section>
-            
+
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Coerência e Previsibilidade do Exame</h2>
-                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível
+                    na prova de Ciências da Natureza.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
                     <div class="flex flex-col items-center">
                         <span class="text-6xl font-black text-[#EB6841]">~15</span>
@@ -149,129 +194,200 @@
                     <div class="flex flex-col items-center">
                         <span class="text-6xl font-black text-[#EDC951]">Idêntica</span>
                         <p class="text-xl font-bold text-[#6A4A3C]">Matriz de Referência</p>
-                        <p class="text-sm text-gray-500">Conteúdo, estrutura e filosofia pedagógica equivalentes entre Impresso, PPL e Digital.</p>
+                        <p class="text-sm text-gray-500">Conteúdo, estrutura e filosofia pedagógica equivalentes entre
+                            Impresso, PPL e Digital.</p>
                     </div>
                 </div>
-                <p class="mt-6 text-base text-gray-700">Essa estabilidade permite um planejamento de estudos mais eficiente, focando nos pilares e na abordagem do exame sem surpresas quanto ao formato.</p>
+                <p class="mt-6 text-base text-gray-700">Essa estabilidade permite um planejamento de estudos mais
+                    eficiente, focando nos pilares e na abordagem do exame sem surpresas quanto ao formato.</p>
             </section>
 
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Interdisciplinaridade e Contextualização</h2>
-                <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"> <!-- Changed to items-start for better alignment -->
-                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras
+                    disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <!-- Changed to items-start for better alignment -->
+                    <div
+                        class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <p class="text-5xl mb-4 text-[#EB6841]">&#x1F30D;</p>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental e Sustentabilidade</h4>
-                        <p class="text-sm text-gray-500 mt-2">Temas como **poluição da água (15 questões)** e **controle de poluição (17 questões)** frequentemente exigem a compreensão de fenômenos globais e soluções sustentáveis, muitas vezes ligando-se à **Biologia** (ciclos biogeoquímicos) e **Geografia** (impactos regionais).</p>
+                        <p class="text-sm text-gray-500 mt-2">Temas como **poluição da água (15 questões)** e **controle
+                            de poluição (17 questões)** frequentemente exigem a compreensão de fenômenos globais e
+                            soluções sustentáveis, muitas vezes ligando-se à **Biologia** (ciclos biogeoquímicos) e
+                            **Geografia** (impactos regionais).</p>
                     </div>
-                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                    <div
+                        class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <p class="text-5xl mb-4 text-[#CC333F]">&#x1F52C;</p>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química, Energia e Tecnologia</h4>
-                        <p class="text-sm text-gray-500 mt-2">A **Termoquímica (13 questões)** é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando-se à **Física** (transformações de energia) e à **Tecnologia** (desenvolvimento de novas fontes). Questões sobre **Eletroquímica** frequentemente exploram o funcionamento de pilhas e baterias em dispositivos eletrônicos ou carros elétricos.</p>
+                        <p class="text-sm text-gray-500 mt-2">A **Termoquímica (13 questões)** é abordada em contextos
+                            de combustão de veículos e processos energéticos em seres vivos, conectando-se à **Física**
+                            (transformações de energia) e à **Tecnologia** (desenvolvimento de novas fontes). Questões
+                            sobre **Eletroquímica** frequentemente exploram o funcionamento de pilhas e baterias em
+                            dispositivos eletrônicos ou carros elétricos.</p>
                     </div>
-                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2"> <!-- Span full width on larger screens -->
+                    <div
+                        class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2">
+                        <!-- Span full width on larger screens -->
                         <p class="text-5xl mb-4 text-[#EDC951]">&#x1F9EC;</p>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Orgânica, Saúde e Cotidiano</h4>
-                        <p class="text-sm text-gray-500 mt-2">A Química Orgânica, com **Funções Orgânicas (35 questões)** e **Reações Orgânicas (27 questões)**, frequentemente aparece em cenários de **saúde** (medicamentos, alimentos) e **cotidiano** (polímeros, cosméticos), exigindo a compreensão da estrutura e das transformações das moléculas que nos cercam.</p>
+                        <p class="text-sm text-gray-500 mt-2">A Química Orgânica, com **Funções Orgânicas (35
+                            questões)** e **Reações Orgânicas (27 questões)**, frequentemente aparece em cenários de
+                            **saúde** (medicamentos, alimentos) e **cotidiano** (polímeros, cosméticos), exigindo a
+                            compreensão da estrutura e das transformações das moléculas que nos cercam.</p>
                     </div>
                 </div>
-                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor, preparando o estudante para analisar problemas complexos e relevantes em diversas áreas.</p>
+                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química
+                    como uma ciência viva e atuante na compreensão do mundo ao redor, preparando o estudante para
+                    analisar problemas complexos e relevantes em diversas áreas.</p>
             </section>
 
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Alinhamento com a BNCC: Competências Avaliadas</h3>
-                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">As questões são formuladas para avaliar competências específicas da Base Nacional Comum Curricular, priorizando a capacidade de análise crítica e resolução de problemas em contextos reais.</p>
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Alinhamento com a BNCC: Competências
+                    Avaliadas</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">As questões são formuladas para avaliar
+                    competências específicas da Base Nacional Comum Curricular, priorizando a capacidade de análise
+                    crítica e resolução de problemas em contextos reais.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="flex flex-col items-center">
                         <div class="text-6xl font-black text-[#CC333F]">56%</div>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 3</h4>
-                        <p class="text-sm text-gray-500">Analisar e resolver situações-problema, avaliando aplicações do conhecimento científico e tecnológico.</p>
+                        <p class="text-sm text-gray-500">Analisar e resolver situações-problema, avaliando aplicações do
+                            conhecimento científico e tecnológico.</p>
                     </div>
                     <div class="flex flex-col items-center">
                         <div class="text-6xl font-black text-[#EB6841]">34%</div>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 1</h4>
-                        <p class="text-sm text-gray-500">Analisar fenômenos naturais e processos tecnológicos, com base nas interações e relações entre matéria e energia.</p>
+                        <p class="text-sm text-gray-500">Analisar fenômenos naturais e processos tecnológicos, com base
+                            nas interações e relações entre matéria e energia.</p>
                     </div>
                     <div class="flex flex-col items-center">
                         <div class="text-6xl font-black text-[#EDC951]">10%</div>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 2</h4>
-                        <p class="text-sm text-gray-500">Interpretar a dinâmica da vida, da Terra e do Cosmos, relacionando fenômenos e processos químicos.</p>
+                        <p class="text-sm text-gray-500">Interpretar a dinâmica da vida, da Terra e do Cosmos,
+                            relacionando fenômenos e processos químicos.</p>
                     </div>
                 </div>
             </section>
 
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Habilidades Essenciais para o ENEM</h2>
-                <p class="text-lg text-gray-600 mb-6">A prova de Química no ENEM foca em habilidades específicas, que são cruciais para a aplicação do conhecimento e a resolução de problemas complexos. Dominar estas habilidades é tão importante quanto o conteúdo teórico.</p>
+                <p class="text-lg text-gray-600 mb-6">A prova de Química no ENEM foca em habilidades específicas, que
+                    são cruciais para a aplicação do conhecimento e a resolução de problemas complexos. Dominar estas
+                    habilidades é tão importante quanto o conteúdo teórico.</p>
                 <div class="grid grid-cols-1 gap-4 text-left">
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <div class="toggle-button" data-target="skill1-content">
-                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span
+                                    class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
                         <div id="skill1-content" class="accordion-content hidden">
-                            <p class="text-sm text-gray-700 mt-2">Esta habilidade exige que o estudante seja capaz de **avaliar materiais, tecnologias, processos e sistemas** não apenas por suas propriedades e aplicações técnicas, mas também considerando seu **impacto socioambiental**. Isso inclui analisar o ciclo de vida de produtos, a eficiência energética de processos e a sustentabilidade de novas tecnologias. Questões relacionadas a esta habilidade podem pedir que você compare a pegada de carbono de diferentes combustíveis ou avalie a segurança de um novo material sintético, por exemplo.</p>
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade exige que o estudante seja capaz de
+                                **avaliar materiais, tecnologias, processos e sistemas** não apenas por suas
+                                propriedades e aplicações técnicas, mas também considerando seu **impacto
+                                socioambiental**. Isso inclui analisar o ciclo de vida de produtos, a eficiência
+                                energética de processos e a sustentabilidade de novas tecnologias. Questões relacionadas
+                                a esta habilidade podem pedir que você compare a pegada de carbono de diferentes
+                                combustíveis ou avalie a segurança de um novo material sintético, por exemplo.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Alta</p>
                         </div>
                     </div>
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <div class="toggle-button" data-target="skill2-content">
-                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span
+                                    class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
                         <div id="skill2-content" class="accordion-content hidden">
-                            <p class="text-sm text-gray-700 mt-2">Focada na avaliação dos **impactos socioambientais** de materiais e tecnologias. Aqui, o aluno precisa identificar os prejuízos à saúde e ao meio ambiente resultantes da produção, uso e descarte de produtos químicos e tecnológicos, e propor soluções ou ações mais sustentáveis. Exemplos de questões incluem a análise da poluição da água por resíduos industriais ou a discussão sobre alternativas menos tóxicas em produtos de limpeza.</p>
+                            <p class="text-sm text-gray-700 mt-2">Focada na avaliação dos **impactos socioambientais**
+                                de materiais e tecnologias. Aqui, o aluno precisa identificar os prejuízos à saúde e ao
+                                meio ambiente resultantes da produção, uso e descarte de produtos químicos e
+                                tecnológicos, e propor soluções ou ações mais sustentáveis. Exemplos de questões incluem
+                                a análise da poluição da água por resíduos industriais ou a discussão sobre alternativas
+                                menos tóxicas em produtos de limpeza.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
                         </div>
                     </div>
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <div class="toggle-button" data-target="skill3-content">
-                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span
+                                    class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
                         <div id="skill3-content" class="accordion-content hidden">
-                            <p class="text-sm text-gray-700 mt-2">Esta habilidade envolve a capacidade de **raciocínio científico**. O aluno é desafiado a construir questões a partir de um problema, elaborar hipóteses para sua solução, prever resultados de experimentos ou fenômenos e interpretar dados (em gráficos, tabelas, textos) para chegar a conclusões. Muitas questões do ENEM que apresentam dados experimentais ou cenários complexos testam diretamente essa habilidade, exigindo uma análise crítica e a formulação de um plano para resolver a situação.</p>
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade envolve a capacidade de **raciocínio
+                                científico**. O aluno é desafiado a construir questões a partir de um problema, elaborar
+                                hipóteses para sua solução, prever resultados de experimentos ou fenômenos e interpretar
+                                dados (em gráficos, tabelas, textos) para chegar a conclusões. Muitas questões do ENEM
+                                que apresentam dados experimentais ou cenários complexos testam diretamente essa
+                                habilidade, exigindo uma análise crítica e a formulação de um plano para resolver a
+                                situação.</p>
                             <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
                         </div>
                     </div>
                 </div>
-                <p class="mt-6 text-base text-gray-700">Essas habilidades indicam que o ENEM busca estudantes que consigam aplicar o conhecimento de Química para analisar e resolver problemas complexos e relevantes para o mundo real.</p>
+                <p class="mt-6 text-base text-gray-700">Essas habilidades indicam que o ENEM busca estudantes que
+                    consigam aplicar o conhecimento de Química para analisar e resolver problemas complexos e relevantes
+                    para o mundo real.</p>
             </section>
-            
+
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
-                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova,
+                    Múltiplos Formatos</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação,
+                    o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em
+                    todas as versões do ENEM.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-                    <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
+                    <button
+                        class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button"
+                        data-target="impresso-info">
                         <span class="text-2xl font-bold">ENEM 1ª aplicação</span>
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
-                    <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info">
+                    <button
+                        class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button"
+                        data-target="ppl-digital-info">
                         <span class="text-2xl font-bold">ENEM PPL / Digital</span>
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
                 </div>
-                <div id="impresso-info" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="impresso-info"
+                    class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM 1ª aplicação</h4>
-                    <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.</p>
+                    <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em
+                        cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com
+                        maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.
+                    </p>
                 </div>
-                <div id="ppl-digital-info" class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="ppl-digital-info"
+                    class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM PPL / Digital</h4>
-                    <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM 1ª aplicação, mas voltado para um público específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
+                    <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda
+                        aplicação da prova, com conteúdo equivalente ao ENEM 1ª aplicação, mas voltado para um público
+                        específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em
+                        computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das
+                        diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.
+                    </p>
                 </div>
             </section>
 
             <!-- Nova Seção de Vagas de Medicina - Unificada -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Vagas de Medicina no ENEM</h2>
-                <p class="text-lg text-gray-600 mb-6">Selecione a universidade e o campus para visualizar as vagas e notas de corte para o curso de Medicina:</p>
+                <p class="text-lg text-gray-600 mb-6">Selecione a universidade e o campus para visualizar as vagas e
+                    notas de corte para o curso de Medicina:</p>
                 <div class="flex justify-center mb-6">
-                    <select id="universityCampusSelector" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] text-gray-800">
+                    <select id="universityCampusSelector"
+                        class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] text-gray-800">
                         <option value="">Selecione uma Universidade e Campus</option>
                         <!-- Options will be populated by JavaScript -->
                     </select>
                 </div>
-                <div id="vagas-display" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="vagas-display"
+                    class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <!-- A tabela com as vagas e notas de corte será injetada aqui pelo JavaScript -->
                 </div>
             </section>
@@ -279,18 +395,27 @@
 
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
-                <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
+                <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM,
+                    de 2011 a 2024. Clique no ano para ver a análise detalhada!</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8" id="yearly-buttons-container">
                     <!-- Botões dos anos gerados dinamicamente por JS -->
                 </div>
-                <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
-                    <h4 class="font-bold text-xl text-[#6A4A3C] mb-2">Destaques do ENEM <span id="selectedYear"></span>:</h4>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span id="yearSummary"></span></p>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span id="yearChemistryQuestions"></span></p>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearApplicationType"></span></p>
-                    <p class="text-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
-                    <p class="text-gray-800 mb-4"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
+                <div id="yearly-analysis-output"
+                    class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-xl text-[#6A4A3C] mb-2">Destaques do ENEM <span id="selectedYear"></span>:
+                    </h4>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span
+                            id="yearSummary"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span
+                            id="yearChemistryQuestions"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span
+                            id="yearApplicationType"></span></p>
+                    <p class="text-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span
+                            id="yearMainThemes"></span></p>
+                    <p class="text-gray-800 mb-4"><span class="font-semibold">Foco em Competências:</span> <span
+                            id="yearCompetencyFocus"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Habilidades Cobradas:</span> <span
+                            id="yearHabilidades"></span></p>
                     <div class="chart-container mt-6">
                         <canvas id="yearlyThemesChart"></canvas>
                     </div>
@@ -303,20 +428,28 @@
 
                     <!-- Seção para a questão de exemplo do ano (existente) -->
                     <div id="yearlyQuestionSection" class="mt-8 pt-4 border-t border-gray-300">
-                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span id="yearlyQuestionYearDisplay"></span>:</h5>
-                        <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
+                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span
+                                id="yearlyQuestionYearDisplay"></span>:</h5>
+                        <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de
+                            exemplo...</div>
                         <div id="yearlyQuestionContent" class="hidden">
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
-                            <p class="text-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
-                            <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
-                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span
+                                    id="yearlyQuestionDetailedTopic"></span></p>
+                            <p class="text-800 mb-2"><span class="font-semibold">Competência:</span> <span
+                                    id="yearlyQuestionCompetence"></span></p>
+                            <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span
+                                    id="yearlyQuestionSkill"></span></p>
+                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div>
+                            <!-- Container para a imagem da questão -->
                             <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
                             <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
-                            <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4"></ul>
+                            <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4">
+                            </ul>
                             <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
                             <p id="yearlyCorrectAnswer" class="text-gray-800 font-semibold"></p>
                         </div>
-                        <div id="noYearlyQuestionFound" class="text-center text-gray-600 hidden">Nenhuma questão de exemplo detalhada encontrada para este ano em nossos registros.</div>
+                        <div id="noYearlyQuestionFound" class="text-center text-gray-600 hidden">Nenhuma questão de
+                            exemplo detalhada encontrada para este ano em nossos registros.</div>
                     </div>
                     <!-- Fim da seção da questão de exemplo -->
 
@@ -325,23 +458,33 @@
 
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔎 Busca de Questões Anteriores do ENEM 🔎</h2>
-                <p class="text-lg text-gray-600 mb-6">Digite um tema de química para buscar uma questão que já caiu em provas anteriores do ENEM. Ideal para revisar tópicos específicos!</p>
+                <p class="text-lg text-gray-600 mb-6">Digite um tema de química para buscar uma questão que já caiu em
+                    provas anteriores do ENEM. Ideal para revisar tópicos específicos!</p>
                 <div class="flex flex-col items-center max-w-xl mx-auto">
-                    <input type="text" id="topicInput" placeholder="Ex: Eletroquímica, Termoquímica, Funções Orgânicas" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] mb-4 text-gray-800">
-                    <button id="generateQuestionBtn" class="bg-[#EB6841] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out">
+                    <input type="text" id="topicInput" placeholder="Ex: Eletroquímica, Termoquímica, Funções Orgânicas"
+                        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] mb-4 text-gray-800">
+                    <button id="generateQuestionBtn"
+                        class="bg-[#EB6841] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out">
                         Buscar Questão ENEM
                     </button>
                     <div id="loadingIndicator" class="mt-4 text-[#00A0B0] hidden">
                         Buscando questão... Por favor, aguarde.
                     </div>
-                    <div id="questionOutput" class="mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 hidden">
+                    <div id="questionOutput"
+                        class="mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 hidden">
                         <p class="font-bold text-lg text-[#6A4A3C] mb-2">Questão Encontrada:</p>
-                        <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="questionYear"></span></p>
-                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="questionType"></span></p>
-                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="questionDetailedTopic"></span></p>
-                        <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
-                        <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
-                        <div id="questionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span
+                                id="questionYear"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span
+                                id="questionType"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span
+                                id="questionDetailedTopic"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span
+                                id="questionCompetence"></span></p>
+                        <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span
+                                id="questionSkill"></span></p>
+                        <div id="questionImageContainer" class="text-center mb-4"></div>
+                        <!-- Container para a imagem da questão -->
                         <p id="questionText" class="text-gray-800 mb-4 font-medium"></p>
                         <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
                         <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
@@ -357,7 +500,8 @@
             <!-- Nova seção para Provas Completas do ENEM para Download -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8" id="full-exams-download">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔗 Provas Completas do ENEM para Download 🔗</h2>
-                <p class="text-lg text-gray-600 mb-6">Acesse as provas completas do ENEM em PDF para aprofundar seus estudos. Clique no ano para expandir e ver as modalidades disponíveis:</p>
+                <p class="text-lg text-gray-600 mb-6">Acesse as provas completas do ENEM em PDF para aprofundar seus
+                    estudos. Clique no ano para expandir e ver as modalidades disponíveis:</p>
                 <div id="full-exams-container" class="space-y-4">
                     <!-- Conteúdo será gerado via JavaScript -->
                 </div>
@@ -368,22 +512,21 @@
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8 text-center max-w-xl mx-auto">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">✨ Sobre o Professor Mamá ✨</h2>
                 <div class="flex flex-col items-center">
-                    <img 
-                        src="https://drive.google.com/uc?export=view&id=19ueXA7EiCDJkxyiahBJt5kHX_7QFfqZA" 
-                        alt="Foto do Professor Matheus Braga (Professor Mamá)" 
+                    <img src="./assets/images/mama.png" alt="Foto do Professor Matheus Braga (Professor Mamá)"
                         class="w-40 h-40 rounded-full object-cover shadow-lg mb-6 border-4 border-[#EB6841]"
-                        onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';"
-                    >
-                    <p class="text-xl font-bold text-[#6A4A3C] mb-2">Matheus Braga – Mais conhecido como <span class="text-[#CC333F]">Professor Mamá</span></p>
+                        onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';">
+                    <p class="text-xl font-bold text-[#6A4A3C] mb-2">Matheus Braga – Mais conhecido como <span
+                            class="text-[#CC333F]">Professor Mamá</span></p>
                     <p class="text-md text-gray-700 mb-3">Licenciado em Química pela Universidade de Brasília (UnB).</p>
                     <p class="text-md text-gray-700 mb-3">Professor há mais de 10 anos na capital federal.</p>
-                    <p class="text-md text-gray-700">Apaixonado pela sala de aula e entusiasta das redes sociais, busca conectar a Química ao dia a dia de forma acessível e envolvente.</p>
+                    <p class="text-md text-gray-700">Apaixonado pela sala de aula e entusiasta das redes sociais, busca
+                        conectar a Química ao dia a dia de forma acessível e envolvente.</p>
                 </div>
             </section>
             <!-- Fim da Nova Seção: Sobre o Professor Mamá -->
 
         </main>
-        
+
         <footer class="text-center mt-12 pt-8 border-t border-gray-300">
         </footer>
 
@@ -400,11 +543,11 @@
             }
             return label;
         };
-        
+
         const wrapLabel = (label) => {
             const maxLength = 16;
             if (label.length <= maxLength) return label;
-            
+
             const words = label.split(' ');
             const lines = [];
             let currentLine = '';
@@ -480,7 +623,7 @@
                 }
             }
         });
-        
+
         const topicsRawData = [
             { label: 'Funções Orgânicas', value: 35 },
             { label: 'Reações Orgânicas', value: 27 },
@@ -514,10 +657,10 @@
                     x: {
                         beginAtZero: true,
                         ticks: {
-                           color: '#6A4A3C'
+                            color: '#6A4A3C'
                         },
                         grid: {
-                          color: '#E0E0E0'
+                            color: '#E0E0E0'
                         }
                     },
                     y: {
@@ -525,7 +668,7 @@
                             color: '#6A4A3C'
                         },
                         grid: {
-                          display: false
+                            display: false
                         }
                     }
                 },
@@ -1694,7 +1837,7 @@
                     { theme: 'Geral', percentage: 15 }
                 ]
             },
-             {
+            {
                 year: 2012,
                 title: "ENEM 2012: Química no Dia a Dia",
                 summary: "As questões de 2012 tiveram um foco claro na aplicação dos conceitos de Química em situações cotidianas, como produtos de limpeza, alimentos e materiais.",
@@ -1804,7 +1947,7 @@
                 campuses: {
                     "escs": { // Chave simplificada
                         campusName: "ESCS", // Nome simplificado
-                        ingresso: "1º Semestre", 
+                        ingresso: "1º Semestre",
                         totalVagas: 80, // 48 AC + 18 Esc Pub + 7 Esc Pub PP + 7 Esc Pub Renda <= 2 SM = 80
                         amplaConcorrencia: { vagas: 48, notaCorte: "788,55" },
                         cotasEspecificas: [ // Use a list for less common, more specific quota types
@@ -1896,7 +2039,7 @@
                         },
                         cotasIndependenteRenda: {
                             ppi: { vagas: 9, notaCorte: "749,65" },
-                            pcd: { vagas: 2, notaCorte: "751,85" }, 
+                            pcd: { vagas: 2, notaCorte: "751,85" },
                             escolaPublica: { vagas: 4, notaCorte: "794,02" }
                         }
                     }
@@ -1993,14 +2136,14 @@
             vagasDisplay.classList.add('hidden');
             vagasDisplay.innerHTML = ''; // Limpa o conteúdo anterior
 
-            if (!selectedValue) { 
-                return; 
+            if (!selectedValue) {
+                return;
             }
 
-            const parts = selectedValue.split('-', 2); 
+            const parts = selectedValue.split('-', 2);
             const uniKey = parts[0];
             const campusKey = parts[1];
-            
+
             const university = universityData[uniKey];
 
             if (!university) {
@@ -2016,7 +2159,7 @@
 
             if (!campusData) {
                 console.error(`Erro: Dados do campus não encontrados para a chave: ${campusKey} na universidade: ${university.name}`);
-                vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados do campus selecionado. Chave do Campus: ${campusKey}</p>`; 
+                vagasDisplay.innerHTML = `<p class="text-red-500">Erro: Não foi possível carregar os dados do campus selecionado. Chave do Campus: ${campusKey}</p>`;
                 vagasDisplay.classList.remove('hidden');
                 vagasDisplay.classList.add('active');
                 vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + "px";
@@ -2220,11 +2363,11 @@
             const targetId = 'yearly-analysis-output'; // Fixed target ID for yearly analysis
             const targetContent = document.getElementById(targetId);
             const currentYear = parseInt(button.dataset.year);
-            
+
             const yearData = enemByYearAnalysisData.find(d => d.year === currentYear);
 
             const toggleIcon = button.querySelector('.toggle-icon');
-            
+
             // Close all other active accordion sections (skills, modalities, other years)
             document.querySelectorAll('.accordion-content.active').forEach(content => {
                 if (content.id !== targetId || content.dataset.activeYear !== String(currentYear)) {
@@ -2232,7 +2375,7 @@
                     content.style.maxHeight = null;
                     content.classList.add('hidden');
                     const associatedButton = document.querySelector(`.toggle-button[data-target="${content.id}"]`);
-                     // Also toggle icon if it's a general toggle button
+                    // Also toggle icon if it's a general toggle button
                     if (associatedButton) {
                         associatedButton.querySelector('.toggle-icon').classList.remove('active');
                     }
@@ -2259,7 +2402,7 @@
             } else {
                 // Open the selected year's content
                 targetContent.classList.remove('hidden');
-                
+
                 document.getElementById('selectedYear').textContent = yearData.year;
                 document.getElementById('yearSummary').textContent = yearData.summary;
                 document.getElementById('yearChemistryQuestions').textContent = yearData.quimicaQuestions;
@@ -2316,7 +2459,7 @@
 
                 // Load and display detailed questions table for the selected year
                 const yearlyDetailedQuestionsTableContainer = document.getElementById('yearlyDetailedQuestionsTableContainer');
-                
+
                 // Construct the combined array directly for display
                 const questionsForDisplay = detailedYearlyQuestionsData.filter(q => q.ano === currentYear);
 
@@ -2379,16 +2522,16 @@
                     const questionsForExample = pastQuestionsData.filter(q => q.ano === String(currentYear));
                     if (questionsForExample.length > 0) {
                         const randomQuestion = questionsForExample[Math.floor(Math.random() * questionsForExample.length)];
-                        
+
                         document.getElementById('yearlyQuestionYearDisplay').textContent = randomQuestion.ano;
                         document.getElementById('yearlyQuestionDetailedTopic').textContent = randomQuestion.tema_detalhado;
                         document.getElementById('yearlyQuestionCompetence').textContent = randomQuestion.competencia;
                         document.getElementById('yearlyQuestionSkill').textContent = randomQuestion.habilidade;
                         document.getElementById('yearlyQuestionText').textContent = randomQuestion.questao;
-                        
+
                         const yearlyAlternativesList = document.getElementById('yearlyAlternativesList');
                         yearlyAlternativesList.innerHTML = randomQuestion.alternativas.map(alt => `<li>${alt}</li>`).join('');
-                        
+
                         document.getElementById('yearlyCorrectAnswer').textContent = randomQuestion.resposta_correta;
 
                         // Display image if available
@@ -2397,10 +2540,10 @@
                             imgElement.src = randomQuestion.imageUrl;
                             imgElement.alt = `Imagem da Questão do ENEM ${randomQuestion.ano}`;
                             imgElement.classList.add('question-image'); // Add styling class
-                            imgElement.onerror = function() {
-                                this.onerror=null;
-                                this.src=`https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
-                                this.alt="Imagem da questão não disponível";
+                            imgElement.onerror = function () {
+                                this.onerror = null;
+                                this.src = `https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
+                                this.alt = "Imagem da questão não disponível";
                             };
                             yearlyQuestionImageContainer.appendChild(imgElement);
                         }
@@ -2568,7 +2711,7 @@
             questionImageContainer.innerHTML = ''; // Clear previous image
 
             setTimeout(() => {
-                const filteredQuestions = pastQuestionsData.filter(q => 
+                const filteredQuestions = pastQuestionsData.filter(q =>
                     q.tema.toLowerCase().includes(topic.toLowerCase()) ||
                     q.tema_detalhado.toLowerCase().includes(topic.toLowerCase())
                 );
@@ -2592,10 +2735,10 @@
                         imgElement.src = selectedQuestion.imageUrl;
                         imgElement.alt = `Imagem da Questão do ENEM ${selectedQuestion.ano}`;
                         imgElement.classList.add('question-image'); // Add styling class
-                        imgElement.onerror = function() {
-                            this.onerror=null;
-                            this.src=`https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
-                            this.alt="Imagem da questão não disponível";
+                        imgElement.onerror = function () {
+                            this.onerror = null;
+                            this.src = `https://placehold.co/400x200/cccccc/000000?text=Imagem+Não+Carregada`; // Fallback image
+                            this.alt = "Imagem da questão não disponível";
                         };
                         questionImageContainer.appendChild(imgElement);
                     }
@@ -2605,8 +2748,9 @@
                     noQuestionFound.classList.remove('hidden');
                 }
                 loadingIndicator.classList.add('hidden');
-            }, 1000); 
+            }, 1000);
         });
     </script>
 </body>
+
 </html>
