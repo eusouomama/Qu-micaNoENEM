@@ -4,59 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infográfico: Análise da Química no ENEM</title>
+    <!-- Inclui o Tailwind CSS para estilos utilitários e responsivos -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inclui o Chart.js para a criação de gráficos interativos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Pré-carrega as fontes Inter do Google Fonts para uma melhor experiência de carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Define a fonte "Inter" como padrão para o corpo do documento -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Define a família da fonte para todo o corpo do documento */
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Estilos base para contêineres de gráfico, garantindo responsividade e uma altura inicial razoável */
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Ainda útil para escala em desktop */
+            max-width: 600px; /* Limite máximo para gráficos em larguras maiores */
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* Uma altura base ligeiramente menor para uso geral */
-            min-height: 200px; /* Garante que não seja muito pequeno */
-            max-height: 40vh; /* Limite para telas muito altas, para gráficos móveis */
+            height: 300px; /* Altura padrão para gráficos */
+            min-height: 200px; /* Altura mínima para evitar que os gráficos fiquem muito pequenos */
+            max-height: 40vh; /* Limite a altura do gráfico para telas muito altas, para melhor usabilidade móvel */
         }
-        /* Estilos específicos para contêineres de gráfico em telas maiores */
+        /* Ajustes específicos para contêineres de gráfico em telas maiores (desktop) */
         @media (min-width: 768px) {
             .chart-container {
-                height: 450px; /* Mais alto em desktop */
-                max-height: 450px; /* Limite para desktop */
+                height: 450px; /* Altura maior para gráficos em desktop */
+                max-height: 450px; /* Limite máximo para desktop */
             }
         }
+        /* Estilos para o conteúdo do acordeão, com transição para max-height para um efeito suave */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Adiciona transição para padding */
+            padding-top: 0;
+            padding-bottom: 0;
         }
+        /* Quando o acordeão está ativo, expande o max-height e ajusta o padding */
         .accordion-content.active {
-            max-height: 9999px; /* Aumentado para acomodar todo o conteúdo sem cortes */
+            /* max-height: 9999px; // Removido, será definido via JS para 'fit-content' */
+            padding-top: 1rem; /* Restaura o padding para mostrar o conteúdo */
+            padding-bottom: 1rem;
         }
+        /* Estilos para o botão de alternância do acordeão */
         .toggle-button {
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+        /* Estilos para o ícone de alternância do acordeão, com rotação suave */
         .toggle-icon {
             transition: transform 0.3s ease-out;
         }
+        /* Rotação do ícone quando o acordeão está ativo */
         .toggle-icon.active {
             transform: rotate(90deg);
         }
+        /* Estilos para imagens de questões, garantindo que sejam responsivas e bem apresentadas */
         .question-image {
             max-width: 100%;
             height: auto;
-            border-radius: 0.5rem; /* rounded-lg */
-            margin-top: 1rem; /* mt-4 */
-            margin-bottom: 1rem; /* mb-4 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border-radius: 0.5rem; /* Bordas arredondadas */
+            margin-top: 1rem; /* Margem superior */
+            margin-bottom: 1rem; /* Margem inferior */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra */
+        }
+        /* Esconde elementos visualmente, mas mantém acessível para leitores de tela */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
     </style>
 </head>
@@ -65,9 +93,11 @@
     <div class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <!-- Brand Logo and Social Media Links - moved to the very top of the header -->
+            <!-- Seção do logo da marca e links de redes sociais -->
             <div class="mb-6 flex flex-col items-center space-y-4">
-                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="h-24 mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <!-- Logo principal da marca -->
+                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="h-24 mx-auto rounded-full shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <!-- Links para redes sociais -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
                     <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
@@ -79,6 +109,7 @@
                     </a>
                 </div>
             </div>
+            <!-- Título principal e subtítulo do infográfico -->
             <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wider">Química no ENEM: Seu Roteiro de Estudos</h1>
             <p class="text-lg md:text-xl text-[#6A4A3C] mt-2">Uma análise aprofundada de conteúdos, habilidades e oportunidades de ingresso em Medicina.</p>
         </header>
@@ -123,7 +154,7 @@
                             </tr>
                         </thead>
                         <tbody id="important-dates-table-body">
-                            <!-- Datas serão preenchidas via JavaScript -->
+                            <!-- As datas serão preenchidas dinamicamente via JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -131,6 +162,7 @@
             </section>
             <!-- Fim da seção de Datas Importantes -->
 
+            <!-- Seção de Pilar Consistente na Prova -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-2">Um Pilar Consistente na Prova</h2>
                 <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
@@ -143,6 +175,7 @@
                 <p class="mt-4 text-sm text-gray-500">Isso representa aproximadamente 1/3 da prova de Ciências da Natureza, destacando a importância estratégica de um preparo focado.</p>
             </section>
 
+            <!-- Seção de Gráficos de Distribuição por Área e Foco Cognitivo -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
@@ -162,6 +195,7 @@
                 </div>
             </div>
 
+            <!-- Seção de Temas Mais Recorrentes -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais Recorrentes</h3>
                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
@@ -177,6 +211,7 @@
                 </div>
             </section>
             
+            <!-- Seção de Coerência e Previsibilidade do Exame -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Coerência e Previsibilidade do Exame</h2>
                 <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
@@ -195,10 +230,11 @@
                 <p class="mt-6 text-base text-gray-700">Essa estabilidade permite um planejamento de estudos mais eficiente, focando nos pilares e na abordagem do exame sem surpresas quanto ao formato.</p>
             </section>
 
+            <!-- Seção de Interdisciplinaridade e Contextualização -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Interdisciplinaridade e Contextualização</h2>
                 <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"> <!-- Alterado para items-start para melhor alinhamento -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                         <p class="text-5xl mb-4 text-[#EB6841]">&#x1F30D;</p>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental e Sustentabilidade</h4>
@@ -209,7 +245,7 @@
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química, Energia e Tecnologia</h4>
                         <p class="text-sm text-gray-500 mt-2">A **Termoquímica (13 questões)** é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando-se à **Física** (transformações de energia) e à **Tecnologia** (desenvolvimento de novas fontes). Questões sobre **Eletroquímica** frequentemente exploram o funcionamento de pilhas e baterias em dispositivos eletrônicos ou carros elétricos.</p>
                     </div>
-                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2"> <!-- Ocupa a largura total em telas maiores -->
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2">
                         <p class="text-5xl mb-4 text-[#EDC951]">&#x1F9EC;</p>
                         <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Orgânica, Saúde e Cotidiano</h4>
                         <p class="text-sm text-gray-500 mt-2">A Química Orgânica, com **Funções Orgânicas (35 questões)** e **Reações Orgânicas (27 questões)**, frequentemente aparece em cenários de **saúde** (medicamentos, alimentos) e **cotidiano** (polímeros, cosméticos), exigindo a compreensão da estrutura e das transformações das moléculas que nos cercam.</p>
@@ -218,6 +254,7 @@
                 <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor, preparando o estudante para analisar problemas complexos e relevantes em diversas áreas.</p>
             </section>
 
+            <!-- Seção de Alinhamento com a BNCC: Competências Avaliadas -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Alinhamento com a BNCC: Competências Avaliadas</h3>
                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">As questões são formuladas para avaliar competências específicas da Base Nacional Comum Curricular, priorizando a capacidade de análise crítica e resolução de problemas em contextos reais.</p>
@@ -240,12 +277,13 @@
                 </div>
             </section>
 
+            <!-- Seção de Habilidades Essenciais para o ENEM (Acordeão) -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Habilidades Essenciais para o ENEM</h2>
                 <p class="text-lg text-gray-600 mb-6">A prova de Química no ENEM foca em habilidades específicas, que são cruciais para a aplicação do conhecimento e a resolução de problemas complexos. Dominar estas habilidades é tão importante quanto o conteúdo teórico.</p>
                 <div class="grid grid-cols-1 gap-4 text-left">
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-                        <div class="toggle-button" data-target="skill1-content">
+                        <div class="toggle-button" data-target="skill1-content" role="button" aria-expanded="false" aria-controls="skill1-content">
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
@@ -255,7 +293,7 @@
                         </div>
                     </div>
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-                        <div class="toggle-button" data-target="skill2-content">
+                        <div class="toggle-button" data-target="skill2-content" role="button" aria-expanded="false" aria-controls="skill2-content">
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
@@ -265,7 +303,7 @@
                         </div>
                     </div>
                     <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-                        <div class="toggle-button" data-target="skill3-content">
+                        <div class="toggle-button" data-target="skill3-content" role="button" aria-expanded="false" aria-controls="skill3-content">
                             <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
                             <span class="toggle-icon text-2xl text-[#00A0B0]">&#x25B6;</span>
                         </div>
@@ -278,30 +316,31 @@
                 <p class="mt-6 text-base text-gray-700">Essas habilidades indicam que o ENEM busca estudantes que consigam aplicar o conhecimento de Química para analisar e resolver problemas complexos e relevantes para o mundo real.</p>
             </section>
             
+            <!-- Seção de Modalidades de Aplicação (Acordeão) -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-                    <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info">
+                    <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info" role="button" aria-expanded="false" aria-controls="impresso-info">
                         <span class="text-2xl font-bold">ENEM 1ª aplicação</span>
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
-                    <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info">
+                    <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info" role="button" aria-expanded="false" aria-controls="ppl-digital-info">
                         <span class="text-2xl font-bold">ENEM PPL / Digital</span>
                         <span class="toggle-icon text-2xl ml-4">&#x25B6;</span>
                     </button>
                 </div>
-                <div id="impresso-info" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="impresso-info" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM 1ª aplicação</h4>
                     <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.</p>
                 </div>
-                <div id="ppl-digital-info" class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="ppl-digital-info" class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM PPL / Digital</h4>
                     <p class="text-sm text-gray-700">O **ENEM PPL (Pessoas Privadas de Liberdade)** é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM 1ª aplicação, mas voltado para um público específico. O **ENEM Digital** foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
                 </div>
             </section>
 
-            <!-- Nova Seção de Vagas de Medicina - Unificada -->
+            <!-- Seção de Vagas de Medicina - Unificada -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Vagas de Medicina no ENEM</h2>
                 <p class="text-lg text-gray-600 mb-6">Selecione a universidade e o campus para visualizar as vagas e notas de corte para o curso de Medicina:</p>
@@ -311,26 +350,27 @@
                         <!-- As opções serão preenchidas por JavaScript -->
                     </select>
                 </div>
-                <div id="vagas-display" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div id="vagas-display" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
                     <!-- A tabela com as vagas e notas de corte será injetada aqui pelo JavaScript -->
                 </div>
             </section>
             <!-- Fim da Nova Seção de Vagas de Medicina - Unificada -->
 
+            <!-- Seção de Análise Ano a Ano da Prova de Química -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
                 <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2009 a 2024. Clique no ano para ver a análise detalhada!</p>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8" id="yearly-buttons-container">
                     <!-- Botões dos anos gerados dinamicamente por JS -->
                 </div>
-                <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200 overflow-x-auto">
                     <h4 class="font-bold text-xl text-[#6A4A3C] mb-2">Destaques do ENEM <span id="selectedYear"></span>:</h4>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span id="yearSummary"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span id="yearChemistryQuestions"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearApplicationType"></span></p>
                     <p class="text-gray-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
-                    <p class="text-gray-800 mb-4"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
-                    <p class="text-gray-800 mb-2"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
+                    <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
                     <div class="chart-container mt-6">
                         <canvas id="yearlyThemesChart"></canvas>
                     </div>
@@ -341,18 +381,17 @@
                     </div>
                     <!-- Fim da nova seção para a tabela -->
 
-                    <!-- Seção para a questão de exemplo do ano (existente) -->
+                    <!-- Seção para a questão de exemplo do ano -->
                     <div id="yearlyQuestionSection" class="mt-8 pt-4 border-t border-gray-300">
                         <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span id="yearlyQuestionYearDisplay"></span>:</h5>
                         <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
                         <div id="yearlyQuestionContent" class="hidden">
-                            <!-- Adicionado os spans em falta para o ano e tipo de aplicação -->
                             <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="yearlyQuestionYear"></span></p>
                             <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearlyQuestionType"></span></p>
                             <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
                             <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
                             <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
-                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
+                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div>
                             <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
                             <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
                             <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4"></ul>
@@ -366,6 +405,7 @@
                 </div>
             </section>
 
+            <!-- Seção de Busca de Questões Anteriores do ENEM -->
             <section class="text-center bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔎 Busca de Questões Anteriores do ENEM 🔎</h2>
                 <p class="text-lg text-gray-600 mb-6">Digite um tema de química para buscar uma questão que já caiu em provas anteriores do ENEM. Ideal para revisar tópicos específicos!</p>
@@ -374,30 +414,30 @@
                     <button id="generateQuestionBtn" class="bg-[#EB6841] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out">
                         Buscar Questão ENEM
                     </button>
-                    <div id="loadingIndicator" class="mt-4 text-[#00A0B0] hidden">
+                    <div id="loadingIndicator" class="mt-4 text-[#00A0B0] hidden" aria-live="polite">
                         Buscando questão... Por favor, aguarde.
                     </div>
-                    <div id="questionOutput" class="mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 hidden">
+                    <div id="questionOutput" class="accordion-content hidden mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 overflow-x-auto">
                         <p class="font-bold text-lg text-[#6A4A3C] mb-2">Questão Encontrada:</p>
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="questionYear"></span></p>
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="questionType"></span></p>
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="questionDetailedTopic"></span></p>
                         <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
                         <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
-                        <div id="questionImageContainer" class="text-center mb-4"></div> <!-- Container para a imagem da questão -->
+                        <div id="questionImageContainer" class="text-center mb-4"></div>
                         <p id="questionText" class="text-gray-800 mb-4 font-medium"></p>
                         <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
                         <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
                         <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
                         <p id="correctAnswer" class="text-gray-800"></p>
                     </div>
-                    <div id="noQuestionFound" class="mt-6 text-center text-gray-600 hidden">
+                    <div id="noQuestionFound" class="mt-6 text-center text-gray-600 hidden" aria-live="polite">
                         Nenhuma questão encontrada para o tema digitado. Tente outro tema!
                     </div>
                 </div>
             </section>
 
-            <!-- Nova seção para Provas Completas do ENEM para Download -->
+            <!-- Seção para Provas Completas do ENEM para Download -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8" id="full-exams-download">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔗 Provas Completas do ENEM para Download 🔗</h2>
                 <p class="text-lg text-gray-600 mb-6">Acesse as provas completas do ENEM em PDF para aprofundar seus estudos. Clique no ano para expandir e ver as modalidades disponíveis:</p>
@@ -405,9 +445,9 @@
                     <!-- Conteúdo será gerado via JavaScript -->
                 </div>
             </section>
-            <!-- Fim da Nova seção -->
+            <!-- Fim da seção de Provas Completas do ENEM para Download -->
 
-            <!-- Nova Seção: Sobre o Professor Mamá -->
+            <!-- Seção: Sobre o Professor Mamá -->
             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8 text-center max-w-xl mx-auto">
                 <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">✨ Sobre o Professor Mamá ✨</h2>
                 <div class="flex flex-col items-center">
@@ -423,18 +463,29 @@
                     <p class="text-md text-gray-700">Apaixonado pela sala de aula e entusiasta das redes sociais, busca conectar-se aos alunos de forma mais acessível, tornando a Química parte do seu dia a dia de maneira envolvente.</p>
                 </div>
             </section>
-            <!-- Fim da Nova Seção: Sobre o Professor Mamá -->
+            <!-- Fim da Seção: Sobre o Professor Mamá -->
 
         </main>
         
         <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <!-- Rodapé, se necessário adicionar conteúdo aqui -->
         </footer>
 
     </div>
 
     <script>
-        let yearlyThemesChartInstance = null; // Para manter a instância do Chart.js para temas anuais
+        // Variável para armazenar a instância do Chart.js para temas anuais, permitindo sua destruição e recriação
+        let yearlyThemesChartInstance = null; 
 
+        // Paleta de cores vibrantes e lúdicas para os gráficos
+        const energeticPlayfulPalette = ['#00A0B0', '#EB6841', '#CC333F', '#EDC951', '#6A4A3C', '#8A4A5C', '#3F6841', '#B0A000'];
+
+        /**
+         * Callback para formatar o título do tooltip do Chart.js.
+         * Garante que labels divididos em múltiplas linhas sejam exibidos corretamente.
+         * @param {Array<Object>} tooltipItems - Itens do tooltip.
+         * @returns {string} - Título formatado.
+         */
         const tooltipTitleCallback = (tooltipItems) => {
             const item = tooltipItems[0];
             let label = item.chart.data.labels[item.dataIndex];
@@ -444,8 +495,13 @@
             return label;
         };
         
+        /**
+         * Função para quebrar rótulos longos em múltiplas linhas para melhor legibilidade em gráficos.
+         * @param {string} label - O rótulo a ser quebrado.
+         * @returns {string|Array<string>} - O rótulo original ou um array de strings para múltiplas linhas.
+         */
         const wrapLabel = (label) => {
-            const maxLength = 16;
+            const maxLength = 16; // Número máximo de caracteres por linha
             if (label.length <= maxLength) return label;
             
             const words = label.split(' ');
@@ -453,6 +509,7 @@
             let currentLine = '';
 
             for (const word of words) {
+                // Se adicionar a próxima palavra exceder o limite e já houver algo na linha atual, inicia uma nova linha
                 if ((currentLine + word).length > maxLength && currentLine.length > 0) {
                     lines.push(currentLine.trim());
                     currentLine = word + ' ';
@@ -460,13 +517,13 @@
                     currentLine += word + ' ';
                 }
             }
-            lines.push(currentLine.trim());
+            lines.push(currentLine.trim()); // Adiciona a última linha
             return lines;
         };
 
-        const energeticPlayfulPalette = ['#00A0B0', '#EB6841', '#CC333F', '#EDC951', '#6A4A3C', '#8A4A5C', '#3F6841', '#B0A000']; // Paleta estendida
+        // --- Dados dos Gráficos Principais ---
 
-        // Dados para os gráficos principais
+        // Dados para o gráfico de distribuição por áreas da Química no ENEM
         const areasData = {
             labels: ['Química Geral', 'Físico-Química', 'Química Orgânica', 'Outras (Ambiental, Inorgânica)'],
             datasets: [{
@@ -477,6 +534,7 @@
                 borderWidth: 2
             }]
         };
+        // Inicializa o gráfico de Rosca (Doughnut Chart) para a distribuição por áreas
         new Chart(document.getElementById('areasChart'), {
             type: 'doughnut',
             data: areasData,
@@ -485,17 +543,18 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        position: 'bottom', // Legenda na parte inferior para melhor visualização em telas menores
                     },
                     tooltip: {
                         callbacks: {
-                            title: tooltipTitleCallback
+                            title: tooltipTitleCallback // Usa o callback para títulos de tooltip
                         }
                     }
                 }
             }
         });
 
+        // Dados para o gráfico de foco cognitivo
         const cognitiveData = {
             labels: ['Compreender Fenômenos', 'Enfrentar Situações-Problema'],
             datasets: [{
@@ -506,6 +565,7 @@
                 borderWidth: 2
             }]
         };
+        // Inicializa o gráfico de Pizza (Pie Chart) para o foco cognitivo
         new Chart(document.getElementById('cognitiveChart'), {
             type: 'pie',
             data: cognitiveData,
@@ -514,7 +574,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom', /* Alterado para a parte inferior para melhor exibição em dispositivos móveis */
+                        position: 'bottom', // Legenda na parte inferior
                     },
                     tooltip: {
                         callbacks: {
@@ -525,6 +585,7 @@
             }
         });
         
+        // Dados brutos para os temas mais recorrentes
         const topicsRawData = [
             { label: 'Funções Orgânicas', value: 38 },
             { label: 'Reações Orgânicas', value: 30 },
@@ -538,44 +599,45 @@
             { label: 'Ligações Químicas', value: 14 }
         ];
 
+        // Inicializa o gráfico de Barras Horizontal para os temas mais recorrentes
         new Chart(document.getElementById('topicsChart'), {
             type: 'bar',
             data: {
-                labels: topicsRawData.map(d => wrapLabel(d.label)),
+                labels: topicsRawData.map(d => wrapLabel(d.label)), // Aplica a função wrapLabel
                 datasets: [{
                     label: 'Número de Questões (2009-2024)',
                     data: topicsRawData.map(d => d.value),
-                    backgroundColor: energeticPlayfulPalette[0],
+                    backgroundColor: energeticPlayfulPalette[0], // Usa a primeira cor da paleta
                     borderColor: energeticPlayfulPalette[0],
                     borderWidth: 1
                 }]
             },
             options: {
-                indexAxis: 'y',
+                indexAxis: 'y', // Define o eixo Y como índice para barras horizontais
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
                     x: {
                         beginAtZero: true,
                         ticks: {
-                           color: '#6A4A3C'
+                           color: '#6A4A3C' // Cor dos rótulos do eixo X
                         },
                         grid: {
-                          color: '#E0E0E0'
+                          color: '#E0E0E0' // Cor das linhas de grade do eixo X
                         }
                     },
                     y: {
                         ticks: {
-                            color: '#6A4A3C'
+                            color: '#6A4A3C' // Cor dos rótulos do eixo Y
                         },
                         grid: {
-                          display: false
+                          display: false // Esconde as linhas de grade do eixo Y
                         }
                     }
                 },
                 plugins: {
                     legend: {
-                        display: false
+                        display: false // Esconde a legenda
                     },
                     tooltip: {
                         callbacks: {
@@ -586,492 +648,342 @@
             }
         });
 
-        // Expanded pastQuestionsData for more diverse examples
+        // --- Dados de Questões Anteriores (Exemplos) ---
+        // Contém dados detalhados de questões de anos anteriores para a função de busca
         const pastQuestionsData = [
-            // ENEM 2009
             { ano: '2009', tipo_aplicacao: 'Impressa', tema: 'Radioatividade', tema_detalhado: 'Meia-vida em contextos ambientais', competencia: 'Competência de Área 7', habilidade: 'H26', questao: 'Um isótopo radioativo X tem uma meia-vida de 10 anos. Se uma amostra contém 100g de X, qual a massa de X que restará após 30 anos?', alternativas: ['A) 50g', 'B) 25g', 'C) 12.5g', 'D) 6.25g', 'E) 3.125g'], resposta_correta: 'C) 12.5g', imageUrl: 'https://placehold.co/400x200/B0A000/FFFFFF?text=Questão+2009' },
-            // ENEM 2010
             { ano: '2010', tipo_aplicacao: 'Impressa', tema: 'Combustão', tema_detalhado: 'Eficiência de combustíveis e emissão de CO₂', competencia: 'Competência de Área 7', habilidade: 'H26', questao: 'Qual combustível libera a maior quantidade de energia por mol na sua combustão completa?', alternativas: ['A) Metano', 'B) Etanol', 'C) Gasolina', 'D) Diesel', 'E) Gás natural'], resposta_correta: 'C) Gasolina', imageUrl: 'https://placehold.co/400x200/CC333F/FFFFFF?text=Questão+2010' },
-            // ENEM 2011
             { ano: '2011', tipo_aplicacao: 'Impressa', tema: 'Reações Orgânicas', tema_detalhado: 'Esterificação para produção de aromas', competencia: 'Competência de Área 7', habilidade: 'H24', questao: 'A reação de um ácido carboxílico com um álcool para formar um éster é conhecida como:', alternativas: ['A) Saponificação', 'B) Hidrogenação', 'C) Esterificação', 'D) Desidratação', 'E) Oxidação'], resposta_correta: 'C) Esterificação', imageUrl: 'https://placehold.co/400x200/EB6841/FFFFFF?text=Questão+2011' },
-            // ENEM 2012
             { ano: '2012', tipo_aplicacao: 'Impressa', tema: 'Eletroquímica', tema_detalhado: 'Corrosão e proteção de metais', competencia: 'Competência de Área 7', habilidade: 'H25', questao: 'Para proteger um ferro da corrosão, ele pode ser revestido com um metal mais reativo. Esse processo é chamado de:', alternativas: ['A) Cromagem', 'B) Galvanoplastia', 'C) Galvanização', 'D) Anodização', 'E) Eletrólise'], resposta_correta: 'C) Galvanização', imageUrl: 'https://placehold.co/400x200/EDC951/FFFFFF?text=Questão+2012' },
-            // ENEM 2013
             { ano: '2013', tipo_aplicacao: 'Impressa', tema: 'Soluções', tema_detalhado: 'Cálculo de concentração molar', competencia: 'Competência de Área 2', habilidade: 'H7', questao: 'Qual a molaridade de uma solução preparada com 29,25g de NaCl (M.M. = 58,5 g/mol) em 500 mL de água?', alternativas: ['A) 0,5 M', 'B) 1,0 M', 'C) 0,1 M', 'D) 2,0 M', 'E) 1,5 M'], resposta_correta: 'B) 1,0 M', imageUrl: 'https://placehold.co/400x200/6A4A3C/FFFFFF?text=Questão+2013' },
-            // ENEM 2014
             { ano: '2014', tipo_aplicacao: 'Impressa', tema: 'Estequiometria', tema_detalhado: 'Rendimento de reação na produção de gesso', competencia: 'Competência de Área 7', habilidade: 'H25', questao: 'A produção de gesso (CaSO₄.2H₂O) a partir de gipsita (CaSO₄) é um processo industrial. Se 100g de gipsita reagem com um rendimento de 80%, qual a massa de gesso formada? (Massas molares: CaSO₄ = 136 g/mol, H₂O = 18 g/mol)', alternativas: ['A) 116g', 'B) 92.8g', 'C) 144g', 'D) 184g', 'E) 232g'], resposta_correta: 'B) 92.8g', imageUrl: 'https://placehold.co/400x200/00A0B0/FFFFFF?text=Questão+2014' },
-            // ENEM 2015
             { ano: '2015', tipo_aplicacao: 'Impressa', tema: 'Química Ambiental', tema_detalhado: 'Pesticidas organoclorados: bioacumulação', competencia: 'Competência de Área 7', habilidade: 'H27', questao: 'Pesticidas organoclorados são substâncias que, devido à sua lipofilicidade, tendem a se acumular nos organismos ao longo da cadeia alimentar. Esse fenômeno é conhecido como:', alternativas: ['A) Eutrofização', 'B) Biomagnificação', 'C) Biofiltração', 'D) Biodegradação', 'E) Lixiviação'], resposta_correta: 'B) Biomagnificação', imageUrl: 'https://placehold.co/400x200/CC333F/FFFFFF?text=Questão+2015' },
-            // ENEM 2016
             { ano: '2016', tipo_aplicacao: 'Impressa', tema: 'Cinética Química', tema_detalhado: 'Fatores que afetam a velocidade de reação: temperatura', competencia: 'Competência de Área 7', habilidade: 'H24', questao: 'Um aumento na temperatura geralmente acelera uma reação química porque:', alternativas: ['A) A energia de ativação diminui.', 'B) Aumenta a frequência de colisões eficazes entre as moléculas.', 'C) A concentração dos reagentes aumenta.', 'D) Os produtos são formados mais rapidamente.', 'E) A pressão do sistema aumenta.'], resposta_correta: 'B) Aumenta a frequência de colisões eficazes entre as moléculas.', imageUrl: 'https://placehold.co/400x200/EB6841/FFFFFF?text=Questão+2016' },
-            // ENEM 2017
             { ano: '2017', tipo_aplicacao: 'Impressa', tema: 'Equilíbrio Químico', tema_detalhado: 'Efeito da temperatura sobre o deslocamento de equilíbrio', competencia: 'Competência de Área 7', habilidade: 'H26', questao: 'Para a reação endotérmica A(g) + B(g) <=> C(g) + D(g), um aumento na temperatura causará:', alternativas: ['A) Deslocamento para os reagentes.', 'B) Deslocamento para os produtos.', 'C) Nenhuma alteração no equilíbrio.', 'D) Aumento da pressão parcial de A e B.', 'E) Diminuição da constante de equilíbrio.'], resposta_correta: 'B) Deslocamento para os produtos.', imageUrl: 'https://placehold.co/400x200/EDC951/FFFFFF?text=Questão+2017' },
-            // ENEM 2018
             { ano: '2018', tipo_aplicacao: 'Impressa', tema: 'Funções Inorgânicas', tema_detalhado: 'Identificação de ácidos e bases por indicadores', competencia: 'Competência de Área 7', habilidade: 'H24', questao: 'Um indicador ácido-base muda de cor dependendo do pH da solução. Se uma solução de repolho roxo fica vermelha, isso indica que a solução é:', alternativas: ['A) Neutra', 'B) Básica', 'C) Ácida', 'D) Satura', 'E) Tampão'], resposta_correta: 'C) Ácida', imageUrl: 'https://placehold.co/400x200/6A4A3C/FFFFFF?text=Questão+2018' },
-            // ENEM 2019
             { ano: '2019', tipo_aplicacao: 'Impressa', tema: 'Ligações Químicas', tema_detalhado: 'Polaridade de moléculas', competencia: 'Competência de Área 7', habilidade: 'H24', questao: 'Qual das seguintes moléculas é considerada apolar, apesar de possuir ligações polares?', alternativas: ['A) H₂O', 'B) NH₃', 'C) CO₂', 'D) HCl', 'E) CH₃OH'], resposta_correta: 'C) CO₂', imageUrl: 'https://placehold.co/400x200/00A0B0/FFFFFF?text=Questão+2019' },
-            // ENEM 2020
             { ano: '2020', tipo_aplicacao: 'Impressa', tema: 'Separação de Misturas', tema_detalhado: 'Destilação fracionada do petróleo', competencia: 'Competência de Área 7', habilidade: 'H25', questao: 'O processo de separação do petróleo em diversas frações (gasolina, querosene, etc.) é feito por:', alternativas: ['A) Decantação', 'B) Filtração', 'C) Destilação fracionada', 'D) Cristalização', 'E) Sublimação'], resposta_correta: 'C) Destilação fracionada', imageUrl: 'https://placehold.co/400x200/CC333F/FFFFFF?text=Questão+2020' },
-            // ENEM 2021
             { ano: '2021', tipo_aplicacao: 'Impressa', tema: 'Química Orgânica', tema_detalhado: 'Identificação de funções orgânicas em medicamentos', competencia: 'Competência de Área 7', habilidade: 'H24', questao: 'A aspirina (ácido acetilsalicílico) contém quais funções orgânicas em sua estrutura?', alternativas: ['A) Cetona e Éter', 'B) Aldeído e Álcool', 'C) Ácido carboxílico e Éster', 'D) Amina e Haleto', 'E) Fenol e Ácido sulfônico'], resposta_correta: 'C) Ácido carboxílico e Éster', imageUrl: 'https://placehold.co/400x200/EB6841/FFFFFF?text=Questão+2021' },
-            // ENEM 2022
             { ano: '2022', tipo_aplicacao: 'Impressa', tema: 'Reações de Oxirredução', tema_detalhado: 'Balanceamento de equações redox', competencia: 'Competência de Área 7', habilidade: 'H25', questao: 'Qual é o coeficiente estequiométrico do H₂O na reação redox balanceada: MnO₄⁻ + H₂O₂ + H⁺ → Mn²⁺ + O₂ + H₂O?', alternativas: ['A) 2', 'B) 3', 'C) 4', 'D) 5', 'E) 6'], resposta_correta: 'C) 4', imageUrl: 'https://placehold.co/400x200/EDC951/FFFFFF?text=Questão+2022' },
-            // ENEM 2023
             { ano: '2023', tipo_aplicacao: 'Impressa', tema: 'Bioquímica', tema_detalhado: 'Estrutura e função dos carboidratos', competencia: 'Competência de Área 2', habilidade: 'H7', questao: 'A celulose, um polissacarídeo, é fundamental para as plantas por sua função:', alternativas: ['A) Energética', 'B) Estrutural', 'C) Reguladora', 'D) Hormonal', 'E) Catalítica'], resposta_correta: 'B) Estrutural', imageUrl: 'https://placehold.co/400x200/6A4A3C/FFFFFF?text=Questão+2023' },
-            // ENEM 2024
-            { ano: '2024', tipo_aplicacao: 'Impressa', tema: 'Química Ambiental', tema_detalhado: 'Impactos do efeito estufa e soluções', competencia: 'Competência de Área 7', habilidade: 'H27', questao: 'Qual dos seguintes gases é o principal responsável pelo efeito estufa intensificado pelas atividades humanas?', alternativas: ['A) Oxigênio (O₂)', 'B) Nitrogênio (N₂)', 'C) Vapor d\'água (H₂O)', 'D) Dióxido de carbono (CO₂)', 'E) Hélio (He)'], resposta_correta: 'D) Dióxido de carbono (CO₂)', imageUrl: 'https://placehold.co/400x200/00A0B0/FFFFFF?text=Questão+2024' },
-            // Adicione mais questões de exemplo para PPL e Digital se desejar.
+            // Questões de 2024 (apenas exemplos, sem imagens reais)
+            { ano: '2024', tipo_aplicacao: 'Impressa', tema: 'Reações ácido-base', tema_detalhado: 'Neutralização de efluentes', competencia: 'C7', habilidade: 'H27', questao: 'Questão de exemplo sobre Reações ácido-base na neutralização de efluentes do ENEM 2024.', alternativas: ['A) Alternativa 1', 'B) Alternativa 2', 'C) Alternativa 3', 'D) Alternativa 4', 'E) Alternativa 5'], resposta_correta: 'C) Alternativa 3', imageUrl: '' },
+            { ano: '2024', tipo_aplicacao: 'Impressa', tema: 'Estequiometria', tema_detalhado: 'Rendimento de reação de produção de ácido acetilsalicílico', competencia: 'C7', habilidade: 'H24', questao: 'Questão de exemplo sobre Rendimento de reação de produção de ácido acetilsalicílico do ENEM 2024.', alternativas: ['A) Alternativa 1', 'B) Alternativa 2', 'C) Alternativa 3', 'D) Alternativa 4', 'E) Alternativa 5'], resposta_correta: 'C) Alternativa 3', imageUrl: '' },
         ];
 
 
-        // Detailed questions data for each year (Expanded and diversified)
+        // Dados detalhados de questões por ano para a seção de Análise Ano a Ano
         const detailedYearlyQuestionsData = [
-            // ENEM 2009 Data
-            { ano: 2009, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2009, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "Impressa", tema: "Reações de oxirredução em pilhas e baterias", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "Impressa", tema: "Impacto de poluentes atmosféricos sobre chuvas ácidas", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2009, tipo: "Impressa", tema: "Propriedades de metais alcalinos e suas reações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "PPL", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "PPL", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "PPL", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2009, tipo: "PPL", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2009, tipo: "PPL", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "PPL", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2009, tipo: "PPL", tema: "Reações de oxirredução em pilhas e baterias", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2009, tipo: "PPL", tema: "Impacto de poluentes atmosféricos sobre chuvas ácidas", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2009, tipo: "PPL", tema: "Propriedades de metais alcalinos e suas reações", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2010 Data
-            { ano: 2010, tipo: "Impressa", tema: "Combustão e energia liberada", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2010, tipo: "Impressa", tema: "Propriedades da água e soluções aquosas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "Impressa", tema: "Química Orgânica: hidrocarbonetos e suas aplicações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "Impressa", tema: "Estequiometria: cálculo de massa e rendimento", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "Impressa", tema: "Polímeros: características e usos no cotidiano", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "Impressa", tema: "Eletroquímica: eletrólise de sais fundidos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2010, tipo: "Impressa", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "Impressa", tema: "Radioatividade: decaimento alfa e beta", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2010, tipo: "Impressa", tema: "Química Ambiental: tratamento de água e esgoto", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2010, tipo: "Impressa", tema: "Equilíbrio Químico: princípio de Le Chatelier", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2010, tipo: "PPL", tema: "Combustão e energia liberada", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2010, tipo: "PPL", tema: "Propriedades da água e soluções aquosas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "PPL", tema: "Química Orgânica: hidrocarbonetos e suas aplicações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "PPL", tema: "Estequiometria: cálculo de massa e rendimento", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "PPL", tema: "Polímeros: características e usos no cotidiano", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "PPL", tema: "Eletroquímica: eletrólise de sais fundidos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2010, tipo: "PPL", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2010, tipo: "PPL", tema: "Radioatividade: decaimento alfa e beta", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2010, tipo: "PPL", tema: "Química Ambiental: tratamento de água e esgoto", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2010, tipo: "PPL", tema: "Equilíbrio Químico: princípio de Le Chatelier", competencia: "Competência de Área 7", habilidade: "H26" },
-            // ENEM 2011 Data
-            { ano: 2011, tipo: "Impressa", tema: "Reações Orgânicas: mecanismo de esterificação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Termoquímica: cálculo de entalpia de reação", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2011, tipo: "Impressa", tema: "Cinética Química: energia de ativação e catalisadores", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Funções Orgânicas: identificação de álcoois e fenóis", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Eletroquímica: pilhas e fluxo de elétrons", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Química Ambiental: poluição do ar e chuva ácida", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2011, tipo: "Impressa", tema: "Soluções e Concentração: diluição e titulação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Ligações Químicas: forças intermoleculares", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Isomeria: geométrica e óptica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "Impressa", tema: "Radioatividade: datação por Carbono-14", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2011, tipo: "Impressa", tema: "Estequiometria: reagente limitante e excesso", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Reações Orgânicas: mecanismo de esterificação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Termoquímica: cálculo de entalpia de reação", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2011, tipo: "PPL", tema: "Cinética Química: energia de ativação e catalisadores", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Funções Orgânicas: identificação de álcoois e fenóis", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Eletroquímica: pilhas e fluxo de elétrons", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Química Ambiental: poluição do ar e chuva ácida", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2011, tipo: "PPL", tema: "Soluções e Concentração: diluição e titulação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Ligações Químicas: forças intermoleculares", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Isomeria: geométrica e óptica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2011, tipo: "PPL", tema: "Radioatividade: datação por Carbono-14", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2011, tipo: "PPL", tema: "Estequiometria: reagente limitante e excesso", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2012 Data
-            { ano: 2012, tipo: "Impressa", tema: "Eletroquímica: corrosão e proteção de metais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2012, tipo: "Impressa", tema: "Físico-Química: propriedades coligativas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "Impressa", tema: "Química Orgânica: polímeros e suas aplicações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "Impressa", tema: "Equilíbrio Químico: pH de soluções", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2012, tipo: "Impressa", tema: "Química Geral: estrutura atômica e modelos atômicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "Impressa", tema: "Termoquímica: reações exotérmicas e endotérmicas", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2012, tipo: "Impressa", tema: "Soluções: solubilidade e curvas de solubilidade", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "Impressa", tema: "Química Ambiental: poluição da água por metais pesados", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2012, tipo: "Impressa", tema: "Radioatividade: usos na medicina e indústria", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2012, tipo: "Impressa", tema: "Estequiometria: pureza e rendimento", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "PPL", tema: "Eletroquímica: corrosão e proteção de metais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2012, tipo: "PPL", tema: "Físico-Química: propriedades coligativas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "PPL", tema: "Química Orgânica: polímeros e suas aplicações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "PPL", tema: "Equilíbrio Químico: pH de soluções", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2012, tipo: "PPL", tema: "Química Geral: estrutura atômica e modelos atômicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "PPL", tema: "Termoquímica: reações exotérmicas e endotérmicas", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2012, tipo: "PPL", tema: "Soluções: solubilidade e curvas de solubilidade", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2012, tipo: "PPL", tema: "Química Ambiental: poluição da água por metais pesados", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2012, tipo: "PPL", tema: "Radioatividade: usos na medicina e indústria", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2012, tipo: "PPL", tema: "Estequiometria: pureza e rendimento", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2013 Data
-            { ano: 2013, tipo: "Impressa", tema: "Estrutura da matéria e radioatividade", competencia: "Competência de Área 1", habilidade: "H3" },
-            { ano: 2013, tipo: "Impressa", tema: "Estequiometria e gases", competencia: "Competência de Área 2", habilidade: "H7" },
-            { ano: 2013, tipo: "Impressa", tema: "Ligações químicas e propriedades", competencia: "Competência de Área 1", habilidade: "H5" },
-            { ano: 2013, tipo: "Impressa", tema: "Soluções e concentração", competencia: "Competência de Área 2", habilidade: "H8" },
-            { ano: 2013, tipo: "Impressa", tema: "Estrutura atômica e espectros", competencia: "Competência de Área 1", habilidade: "H4" },
-            { ano: 2013, tipo: "Impressa", tema: "Propriedades coligativas", competencia: "Competência de Área 2", habilidade: "H8" },
-            { ano: 2013, tipo: "Impressa", tema: "Termoquímica", competencia: "Competência de Área 3", habilidade: "H11" },
-            { ano: 2013, tipo: "Impressa", tema: "Eletroquímica (pilhas e baterias)", competencia: "Competência de Área 3", habilidade: "H10" },
-            { ano: 2013, tipo: "Impressa", tema: "Eletroquímica (corrosão)", competencia: "Competência de Área 3", habilidade: "H10" },
-            { ano: 2013, tipo: "Impressa", tema: "Química orgânica (combustíveis)", competencia: "Competência de Área 5", habilidade: "H17" },
-            { ano: 2013, tipo: "Impressa", tema: "Química ambiental (poluição atmosférica)", competencia: "Competência de Área 4", habilidade: "H13" },
-            { ano: 2013, tipo: "Impressa", tema: "Funções orgânicas", competencia: "Competência de Área 5", habilidade: "H18" },
-            { ano: 2013, tipo: "Impressa", tema: "Soluções e propriedades físico-químicas", competencia: "Competência de Área 2", habilidade: "H8" },
-            { ano: 2013, tipo: "Impressa", tema: "Propriedades periódicas dos elementos", competencia: "Competência de Área 1", habilidade: "H4" },
-            { ano: 2013, tipo: "Impressa", tema: "Cinética química (velocidade de reação)", competencia: "Competência de Área 3", habilidade: "H12" },
-            { ano: 2013, tipo: "PPL", tema: "Eletroquímica (pilha e potencial)", competencia: "Competência de Área 3", habilidade: "H10" },
-            { ano: 2013, tipo: "PPL", tema: "Soluções (concentração)", competencia: "Competência de Área 2", habilidade: "H7" },
-            { ano: 2013, tipo: "PPL", tema: "Funções orgânicas", competencia: "Competência de Área 5", habilidade: "H18" },
-            { ano: 2013, tipo: "PPL", tema: "Estequiometria", competencia: "Competência de Área 2", habilidade: "H7" },
-            { ano: 2013, tipo: "PPL", tema: "Propriedades periódicas", competencia: "Competência de Área 1", habilidade: "H4" },
-            { ano: 2013, tipo: "PPL", tema: "Química ambiental (água e poluentes)", competencia: "Competência de Área 4", habilidade: "H13" },
-            { ano: 2013, tipo: "PPL", tema: "Química orgânica (combustíveis e energia)", competencia: "Competência de Área 5", habilidade: "H17" },
-            { ano: 2013, tipo: "PPL", tema: "Termoquímica", competencia: "Competência de Área 3", habilidade: "H11" },
-            { ano: 2013, tipo: "PPL", tema: "Cinética química", competencia: "Competência de Área 3", habilidade: "H12" },
-            { ano: 2013, tipo: "PPL", tema: "Ligações químicas e propriedades", competencia: "Competência de Área 1", habilidade: "H5" },
-            { ano: 2013, tipo: "PPL", tema: "Eletroquímica (corrosão)", competencia: "Competência de Área 3", habilidade: "H10" },
-            { ano: 2013, tipo: "PPL", tema: "Propriedades das soluções", competencia: "Competência de Área 2", habilidade: "H8" },
-            { ano: 2013, tipo: "PPL", tema: "Química ambiental (chuva ácida)", competencia: "Competência de Área 4", habilidade: "H13" },
-            { ano: 2013, tipo: "PPL", tema: "Radioatividade", competencia: "Competência de Área 1", habilidade: "H3" },
-            // ENEM 2014 Data
-            { ano: 2014, tipo: "Impressa", tema: "Desinfecção de água com HClO (oxidação/cloração)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "Impressa", tema: "Recuperação de prata de reveladores de raio-X (eletroquímica/ambiente)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "Impressa", tema: "Estereoquímica em fármacos (talidomida; enantiômeros e quiralidade)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "Impressa", tema: "Biodiesel/ésteres e ácidos graxos (propriedades e estabilidade oxidativa)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2014, tipo: "Impressa", tema: "Água dura: remoção de Ca²⁺/Mg²⁺ (precipitação/troca iônica)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "Impressa", tema: "Separação industrial de fenol e acetona (propriedades físico-químicas; destilação)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "Impressa", tema: "Neutralização de maus odores com vinagre (ácido–base)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "Impressa", tema: "Dessulfurização de gases (SO₂ → sulfito/sulfato; mitigação de chuva ácida)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "Impressa", tema: "Rendimento na produção de gesso (estequiometria)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "Impressa", tema: "Cadeias carbônicas: insaturada, ramificada e heterogênea (orgânica)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "Impressa", tema: "Biorremediação de naftaleno (limites legais solo/água; tomada de decisão)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "PPL", tema: "Radioatividade em contextos ambientais/tecnológicos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "PPL", tema: "Ligações intermoleculares (ponto de ebulição/solubilidade)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Reações inorgânicas / estequiometria (água e tratamento)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "PPL", tema: "Eletroquímica (pilhas e reações redox)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "PPL", tema: "Estequiometria com rendimento e pureza (geral)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Diluição de soluções", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Unidades de concentração (M, %)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Termoquímica: calor de combustão", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2014, tipo: "PPL", tema: "Equilíbrio químico / deslocamento de equilíbrio", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2014, tipo: "PPL", tema: "Hidrólise de sais e pH", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "PPL", tema: "Equilíbrio iônico e pH", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2014, tipo: "PPL", tema: "Densidade de substâncias (gelo vs líquidos)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2014, tipo: "PPL", tema: "Polímeros não biodegradáveis (sacos plásticos)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Pureza de calcocita (Cu2S → Cu) — cobre metálico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Bisfenol-A (rendimento da síntese)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2014, tipo: "PPL", tema: "Bafômetro: reações químicas envolvidas", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2015 Data
-            { ano: 2015, tipo: "Impressa", tema: "Química Verde: rotas limpas para síntese (acetato, ambiental)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2015, tipo: "Impressa", tema: "Termoquímica: mal das alturas e hemoglobina oxigenada", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2015, tipo: "Impressa", tema: "Separação: óleo e plástico nanomaterial de LCC, castanha-de-caju", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "Impressa", tema: "Fenômeno de fusão espontânea da soda cáustica sólida", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Hidroponia: volume de solução nutritiva (mol/L cálculo)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Corrosão e revestimento: lata de conserva (aço/estanho/verniz)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "Impressa", tema: "Feromônios: funções orgânicas dos compostos (trilha/alarme)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Oxidação de alceno por KMnO₄: transformação em ácidos carboxílicos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "Impressa", tema: "Carbonato de cálcio em efluentes: constante de equilíbrio", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Reação em cadeia nuclear (bomba atômica)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Rendimento: zinco metálico a partir de esfalerita (ZnS)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "Impressa", tema: "Pesticidas organoclorados: lipofilicidade e bioacumulação", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2015, tipo: "Impressa", tema: "Calda bordalesa: oxirredução e formação de mancha avermelhada", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "Impressa", tema: "Combustão dentro de frasco: consumo de oxigênio e mudança de pH", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2015, tipo: "Impressa", tema: "Entalpia de combustão de bio-óleo e liberação de energia", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2015, tipo: "Impressa", tema: "Destilação fracionada do petróleo (produção de gasolina)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "PPL", tema: "Acúmulo de plásticos: densidade diferencial para separação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Adulteração de combustível: propriedades físicas similares", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "PPL", tema: "Sistemas coloidais e desestabilização por solvente (etanol)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "PPL", tema: "Produção de cobre a partir de calcosita: rendimento e massa", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Substituição do carvão por urânio: massa de CO₂ evitada", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2015, tipo: "PPL", tema: "Densidade da mistura etanol/água e fração de etanol (%)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Dessulfurização por calcário: fórmula correta do sal formado", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Concentração de cafeína em café (mol/L)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Poliamida: nomenclatura do Nylon sintetizado (ácido + diamina)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Separação de frações do petróleo: destilação", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "PPL", tema: "PLA: tipo de polímero de condensação formado (poliéster)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Vinagre: amostra dentro de faixa permitida (%)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2015, tipo: "PPL", tema: "Efluentes: identificar qual é básico pelo pH medido", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2015, tipo: "PPL", tema: "Processos de branqueamento que geram organoclorados", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2015, tipo: "PPL", tema: "Eletrólise do alumínio: reações de cátodo e ânodo", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2015, tipo: "PPL", tema: "Propriedade que permite formação de sais de amônio estáveis a partir de aminas", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2016 Data
-            { ano: 2016, tipo: "Impressa", tema: "Spray de pimenta: lavagens ineficazes com água (solubilidade/espécie química)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Destilação do benzeno vs trimerização do acetileno (entalpia)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "Impressa", tema: "Contaminação com bário e teste de solubilidade com HCl e H₂SO₄", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "Impressa", tema: "Estereoisomeria em feromônios (talidomida é semelhante)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Produção de etanol a partir de milho: hidrólise", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "Impressa", tema: "Rendimento molar na síntese de metanol (CH₃Br + NaOH)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Adsorção de benzeno em carvão ativado (interações intermoleculares)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Biocélulas microbianas: número mínimo para alcançar diferença de potencial em série", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "Impressa", tema: "Fases da matéria segundo Platão vs estados físicos contemporâneos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Concentração de fósforo na vinhaça gerada pela produção de etanol", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Datação por carbono-14 (DNA de mamute)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Aromatização por evaporação de compostos voláteis na sauna", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "Impressa", tema: "Propiedades físicas (polaridade) e dissolução do óleo (Interações intermoleculares)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "Impressa", tema: "Termoquímica: efeito do “mal das alturas” na hemoglobina", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "Impressa", tema: "Equilíbrio químico em reações inorgânicas (processos cotidianos)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "Impressa", tema: "Soluções e radioatividade (radioatividade em contextos ambientais)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "Impressa", tema: "Separação de substâncias: físico-química – polímeros ou nanomateriais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "PPL", tema: "Tensoativos: detergente melhora molhabilidade via redução da tensão superficial", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "PPL", tema: "Energia nuclear por fissão de urânio (energia/impacto)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "PPL", tema: "Óleo de cozinha forma película e prejudica trocas gasosas (densidade/interação)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "PPL", tema: "Diferença entre sacolas biodegradáveis e polietileno comum (biodegradação)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2016, tipo: "PPL", tema: "Equilíbrio entre CO₃²⁻ e HCO₃⁻ em águas marinhas (pH, equilíbrio)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2016, tipo: "PPL", tema: "Reação do magnésio com água aquece alimentos (reações exotérmicas)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "PPL", tema: "Fenômeno do etileno no amadurecimento de frutos (bioquímica)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "PPL", tema: "Eficiência de combustíveis: calor liberado por diferentes combustíveis", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "PPL", tema: "Emissão de CO₂ por veículo baseado no conteúdo de carbono da gasolina", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "PPL", tema: "Fissão nuclear vs combustão em liberação de energia (J/g)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2016, tipo: "PPL", tema: "Tratamento de água: precipitação com carbonato de sódio e sulfato de alumínio", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "PPL", tema: "Combustíveis adulterados e testes laboratoriais (biodiesel na lei)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2016, tipo: "PPL", tema: "Eletrólise do alumínio (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2016, tipo: "PPL", tema: "Estabilidade de sais de amônio formados a partir de aminas", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2017 Data
-            { ano: 2017, tipo: "Impressa", tema: "Soluções (concentração, coligativas)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Eletroquímica (reações, pilhas)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "Impressa", tema: "Atomística (estrutura atômica)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Ligações químicas (forças intermoleculares)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Radioatividade", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "Impressa", tema: "Matéria e suas transformações", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Reações orgânicas (tipos e mecanismos)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "Impressa", tema: "Equilíbrio iônico (pH)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2017, tipo: "Impressa", tema: "Propriedades coligativas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Estequiometria (cálculo quantitativo)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Termoquímica", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "Impressa", tema: "Atomística (isótopos, massa molar)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Propriedades dos compostos orgânicos (polaridade, solubilidade)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "Impressa", tema: "Reações orgânicas (transformações químicas)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "Impressa", tema: "Técnicas de separação (cromatografia, centrifugação)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "PPL", tema: "Radiação no tratamento do câncer (radioatividade: tipo de radiação)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "PPL", tema: "Adulteração do leite por NaOH (neutralização / pH)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2017, tipo: "PPL", tema: "Reciclagem/lâmpadas fluorescentes: recuperação de mercúrio", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2017, tipo: "PPL", tema: "Chaminé: reação de poluentes e chuva ácida (SO₂ → H₂SO₄)", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2017, tipo: "PPL", tema: "Fixação de CO₂ por árvores vs emissão de gasolina (estequiometria ambiental)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "PPL", tema: "Eletrólise de NaCl: produto secundário (H₂ gás)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "PPL", tema: "Cor da chama alterada por sais presentes na água de cozimento (espectro de emissão)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "PPL", tema: "Núcleo de condensação e formação de chuva via reação ácido/base", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "PPL", tema: "Síntese de AAS (ácido acetilsalicílico): cálculo de reagentes para produção (rendimento)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "PPL", tema: "Redução de FeO pelo CO (siderurgia): entalpia ΔH", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "PPL", tema: "Gases nobres: por que o flúor reage com xenônio (eletropositividade)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "PPL", tema: "Cromatografia em papel dos pigmentos do pimentão (interações intermoleculares)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2017, tipo: "PPL", tema: "Comparação de etanol e gasolina: combustão e liberação de energia", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2017, tipo: "PPL", tema: "Teste de ácidos: uso de indicadores para identificação de pH", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2017, tipo: "PPL", tema: "Efeito da temperatura sobre deslocamento de equilíbrio químico", competencia: "Competência de Área 7", habilidade: "H26" },
-            // ENEM 2018 Data
-            { ano: 2018, tipo: "Impressa", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2018, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2018, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2018, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "Impressa", tema: "Toxicidade de compostos orgânicos e impacto ambiental", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2018, tipo: "Impressa", tema: "Separação de misturas: destilação e filtração", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2018, tipo: "PPL", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "PPL", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2018, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "PPL", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2018, tipo: "PPL", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2018, tipo: "PPL", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2018, tipo: "PPL", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2018, tipo: "PPL", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2019 Data
-            { ano: 2019, tipo: "Impressa", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2019, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2019, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2019, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "Impressa", tema: "Toxicidade de compostos orgânicos e impacto ambiental", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2019, tipo: "Impressa", tema: "Separação de misturas: destilação e filtração", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2019, tipo: "PPL", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "PPL", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2019, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "PPL", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Concentração molar em soluções após diluição", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Reações ácido-base na neutralização de efluentes", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2019, tipo: "PPL", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2019, tipo: "PPL", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2019, tipo: "PPL", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2019, tipo: "PPL", tema: "Estequiometria em reações de síntese orgânica", competencia: "Competência de Área 7", habilidade: "H24" },
-            // ENEM 2020 Data
-            { ano: 2020, tipo: "Impressa", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Impressa", tema: "Termoquímica: energia de ligação", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2020, tipo: "Impressa", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "Impressa", tema: "Físico-Química: propriedades dos gases ideais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Impressa", tema: "Eletroquímica: eletrólise aquosa", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "Impressa", tema: "Química Ambiental: poluição por plásticos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2020, tipo: "Impressa", tema: "Soluções: preparo e diluição de soluções", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Impressa", tema: "Estrutura Atômica: distribuição eletrônica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Impressa", tema: "Ligações Químicas: ligações metálicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Impressa", tema: "Radioatividade: fissão nuclear e energia", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2020, tipo: "Digital", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Digital", tema: "Termoquímica: energia de ligação", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2020, tipo: "Digital", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "Digital", tema: "Físico-Química: propriedades dos gases ideais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Digital", tema: "Eletroquímica: eletrólise aquosa", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "Digital", tema: "Química Ambiental: poluição por plásticos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2020, tipo: "Digital", tema: "Soluções: preparo e diluição de soluções", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Digital", tema: "Estrutura Atômica: distribuição eletrônica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Digital", tema: "Ligações Químicas: ligações metálicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "Digital", tema: "Radioatividade: fissão nuclear e energia", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2020, tipo: "PPL", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "PPL", tema: "Termoquímica: energia de ligação", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2020, tipo: "PPL", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "PPL", tema: "Físico-Química: propriedades dos gases ideais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "PPL", tema: "Eletroquímica: eletrólise aquosa", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2020, tipo: "PPL", tema: "Química Ambiental: poluição por plásticos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2020, tipo: "PPL", tema: "Soluções: preparo e diluição de soluções", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "PPL", tema: "Estrutura Atômica: distribuição eletrônica", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "PPL", tema: "Ligações Químicas: ligações metálicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2020, tipo: "PPL", tema: "Radioatividade: fissão nuclear e energia", competencia: "Competência de Área 7", habilidade: "H26" },
+            // ENEM 2009 Data - Exemplos expandidos
+            { ano: 2009, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "C7", habilidade: "H26" },
+            { ano: 2009, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "C7", habilidade: "H26" },
+            { ano: 2009, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "C7", habilidade: "H25" },
+            { ano: 2009, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "C7", habilidade: "H27" },
+            { ano: 2009, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "C7", habilidade: "H26" },
+            { ano: 2009, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "C7", habilidade: "H25" },
+            { ano: 2009, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "Impressa", tema: "Reações de oxirredução em pilhas e baterias", competencia: "C7", habilidade: "H25" },
+            { ano: 2009, tipo: "Impressa", tema: "Impacto de poluentes atmosféricos sobre chuvas ácidas", competencia: "C7", habilidade: "H27" },
+            { ano: 2009, tipo: "Impressa", tema: "Propriedades de metais alcalinos e suas reações", competencia: "C7", habilidade: "H24" },
+            { ano: 2009, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais (PPL)", competencia: "C7", habilidade: "H26" },
+            // ENEM 2010 Data - Exemplos expandidos
+            { ano: 2010, tipo: "Impressa", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2010, tipo: "Impressa", tema: "Termoquímica: energia de ligação", competencia: "C7", habilidade: "H26" },
+            { ano: 2010, tipo: "Impressa", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "C7", habilidade: "H25" },
+            { ano: 2010, tipo: "Impressa", tema: "Físico-Química: propriedades dos gases ideais", competencia: "C7", habilidade: "H24" },
+            { ano: 2010, tipo: "Impressa", tema: "Eletroquímica: eletrólise aquosa", competencia: "C7", habilidade: "H25" },
+            { ano: 2010, tipo: "Impressa", tema: "Química Ambiental: poluição por plásticos", competencia: "C7", habilidade: "H27" },
+            { ano: 2010, tipo: "Impressa", tema: "Soluções: preparo e diluição de soluções", competencia: "C7", habilidade: "H24" },
+            { ano: 2010, tipo: "Estrutura Atômica: distribuição eletrônica", competencia: "C7", habilidade: "H24" },
+            { ano: 2010, tipo: "Impressa", tema: "Ligações Químicas: ligações metálicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2010, tipo: "Impressa", tema: "Radioatividade: fissão nuclear e energia", competencia: "C7", habilidade: "H26" },
+            { ano: 2010, tipo: "PPL", tema: "Cinética Química: fatores que afetam a velocidade de reação (PPL)", competencia: "C7", habilidade: "H24" },
+            // ENEM 2011 Data - Exemplos expandidos
+            { ano: 2011, tipo: "Impressa", tema: "Reações Orgânicas: mecanismo de esterificação", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Termoquímica: cálculo de entalpia de reação", competencia: "C7", habilidade: "H25" },
+            { ano: 2011, tipo: "Impressa", tema: "Cinética Química: energia de ativação e catalisadores", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Funções Orgânicas: identificação de álcoois e fenóis", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Eletroquímica: pilhas e fluxo de elétrons", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Química Ambiental: poluição do ar e chuva ácida", competencia: "C7", habilidade: "H25" },
+            { ano: 2011, tipo: "Impressa", tema: "Soluções e Concentração: diluição e titulação", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Ligações Químicas: forças intermoleculares", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Isomeria: geométrica e óptica", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "Impressa", tema: "Radioatividade: datação por Carbono-14", competencia: "C7", habilidade: "H26" },
+            { ano: 2011, tipo: "Impressa", tema: "Estequiometria: reagente limitante e excesso", competencia: "C7", habilidade: "H24" },
+            { ano: 2011, tipo: "PPL", tema: "Reações Orgânicas: mecanismo de esterificação (PPL)", competencia: "C7", habilidade: "H24" },
+            // ENEM 2012 Data - Exemplos expandidos
+            { ano: 2012, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "C7", habilidade: "H26" },
+            { ano: 2012, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "C7", habilidade: "H26" },
+            { ano: 2012, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "C7", habilidade: "H25" },
+            { ano: 2012, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "C7", habilidade: "H27" },
+            { ano: 2012, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "C7", habilidade: "H26" },
+            { ano: 2012, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "C7", habilidade: "H25" },
+            { ano: 2012, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "C7", habilidade: "H24" },
+            { ano: 2012, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais (PPL)", competencia: "C7", habilidade: "H26" },
+            // ENEM 2013 Data - Exemplos expandidos
+            { ano: 2013, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "C7", habilidade: "H26" },
+            { ano: 2013, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "C7", habilidade: "H26" },
+            { ano: 2013, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "C7", habilidade: "H25" },
+            { ano: 2013, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "C7", habilidade: "H27" },
+            { ano: 2013, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "C7", habilidade: "H26" },
+            { ano: 2013, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "C7", habilidade: "H25" },
+            { ano: 2013, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "C7", habilidade: "H24" },
+            { ano: 2013, tipo: "PPL", tema: "Radioatividade e meia-vida em contextos ambientais (PPL)", competencia: "C7", habilidade: "H26" },
+            // ENEM 2014 Data - Exemplos expandidos
+            { ano: 2014, tipo: "Impressa", tema: "Desinfecção de água com HClO (oxidação/cloração)", competencia: "C7", habilidade: "H25" },
+            { ano: 2014, tipo: "Impressa", tema: "Recuperação de prata de reveladores de raio-X (eletroquímica/ambiente)", competencia: "C7", habilidade: "H27" },
+            { ano: 2014, tipo: "Impressa", tema: "Estereoquímica em fármacos (talidomida; enantiômeros e quiralidade)", competencia: "C7", habilidade: "H24" },
+            { ano: 2014, tipo: "Impressa", tema: "Biodiesel/ésteres e ácidos graxos (propriedades e estabilidade oxidativa)", competencia: "C7", habilidade: "H26" },
+            { ano: 2014, tipo: "Impressa", tema: "Água dura: remoção de Ca²⁺/Mg²⁺ (precipitação/troca iônica)", competencia: "C7", habilidade: "H27" },
+            { ano: 2014, tipo: "Impressa", tema: "Separação industrial de fenol e acetona (propriedades físico-químicas; destilação)", competencia: "C7", habilidade: "H25" },
+            { ano: 2014, tipo: "Impressa", tema: "Neutralização de maus odores com vinagre (ácido–base)", competencia: "C7", habilidade: "H25" },
+            { ano: 2014, tipo: "Impressa", tema: "Dessulfurização de gases (SO₂ → sulfito/sulfato; mitigação de chuva ácida)", competencia: "C7", habilidade: "H27" },
+            { ano: 2014, tipo: "Impressa", tema: "Rendimento na produção de gesso (estequiometria)", competencia: "C7", habilidade: "H25" },
+            { ano: 2014, tipo: "Impressa", tema: "Cadeias carbônicas: insaturada, ramificada e heterogênea (orgânica)", competencia: "C7", habilidade: "H24" },
+            { ano: 2014, tipo: "Impressa", tema: "Biorremediação de naftaleno (limites legais solo/água; tomada de decisão)", competencia: "C7", habilidade: "H27" },
+            { ano: 2014, tipo: "PPL", tema: "Radioatividade em contextos ambientais/tecnológicos (PPL)", competencia: "C7", habilidade: "H25" },
+            // ENEM 2015 Data - Exemplos expandidos
+            { ano: 2015, tipo: "Impressa", tema: "Química Verde: rotas limpas para síntese (acetato, ambiental)", competencia: "C7", habilidade: "H27" },
+            { ano: 2015, tipo: "Impressa", tema: "Termoquímica: mal das alturas e hemoglobina oxigenada", competencia: "C7", habilidade: "H26" },
+            { ano: 2015, tipo: "Impressa", tema: "Separação: óleo e plástico nanomaterial de LCC, castanha-de-caju", competencia: "C7", habilidade: "H25" },
+            { ano: 2015, tipo: "Impressa", tema: "Fenômeno de fusão espontânea da soda cáustica sólida", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Hidroponia: volume de solução nutritiva (mol/L cálculo)", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Corrosão e revestimento: lata de conserva (aço/estanho/verniz)", competencia: "C7", habilidade: "H25" },
+            { ano: 2015, tipo: "Impressa", tema: "Feromônios: funções orgânicas dos compostos (trilha/alarme)", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Oxidação de alceno por KMnO₄: transformação em ácidos carboxílicos", competencia: "C7", habilidade: "H25" },
+            { ano: 2015, tipo: "Impressa", tema: "Carbonato de cálcio em efluentes: constante de equilíbrio", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Reação em cadeia nuclear (bomba atômica)", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Rendimento: zinco metálico a partir de esfalerita (ZnS)", competencia: "C7", habilidade: "H24" },
+            { ano: 2015, tipo: "Impressa", tema: "Pesticidas organoclorados: lipofilicidade e bioacumulação", competencia: "C7", habilidade: "H27" },
+            { ano: 2015, tipo: "Impressa", tema: "Calda bordalesa: oxirredução e formação de mancha avermelhada", competencia: "C7", habilidade: "H25" },
+            { ano: 2015, tipo: "Impressa", tema: "Combustão dentro de frasco: consumo de oxigênio e mudança de pH", competencia: "C7", habilidade: "H26" },
+            { ano: 2015, tipo: "Impressa", tema: "Entalpia de combustão de bio-óleo e liberação de energia", competencia: "C7", habilidade: "H26" },
+            { ano: 2015, tipo: "Impressa", tema: "Destilação fracionada do petróleo (produção de gasolina)", competencia: "C7", habilidade: "H25" },
+            { ano: 2015, tipo: "PPL", tema: "Acúmulo de plásticos: densidade diferencial para separação (PPL)", competencia: "C7", habilidade: "H24" },
+            // ENEM 2016 Data - Exemplos expandidos
+            { ano: 2016, tipo: "Impressa", tema: "Spray de pimenta: lavagens ineficazes com água (solubilidade/espécie química)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Destilação do benzeno vs trimerização do acetileno (entalpia)", competencia: "C7", habilidade: "H26" },
+            { ano: 2016, tipo: "Impressa", tema: "Contaminação com bário e teste de solubilidade com HCl e H₂SO₄", competencia: "C7", habilidade: "H25" },
+            { ano: 2016, tipo: "Impressa", tema: "Estereoisomeria em feromônios (talidomida é semelhante)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Produção de etanol a partir de milho: hidrólise", competencia: "C7", habilidade: "H25" },
+            { ano: 2016, tipo: "Impressa", tema: "Rendimento molar na síntese de metanol (CH₃Br + NaOH)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Adsorção de benzeno em carvão ativado (interações intermoleculares)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Biocélulas microbianas: número mínimo para alcançar diferença de potencial em série", competencia: "C7", habilidade: "H25" },
+            { ano: 2016, tipo: "Impressa", tema: "Fases da matéria segundo Platão vs estados físicos contemporâneos", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Concentração de fósforo na vinhaça gerada pela produção de etanol", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Datação por carbono-14 (DNA de mamute)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Aromatização por evaporação de compostos voláteis na sauna", competencia: "C7", habilidade: "H25" },
+            { ano: 2016, tipo: "Impressa", tema: "Propiedades físicas (polaridade) e dissolução do óleo (Interações intermoleculares)", competencia: "C7", habilidade: "H24" },
+            { ano: 2016, tipo: "Impressa", tema: "Termoquímica: efeito do “mal das alturas” na hemoglobina", competencia: "C7", habilidade: "H26" },
+            { ano: 2016, tipo: "Impressa", tema: "Equilíbrio químico em reações inorgânicas (processos cotidianos)", competencia: "C7", habilidade: "H26" },
+            { ano: 2016, tipo: "Impressa", tema: "Soluções e radioatividade (radioatividade em contextos ambientais)", competencia: "C7", habilidade: "H26" },
+            { ano: 2016, tipo: "Impressa", tema: "Separação de substâncias: físico-química – polímeros ou nanomateriais", competencia: "C7", habilidade: "H25" },
+            { ano: 2016, tipo: "PPL", tema: "Tensoativos: detergente melhora molhabilidade via redução da tensão superficial (PPL)", competencia: "C7", habilidade: "H25" },
+            // ENEM 2017 Data - Exemplos expandidos
+            { ano: 2017, tipo: "Impressa", tema: "Soluções (concentração, coligativas)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Eletroquímica (reações, pilhas)", competencia: "C7", habilidade: "H25" },
+            { ano: 2017, tipo: "Impressa", tema: "Atomística (estrutura atômica)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Ligações químicas (forças intermoleculares)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Radioatividade", competencia: "C7", habilidade: "H26" },
+            { ano: 2017, tipo: "Impressa", tema: "Matéria e suas transformações", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Reações orgânicas (tipos e mecanismos)", competencia: "C7", habilidade: "H25" },
+            { ano: 2017, tipo: "Impressa", tema: "Equilíbrio iônico (pH)", competencia: "C7", habilidade: "H27" },
+            { ano: 2017, tipo: "Impressa", tema: "Propriedades coligativas", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Estequiometria (cálculo quantitativo)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Termoquímica", competencia: "C7", habilidade: "H26" },
+            { ano: 2017, tipo: "Impressa", tema: "Atomística (isótopos, massa molar)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Propriedades dos compostos orgânicos (polaridade, solubilidade)", competencia: "C7", habilidade: "H24" },
+            { ano: 2017, tipo: "Impressa", tema: "Reações orgânicas (transformações químicas)", competencia: "C7", habilidade: "H25" },
+            { ano: 2017, tipo: "Impressa", tema: "Técnicas de separação (cromatografia, centrifugação)", competencia: "C7", habilidade: "H25" },
+            { ano: 2017, tipo: "PPL", tema: "Radiação no tratamento do câncer (radioatividade: tipo de radiação) (PPL)", competencia: "C7", habilidade: "H26" },
+            // ENEM 2018 Data - Exemplos expandidos
+            { ano: 2018, tipo: "Impressa", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "C7", habilidade: "H26" },
+            { ano: 2018, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "C7", habilidade: "H25" },
+            { ano: 2018, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "C7", habilidade: "H26" },
+            { ano: 2018, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "C7", habilidade: "H27" },
+            { ano: 2018, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "C7", habilidade: "H26" },
+            { ano: 2018, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "C7", habilidade: "H25" },
+            { ano: 2018, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "C7", habilidade: "H24" },
+            { ano: 2018, tipo: "Impressa", tema: "Toxicidade de compostos orgânicos e impacto ambiental", competencia: "C7", habilidade: "H27" },
+            { ano: 2018, tipo: "Impressa", tema: "Separação de misturas: destilação e filtração", competencia: "C7", habilidade: "H25" },
+            { ano: 2018, tipo: "PPL", tema: "Cores de indicadores para identificação de soluções ácidas e básicas (PPL)", competencia: "C7", habilidade: "H24" },
+            // ENEM 2019 Data - Exemplos expandidos
+            { ano: 2019, tipo: "Impressa", tema: "Cores de indicadores para identificação de soluções ácidas e básicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Rendimento de reação de produção de ácido acetilsalicílico", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)", competencia: "C7", habilidade: "H26" },
+            { ano: 2019, tipo: "Impressa", tema: "Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Eletrólise de sais e formação de produtos (H₂, Cl₂)", competencia: "C7", habilidade: "H25" },
+            { ano: 2019, tipo: "Impressa", tema: "Radioatividade e meia-vida em contextos ambientais", competencia: "C7", habilidade: "H26" },
+            { ano: 2019, tipo: "Impressa", tema: "Propriedades de polímeros biodegradáveis vs plásticos comuns", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Concentração molar em soluções após diluição", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Reações ácido-base na neutralização de efluentes", competencia: "C7", habilidade: "H27" },
+            { ano: 2019, tipo: "Impressa", tema: "Combustão de diferentes combustíveis e emissão de CO₂", competencia: "C7", habilidade: "H26" },
+            { ano: 2019, tipo: "Impressa", tema: "Extração de alumínio por eletrólise (reações no cátodo e ânodo)", competencia: "C7", habilidade: "H25" },
+            { ano: 2019, tipo: "Impressa", tema: "Propriedades intermoleculares e ponto de ebulição de líquidos", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Estequiometria em reações de síntese orgânica", competencia: "C7", habilidade: "H24" },
+            { ano: 2019, tipo: "Impressa", tema: "Toxicidade de compostos orgânicos e impacto ambiental", competencia: "C7", habilidade: "H27" },
+            { ano: 2019, tipo: "Impressa", tema: "Separação de misturas: destilação e filtração", competencia: "C7", habilidade: "H25" },
+            { ano: 2019, tipo: "PPL", tema: "Cores de indicadores para identificação de soluções ácidas e básicas (PPL)", competencia: "C7", habilidade: "H24" },
+            // ENEM 2020 Data - Exemplos expandidos
+            { ano: 2020, tipo: "Impressa", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Impressa", tema: "Termoquímica: energia de ligação", competencia: "C7", habilidade: "H26" },
+            { ano: 2020, tipo: "Impressa", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "Impressa", tema: "Físico-Química: propriedades dos gases ideais", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Impressa", tema: "Eletroquímica: eletrólise aquosa", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "Impressa", tema: "Química Ambiental: poluição por plásticos", competencia: "C7", habilidade: "H27" },
+            { ano: 2020, tipo: "Impressa", tema: "Soluções: preparo e diluição de soluções", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Estrutura Atômica: distribuição eletrônica", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Impressa", tema: "Ligações Químicas: ligações metálicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Impressa", tema: "Radioatividade: fissão nuclear e energia", competencia: "C7", habilidade: "H26" },
+            { ano: 2020, tipo: "Digital", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Digital", tema: "Termoquímica: energia de ligação", competencia: "C7", habilidade: "H26" },
+            { ano: 2020, tipo: "Digital", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "Digital", tema: "Físico-Química: propriedades dos gases ideais", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Digital", tema: "Eletroquímica: eletrólise aquosa", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "Digital", tema: "Química Ambiental: poluição por plásticos", competencia: "C7", habilidade: "H27" },
+            { ano: 2020, tipo: "Digital", tema: "Soluções: preparo e diluição de soluções", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Digital", tema: "Estrutura Atômica: distribuição eletrônica", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Digital", tema: "Ligações Químicas: ligações metálicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "Digital", tema: "Radioatividade: fissão nuclear e energia", competencia: "C7", habilidade: "H26" },
+            { ano: 2020, tipo: "PPL", tema: "Cinética Química: fatores que afetam a velocidade de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "PPL", tema: "Termoquímica: energia de ligação", competencia: "C7", habilidade: "H26" },
+            { ano: 2020, tipo: "PPL", tema: "Química Orgânica: reações de substituição em alcanos", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "PPL", tema: "Físico-Química: propriedades dos gases ideais", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "PPL", tema: "Eletroquímica: eletrólise aquosa", competencia: "C7", habilidade: "H25" },
+            { ano: 2020, tipo: "PPL", tema: "Química Ambiental: poluição por plásticos", competencia: "C7", habilidade: "H27" },
+            { ano: 2020, tipo: "PPL", tema: "Soluções: preparo e diluição de soluções", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "PPL", tema: "Estrutura Atômica: distribuição eletrônica", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "PPL", tema: "Ligações Químicas: ligações metálicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2020, tipo: "PPL", tema: "Radioatividade: fissão nuclear e energia", competencia: "C7", habilidade: "H26" },
             // ENEM 2021 Data
-            { ano: 2021, tipo: "Impressa", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Reações de neutralização em processos industriais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Impressa", tema: "Impacto ambiental de compostos químicos industriais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "Impressa", tema: "Processos de separação de misturas no cotidiano", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Concentração de soluções químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Reações de oxirredução em sistemas biológicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Impressa", tema: "Comportamento de gases ideais em diferentes condições", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "Impressa", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Rendimento de reações químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Impressa", tema: "Processos de purificação de água", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Impressa", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "Digital", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Reações de neutralização em processos industriais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Digital", tema: "Impacto ambiental de compostos químicos industriais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "Digital", tema: "Processos de separação de misturas no cotidiano", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Concentração de soluções químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Reações de oxirredução em sistemas biológicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Digital", tema: "Comportamento de gases ideais em diferentes condições", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "Digital", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Rendimento de reações químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "Digital", tema: "Processos de purificação de água", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "Digital", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "PPL", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Reações de neutralização em processos industriais", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "PPL", tema: "Impacto ambiental de compostos químicos industriais", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "PPL", tema: "Processos de separação de misturas no cotidiano", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Concentração de soluções químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Reações de oxirredução em sistemas biológicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "PPL", tema: "Comportamento de gases ideais em diferentes condições", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2021, tipo: "PPL", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Rendimento de reações químicas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2021, tipo: "PPL", tema: "Processos de purificação de água", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2021, tipo: "PPL", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "Competência de Área 7", habilidade: "H26" },
+            { ano: 2021, tipo: "Impressa", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Reações de neutralização em processos industriais", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Impressa", tema: "Impacto ambiental de compostos químicos industriais", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "Impressa", tema: "Processos de separação de misturas no cotidiano", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Concentração de soluções químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Reações de oxirredução em sistemas biológicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Impressa", tema: "Comportamento de gases ideais em diferentes condições", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "Impressa", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Rendimento de reações químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Impressa", tema: "Processos de purificação de água", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Impressa", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "Digital", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Reações de neutralização em processos industriais", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Digital", tema: "Impacto ambiental de compostos químicos industriais", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "Digital", tema: "Processos de separação de misturas no cotidiano", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Concentração de soluções químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Reações de oxirredução em sistemas biológicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Digital", tema: "Comportamento de gases ideais em diferentes condições", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "Digital", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Rendimento de reações químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "Digital", tema: "Processos de purificação de água", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "Digital", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "PPL", tema: "Propriedades físico-químicas de substâncias orgânicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Reações de neutralização em processos industriais", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "PPL", tema: "Impacto ambiental de compostos químicos industriais", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "PPL", tema: "Processos de separação de misturas no cotidiano", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Concentração de soluções químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Reações de oxirredução em sistemas biológicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Uso de indicadores ácido-base em análises químicas", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "PPL", tema: "Comportamento de gases ideais em diferentes condições", competencia: "C7", habilidade: "H26" },
+            { ano: 2021, tipo: "PPL", tema: "Fenômenos de corrosão e prevenção em materiais metálicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Rendimento de reações químicas", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Propriedades de polímeros sintéticos e naturais", competencia: "C7", habilidade: "H24" },
+            { ano: 2021, tipo: "PPL", tema: "Processos de purificação de água", competencia: "C7", habilidade: "H25" },
+            { ano: 2021, tipo: "PPL", tema: "Efeitos de substâncias químicas no meio ambiente", competencia: "C7", habilidade: "H26" },
             // ENEM 2022 Data
-            { ano: 2022, tipo: "Impressa", tema: "Química Orgânica: Funções oxigenadas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Impressa", tema: "Físico-Química: Eletrólise ígnea", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2022, tipo: "Impressa", tema: "Química Ambiental: Descarte de resíduos tóxicos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2022, tipo: "Impressa", tema: "Soluções: Propriedades coligativas (ebulioscopia)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Impressa", tema: "Estequiometria: Reações com excesso de reagente", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Impressa", tema: "Termoquímica: Lei de Hess", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Impressa", tema: "Cinética Química: Catálise homogênea e heterogênea", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Impressa", tema: "Equilíbrio Químico: Constante de equilíbrio (Kc e Kp)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Impressa", tema: "Radioatividade: Transmutação de elementos", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Impressa", tema: "Ligações Químicas: Geometria molecular", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Digital", tema: "Química Orgânica: Funções nitrogenadas", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Digital", tema: "Físico-Química: Pilhas (células galvânicas)", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2022, tipo: "Digital", tema: "Química Ambiental: Bioremediação de solos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2022, tipo: "Digital", tema: "Soluções: Curvas de titulação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Digital", tema: "Estequiometria: Pureza de reagentes", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Digital", tema: "Termoquímica: Calor de neutralização", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Digital", tema: "Cinética Química: Ordem de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "Digital", tema: "Equilíbrio Químico: Efeito do íon comum", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Digital", tema: "Radioatividade: Fusão nuclear", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "Digital", tema: "Ligações Químicas: Hibridização", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "PPL", tema: "Química Orgânica: Nomenclatura de compostos cíclicos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "PPL", tema: "Físico-Química: Eletrólise em solução aquosa", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2022, tipo: "PPL", tema: "Química Ambiental: Poluição da água por esgoto", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2022, tipo: "PPL", tema: "Soluções: Lei de Raoult e pressão de vapor", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "PPL", tema: "Estequiometria: Volumetria ácido-base", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "PPL", tema: "Termoquímica: Diagramas de energia", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "PPL", tema: "Cinética Química: Mecanismos de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2022, tipo: "PPL", tema: "Equilíbrio Químico: Equilíbrio de solubilidade (Kps)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "PPL", tema: "Radioatividade: Radiação ionizante e não ionizante", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2022, tipo: "PPL", tema: "Ligações Químicas: Teoria de VSEPR", competencia: "Competência de Área 7", habilidade: "H24" },
+            { ano: 2022, tipo: "Impressa", tema: "Química Orgânica: Funções oxigenadas", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Impressa", tema: "Físico-Química: Eletrólise ígnea", competencia: "C7", habilidade: "H25" },
+            { ano: 2022, tipo: "Impressa", tema: "Química Ambiental: Descarte de resíduos tóxicos", competencia: "C7", habilidade: "H27" },
+            { ano: 2022, tipo: "Impressa", tema: "Soluções: Propriedades coligativas (ebulioscopia)", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Impressa", tema: "Estequiometria: Reações com excesso de reagente", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Impressa", tema: "Termoquímica: Lei de Hess", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Impressa", tema: "Cinética Química: Catálise homogênea e heterogênea", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Impressa", tema: "Equilíbrio Químico: Constante de equilíbrio (Kc e Kp)", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Impressa", tema: "Radioatividade: Transmutação de elementos", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Impressa", tema: "Ligações Químicas: Geometria molecular", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Digital", tema: "Química Orgânica: Funções nitrogenadas", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Digital", tema: "Físico-Química: Pilhas (células galvânicas)", competencia: "C7", habilidade: "H25" },
+            { ano: 2022, tipo: "Digital", tema: "Química Ambiental: Bioremediação de solos", competencia: "C7", habilidade: "H27" },
+            { ano: 2022, tipo: "Digital", tema: "Soluções: Curvas de titulação", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Digital", tema: "Estequiometria: Pureza de reagentes", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Digital", tema: "Termoquímica: Calor de neutralização", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Digital", tema: "Cinética Química: Ordem de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "Digital", tema: "Equilíbrio Químico: Efeito do íon comum", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Digital", tema: "Radioatividade: Fusão nuclear", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "Digital", tema: "Ligações Químicas: Hibridização", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "PPL", tema: "Química Orgânica: Nomenclatura de compostos cíclicos", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "PPL", tema: "Físico-Química: Eletrólise em solução aquosa", competencia: "C7", habilidade: "H25" },
+            { ano: 2022, tipo: "PPL", tema: "Química Ambiental: Poluição da água por esgoto", competencia: "C7", habilidade: "H27" },
+            { ano: 2022, tipo: "PPL", tema: "Soluções: Lei de Raoult e pressão de vapor", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "PPL", tema: "Estequiometria: Volumetria ácido-base", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "PPL", tema: "Termoquímica: Diagramas de energia", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "PPL", tema: "Cinética Química: Mecanismos de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2022, tipo: "PPL", tema: "Equilíbrio Químico: Equilíbrio de solubilidade (Kps)", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "PPL", tema: "Radioatividade: Radiação ionizante e não ionizante", competencia: "C7", habilidade: "H26" },
+            { ano: 2022, tipo: "PPL", tema: "Ligações Químicas: Teoria de VSEPR", competencia: "C7", habilidade: "H24" },
             // ENEM 2023 Data
-            { ano: 2023, tipo: "Impressa", tema: "Bioquímica: Estrutura e função das proteínas", competencia: "Competência de Área 2", habilidade: "H7" },
-            { ano: 2023, tipo: "Impressa", tema: "Físico-Química: Termodinâmica (entropia e energia livre)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2023, tipo: "Impressa", tema: "Química Orgânica: Reações de adição em alcenos", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2023, tipo: "Impressa", tema: "Química Ambiental: Aquecimento global e seus impactos", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2023, tipo: "Impressa", tema: "Eletroquímica: Baterias e acumuladores", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2023, tipo: "Impressa", tema: "Soluções: pH e pOH de soluções ácidas e básicas", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2023, tipo: "Impressa", tema: "Estequiometria: Cálculos com gases (equação de Clapeyron)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2023, tipo: "Impressa", tema: "Cinética Química: Efeito da concentração na velocidade de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2023, tipo: "Impressa", tema: "Equilíbrio Químico: Sistemas heterogêneos", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2023, tipo: "Impressa", tema: "Estrutura Atômica: Números quânticos", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2023, tipo: "PPL", tema: "Bioquímica: Enzimas e catálise biológica", competencia: "Competência de Área 2", habilidade: "H7" },
-            { ano: 2023, tipo: "PPL", tema: "Físico-Química: Termodinâmica (espontaneidade das reações)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2023, tipo: "PPL", tema: "Química Orgânica: Reações de eliminação", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2023, tipo: "PPL", tema: "Química Ambiental: Destruição da camada de ozônio", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2023, tipo: "PPL", tema: "Eletroquímica: Proteção catódica", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2023, tipo: "PPL", tema: "Soluções: Indicadores ácido-base", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2023, tipo: "PPL", tema: "Estequiometria: Análise elementar (fórmulas empíricas e moleculares)", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2023, tipo: "PPL", tema: "Cinética Química: Teoria das colisões", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2023, tipo: "PPL", tema: "Equilíbrio Químico: Cálculo de pH em soluções tampão", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2023, tipo: "PPL", tema: "Estrutura Atômica: Configuração eletrônica", competencia: "Competência de Área 7", habilidade: "H24" },
+            { ano: 2023, tipo: "Impressa", tema: "Bioquímica: Estrutura e função das proteínas", competencia: "C2", habilidade: "H7" },
+            { ano: 2023, tipo: "Impressa", tema: "Físico-Química: Termodinâmica (entropia e energia livre)", competencia: "C7", habilidade: "H26" },
+            { ano: 2023, tipo: "Impressa", tema: "Química Orgânica: Reações de adição em alcenos", competencia: "C7", habilidade: "H25" },
+            { ano: 2023, tipo: "Impressa", tema: "Química Ambiental: Aquecimento global e seus impactos", competencia: "C7", habilidade: "H27" },
+            { ano: 2023, tipo: "Impressa", tema: "Eletroquímica: Baterias e acumuladores", competencia: "C7", habilidade: "H25" },
+            { ano: 2023, tipo: "Impressa", tema: "Soluções: pH e pOH de soluções ácidas e básicas", competencia: "C7", habilidade: "H27" },
+            { ano: 2023, tipo: "Impressa", tema: "Estequiometria: Cálculos com gases (equação de Clapeyron)", competencia: "C7", habilidade: "H24" },
+            { ano: 2023, tipo: "Impressa", tema: "Cinética Química: Efeito da concentração na velocidade de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2023, tipo: "Impressa", tema: "Equilíbrio Químico: Sistemas heterogêneos", competencia: "C7", habilidade: "H26" },
+            { ano: 2023, tipo: "Impressa", tema: "Estrutura Atômica: Números quânticos", competencia: "C7", habilidade: "H24" },
+            { ano: 2023, tipo: "PPL", tema: "Bioquímica: Enzimas e catálise biológica", competencia: "C2", habilidade: "H7" },
+            { ano: 2023, tipo: "PPL", tema: "Físico-Química: Termodinâmica (espontaneidade das reações)", competencia: "C7", habilidade: "H26" },
+            { ano: 2023, tipo: "PPL", tema: "Química Orgânica: Reações de eliminação", competencia: "C7", habilidade: "H25" },
+            { ano: 2023, tipo: "PPL", tema: "Química Ambiental: Destruição da camada de ozônio", competencia: "C7", habilidade: "H27" },
+            { ano: 2023, tipo: "PPL", tema: "Eletroquímica: Proteção catódica", competencia: "C7", habilidade: "H25" },
+            { ano: 2023, tipo: "PPL", tema: "Soluções: Indicadores ácido-base", competencia: "C7", habilidade: "H27" },
+            { ano: 2023, tipo: "PPL", tema: "Estequiometria: Análise elementar (fórmulas empíricas e moleculares)", competencia: "C7", habilidade: "H24" },
+            { ano: 2023, tipo: "PPL", tema: "Cinética Química: Teoria das colisões", competencia: "C7", habilidade: "H24" },
+            { ano: 2023, tipo: "PPL", tema: "Equilíbrio Químico: Cálculo de pH em soluções tampão", competencia: "C7", habilidade: "H26" },
+            { ano: 2023, tipo: "PPL", tema: "Estrutura Atômica: Configuração eletrônica", competencia: "C7", habilidade: "H24" },
             // ENEM 2024 Data (Exemplo - ajuste conforme dados reais)
-            { ano: 2024, tipo: "Impressa", tema: "Química Orgânica: Polímeros de condensação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2024, tipo: "Impressa", tema: "Físico-Química: Termodinâmica (calorimetria)", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2024, tipo: "Impressa", tema: "Química Ambiental: Tratamento de efluentes industriais", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2024, tipo: "Impressa", tema: "Equilíbrio Químico: Produto iônico da água", competencia: "Competência de Área 7", habilidade: "H26" },
-            { ano: 2024, tipo: "Impressa", tema: "Eletroquímica: Galvanoplastia", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2024, tipo: "PPL", tema: "Química Orgânica: Reações de oxidação suave e forte", competencia: "Competência de Área 7", habilidade: "H25" },
-            { ano: 2024, tipo: "PPL", tema: "Físico-Química: Cinética Química e mecanismos de reação", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2024, tipo: "PPL", tema: "Química Ambiental: Fontes de energia renováveis e não renováveis", competencia: "Competência de Área 7", habilidade: "H27" },
-            { ano: 2024, tipo: "Digital", tema: "Química Geral: Misturas e substâncias puras", competencia: "Competência de Área 7", habilidade: "H24" },
-            { ano: 2024, tipo: "Digital", tema: "Estequiometria: Leis ponderais e volumétricas", competencia: "Competência de Área 7", habilidade: "H24" },
+            { ano: 2024, tipo: "Impressa", tema: "Química Orgânica: Polímeros de condensação", competencia: "C7", habilidade: "H24" },
+            { ano: 2024, tipo: "Impressa", tema: "Físico-Química: Termodinâmica (calorimetria)", competencia: "C7", habilidade: "H26" },
+            { ano: 2024, tipo: "Impressa", tema: "Química Ambiental: Tratamento de efluentes industriais", competencia: "C7", habilidade: "H27" },
+            { ano: 2024, tipo: "Impressa", tema: "Equilíbrio Químico: Produto iônico da água", competencia: "C7", habilidade: "H26" },
+            { ano: 2024, tipo: "Impressa", tema: "Eletroquímica: Galvanoplastia", competencia: "C7", habilidade: "H25" },
+            { ano: 2024, tipo: "PPL", tema: "Química Orgânica: Reações de oxidação suave e forte", competencia: "C7", habilidade: "H25" },
+            { ano: 2024, tipo: "PPL", tema: "Físico-Química: Cinética Química e mecanismos de reação", competencia: "C7", habilidade: "H24" },
+            { ano: 2024, tipo: "PPL", tema: "Química Ambiental: Fontes de energia renováveis e não renováveis", competencia: "C7", habilidade: "H27" },
+            { ano: 2024, tipo: "Digital", tema: "Química Geral: Misturas e substâncias puras", competencia: "C7", habilidade: "H24" },
+            { ano: 2024, tipo: "Digital", tema: "Estequiometria: Leis ponderais e volumétricas", competencia: "C7", habilidade: "H24" },
         ];
 
 
-        // Dados para a seção de Vagas de Medicina
+        // --- Dados de Vagas de Medicina ---
+        // Contém informações sobre vagas de medicina em diferentes universidades e campi
         const medicineVagasData = [
             {
                 university: "Universidade Federal de Alagoas (UFAL)",
@@ -1083,7 +995,7 @@
             {
                 university: "Universidade Federal de Alagoas (UFAL)",
                 campus: "Arapiraca",
-                type: "Cotas Lazer",
+                type: "Cotas Lazer", // Exemplo de cota
                 vagas: 8,
                 notaCorte: 770.20
             },
@@ -1132,7 +1044,8 @@
             // Adicione mais universidades e campus conforme necessário
         ];
 
-        // Dados de Provas Completas do ENEM para Download (Expandido para 2009-2024)
+        // --- Dados de Provas Completas do ENEM para Download ---
+        // Contém links para download das provas completas do ENEM por ano e tipo de aplicação
         const fullExamsData = [
             {
                 ano: 2024,
@@ -1252,10 +1165,12 @@
             },
         ];
 
-        // Função para preencher o seletor de universidade e campus
+        /**
+         * Preenche o seletor de universidade e campus com opções únicas dos dados de vagas de medicina.
+         */
         function populateUniversityCampusSelector() {
             const selector = document.getElementById('universityCampusSelector');
-            const uniqueOptions = new Set(); // Usa um Set para armazenar strings "Universidade - Campus" únicas
+            const uniqueOptions = new Set(); // Usa um Set para armazenar strings "Universidade - Campus" únicas e evitar duplicações
 
             medicineVagasData.forEach(item => {
                 const optionText = `${item.university} - ${item.campus}`;
@@ -1269,28 +1184,37 @@
                 selector.appendChild(option);
             });
 
+            // Adiciona um listener de evento para reagir à mudança de seleção
             selector.addEventListener('change', (event) => {
                 const selectedValue = event.target.value;
                 displayMedicineVagas(selectedValue);
             });
         }
 
-        // Função para exibir as vagas de medicina com base na seleção
+        /**
+         * Exibe as vagas de medicina com base na universidade e campus selecionados.
+         * @param {string} selectedValue - A string formatada "Universidade - Campus" selecionada.
+         */
         function displayMedicineVagas(selectedValue) {
             const vagasDisplay = document.getElementById('vagas-display');
             vagasDisplay.innerHTML = ''; // Limpa o conteúdo anterior
 
             if (!selectedValue) {
+                // Se nada for selecionado, colapsa o acordeão e retorna
                 vagasDisplay.classList.remove('active');
+                vagasDisplay.classList.add('hidden'); // Garante que esteja escondido
+                vagasDisplay.removeAttribute('aria-expanded');
                 return;
             }
 
             const [selectedUniversity, selectedCampus] = selectedValue.split(' - ');
+            // Filtra os dados de vagas para encontrar as correspondentes à seleção
             const filteredVagas = medicineVagasData.filter(item => 
                 item.university === selectedUniversity && item.campus === selectedCampus
             );
 
             if (filteredVagas.length > 0) {
+                // Constrói a tabela HTML com as vagas encontradas
                 let tableHtml = `
                     <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">Vagas para Medicina em ${selectedUniversity} - ${selectedCampus}:</h4>
                     <div class="overflow-x-auto">
@@ -1299,7 +1223,7 @@
                                 <tr class="bg-gray-100 border-b">
                                     <th class="py-2 px-4 text-left text-gray-600 font-semibold">Tipo de Concorrência</th>
                                     <th class="py-2 px-4 text-left text-gray-600 font-semibold">Vagas</th>
-                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Nota de Corte (aproximada)</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Nota de Corte</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1320,29 +1244,51 @@
                     <p class="text-xs text-gray-500 mt-4">As notas de corte são aproximadas e podem variar a cada ano.</p>
                 `;
                 vagasDisplay.innerHTML = tableHtml;
-                vagasDisplay.classList.add('active');
+                vagasDisplay.classList.remove('hidden'); // Torna visível antes de animar
+                requestAnimationFrame(() => {
+                    vagasDisplay.style.maxHeight = vagasDisplay.scrollHeight + 'px'; 
+                    vagasDisplay.classList.add('active');
+                    vagasDisplay.setAttribute('aria-expanded', 'true');
+                });
+                vagasDisplay.ontransitionend = () => {
+                    if (vagasDisplay.classList.contains('active')) {
+                        vagasDisplay.style.maxHeight = 'fit-content';
+                    }
+                    vagasDisplay.ontransitionend = null;
+                };
             } else {
                 vagasDisplay.innerHTML = '<p class="text-center text-gray-600">Nenhuma vaga encontrada para esta seleção.</p>';
                 vagasDisplay.classList.remove('active');
+                vagasDisplay.classList.remove('hidden'); // Mostra a mensagem de "não encontrado"
+                vagasDisplay.style.maxHeight = 'fit-content'; // Ajusta a altura para a mensagem
+                vagasDisplay.setAttribute('aria-expanded', 'true');
+                
             }
         }
 
-        // Função para gerar os botões de ano
+        /**
+         * Gera os botões dos anos para a seção de análise anual, ordenados do mais recente para o mais antigo.
+         */
         function generateYearlyButtons() {
             const container = document.getElementById('yearly-buttons-container');
-            // Mapeia os anos únicos e os ordena do mais recente para o mais antigo
+            // Mapeia os anos únicos dos dados e os ordena do mais recente para o mais antigo
             const years = Array.from(new Set(detailedYearlyQuestionsData.map(item => item.ano))).sort((a, b) => b - a);
 
             years.forEach(year => {
                 const button = document.createElement('button');
                 button.textContent = year;
                 button.className = 'py-3 px-5 bg-[#EDC951] text-[#6A4A3C] font-bold rounded-lg shadow-md hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out';
-                button.onclick = () => displayYearlyAnalysis(year);
+                button.onclick = () => displayYearlyAnalysis(year); // Adiciona o manipulador de clique
                 container.appendChild(button);
             });
         }
 
-        // Função para exibir a análise anual
+        /**
+         * Exibe a análise detalhada da prova de Química para o ano selecionado.
+         * Inclui um resumo, contagem de questões, tipos de aplicação, temas principais, foco em competências,
+         * habilidades cobradas, um gráfico de temas e uma tabela detalhada de questões.
+         * @param {number} year - O ano para o qual a análise deve ser exibida.
+         */
         async function displayYearlyAnalysis(year) {
             const outputDiv = document.getElementById('yearly-analysis-output');
             const selectedYearSpan = document.getElementById('selectedYear');
@@ -1358,38 +1304,49 @@
             const noYearlyQuestionFound = document.getElementById('noYearlyQuestionFound');
             const yearlyDetailedQuestionsTableContainer = document.getElementById('yearlyDetailedQuestionsTableContainer');
 
-            // Resetar visibilidade
+            // Resetar visibilidade e classes para nova exibição
             yearlyQuestionContent.classList.add('hidden');
             yearlyQuestionLoading.classList.add('hidden');
             noYearlyQuestionFound.classList.add('hidden');
-            yearlyDetailedQuestionsTableContainer.innerHTML = ''; // Limpar tabela anterior
+            yearlyDetailedQuestionsTableContainer.innerHTML = ''; // Limpar tabela detalhada anterior
 
-            selectedYearSpan.textContent = year;
-            outputDiv.classList.remove('hidden'); // Ensure it's not hidden before starting transition
-            outputDiv.classList.add('active'); // Mostrar o conteúdo do acordeão
+            selectedYearSpan.textContent = year; // Atualiza o ano no título
+            
+            outputDiv.classList.remove('hidden'); // Torna visível antes de animar
+            requestAnimationFrame(() => {
+                outputDiv.style.maxHeight = outputDiv.scrollHeight + 'px'; 
+                outputDiv.classList.add('active'); // Adiciona a classe 'active' para transição do acordeão
+                outputDiv.setAttribute('aria-expanded', 'true'); // Atualiza o atributo ARIA
+            });
+            outputDiv.ontransitionend = () => {
+                if (outputDiv.classList.contains('active')) {
+                    outputDiv.style.maxHeight = 'fit-content';
+                }
+                outputDiv.ontransitionend = null;
+            };
 
-            // Filtrar dados para o ano selecionado
+            // Filtrar os dados detalhados das questões para o ano selecionado
             const yearData = detailedYearlyQuestionsData.filter(item => item.ano === year);
 
             if (yearData.length > 0) {
-                // Resumir dados para exibição
+                // Calcula e exibe o resumo dos dados
                 const chemistryQuestionsCount = yearData.length;
                 const applicationTypes = [...new Set(yearData.map(item => item.tipo))].join(', ');
                 const mainThemes = [...new Set(yearData.map(item => item.tema))].slice(0, 5).join(', ') + (yearData.length > 5 ? '...' : '');
                 const competencyFocus = [...new Set(yearData.map(item => item.competencia))].join(', ');
                 const habilidadesCobradas = [...new Set(yearData.map(item => item.habilidade))].join(', ');
 
-                yearSummarySpan.textContent = `Em ${year}, a prova de Química manteve seu padrão.`; // Resumo genérico
+                yearSummarySpan.textContent = `Em ${year}, a prova de Química teve ${chemistryQuestionsCount} questões nas modalidades ${applicationTypes}.`;
                 yearChemistryQuestionsSpan.textContent = `${chemistryQuestionsCount} questões`;
                 yearApplicationTypeSpan.textContent = applicationTypes;
                 yearMainThemesSpan.textContent = mainThemes;
                 yearCompetencyFocusSpan.textContent = competencyFocus;
                 yearHabilidadesSpan.textContent = habilidadesCobradas;
 
-                // Gerar e exibir a tabela de questões detalhadas
+                // Gera e exibe a tabela de questões detalhadas para o ano
                 let detailedTableHtml = `
                     <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questões Detalhadas do ENEM ${year}:</h5>
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto"> <!-- Adicionado para rolagem horizontal em tabelas largas -->
                         <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm text-sm">
                             <thead>
                                 <tr class="bg-gray-100 border-b">
@@ -1419,18 +1376,21 @@
                 yearlyDetailedQuestionsTableContainer.innerHTML = detailedTableHtml;
 
 
-                // Gráfico para temas anuais (re-inicializar se existir)
+                // Destroi a instância anterior do gráfico de temas anuais se existir
                 if (yearlyThemesChartInstance) {
                     yearlyThemesChartInstance.destroy();
                 }
 
+                // Calcula a frequência dos temas para o gráfico anual
                 const themeCounts = yearData.reduce((acc, item) => {
                     acc[item.tema] = (acc[item.tema] || 0) + 1;
                     return acc;
                 }, {});
 
-                const sortedThemes = Object.entries(themeCounts).sort(([, a], [, b]) => b - a).slice(0, 5); // Top 5 temas
+                // Seleciona os top 5 temas por frequência
+                const sortedThemes = Object.entries(themeCounts).sort(([, a], [, b]) => b - a).slice(0, 5);
 
+                // Inicializa o novo gráfico de barras horizontal para temas anuais
                 yearlyThemesChartInstance = new Chart(document.getElementById('yearlyThemesChart'), {
                     type: 'bar',
                     data: {
@@ -1479,24 +1439,24 @@
                     }
                 });
 
-                // Exibir uma questão de exemplo aleatória para o ano, se disponível em pastQuestionsData
+                // Exibe uma questão de exemplo aleatória para o ano, se disponível em pastQuestionsData
                 yearlyQuestionYearDisplay.textContent = year;
                 const exampleQuestionForYear = pastQuestionsData.find(q => q.ano === String(year));
                 if (exampleQuestionForYear) {
                     displayQuestionDetails(exampleQuestionForYear, 'yearly');
-                    yearlyQuestionContent.classList.remove('hidden');
+                    yearlyQuestionContent.classList.remove('hidden'); // Mostra a seção da questão de exemplo
                 } else {
-                    noYearlyQuestionFound.classList.remove('hidden');
+                    noYearlyQuestionFound.classList.remove('hidden'); // Mostra mensagem se não houver questão de exemplo
                 }
 
             } else {
+                // Se não houver dados para o ano, exibe mensagem e esconde o gráfico
                 yearSummarySpan.textContent = 'Dados não disponíveis para este ano.';
                 yearChemistryQuestionsSpan.textContent = 'N/A';
                 yearApplicationTypeSpan.textContent = 'N/A';
                 yearMainThemesSpan.textContent = 'N/A';
                 yearCompetencyFocusSpan.textContent = 'N/A';
                 yearHabilidadesSpan.textContent = 'N/A';
-                // Esconder gráfico se não houver dados
                 if (yearlyThemesChartInstance) {
                     yearlyThemesChartInstance.destroy();
                     yearlyThemesChartInstance = null;
@@ -1505,7 +1465,11 @@
             }
         }
 
-        // Função para exibir detalhes da questão
+        /**
+         * Exibe os detalhes de uma questão específica em um dos containers de questão.
+         * @param {Object} question - Objeto contendo os detalhes da questão.
+         * @param {string} prefix - Prefixo para os IDs dos elementos HTML ('yearly' para análise anual, vazio para busca).
+         */
         function displayQuestionDetails(question, prefix = '') {
             document.getElementById(`${prefix}QuestionYear`).textContent = question.ano;
             document.getElementById(`${prefix}QuestionType`).textContent = question.tipo_aplicacao;
@@ -1530,44 +1494,63 @@
                 img.src = question.imageUrl;
                 img.alt = `Imagem da questão de ${question.tema_detalhado}`;
                 img.className = 'question-image';
-                img.onerror = function() { this.onerror=null; this.src='https://placehold.co/400x200/CCCCCC/6A4A3C?text=Imagem+Não+Disponível'; };
+                // Fallback para imagem não carregada
+                img.onerror = function() { this.onerror=null; this.src='https://placehold.co/400x200/CCCCCC/6A4A3C?text=Imagem+Não+Disponível'; this.alt='Imagem da questão não disponível.'; };
                 questionImageContainer.appendChild(img);
             }
         }
 
-        // Listener de evento para busca de tema
+        // Listener de evento para o botão de busca de questões por tema
         document.getElementById('generateQuestionBtn').addEventListener('click', () => {
             const topicInput = document.getElementById('topicInput').value.trim();
             const loadingIndicator = document.getElementById('loadingIndicator');
             const questionOutput = document.getElementById('questionOutput');
             const noQuestionFound = document.getElementById('noQuestionFound');
 
-            questionOutput.classList.add('hidden');
+            // Esconde saídas anteriores
+            questionOutput.classList.remove('active');
+            questionOutput.classList.add('hidden'); // Garante que esteja escondido
+            questionOutput.removeAttribute('aria-expanded');
+
             noQuestionFound.classList.add('hidden');
 
             if (topicInput) {
-                loadingIndicator.classList.remove('hidden');
+                loadingIndicator.classList.remove('hidden'); // Mostra o indicador de carregamento
 
-                // Simular atraso de chamada de API
+                // Simula um atraso de chamada de API para buscar a questão
                 setTimeout(() => {
+                    // Tenta encontrar uma questão cujo tema ou tema_detalhado inclua o texto digitado
                     const foundQuestion = pastQuestionsData.find(q =>
                         q.tema.toLowerCase().includes(topicInput.toLowerCase()) ||
                         q.tema_detalhado.toLowerCase().includes(topicInput.toLowerCase())
                     );
 
-                    loadingIndicator.classList.add('hidden');
+                    loadingIndicator.classList.add('hidden'); // Esconde o indicador de carregamento
 
                     if (foundQuestion) {
-                        displayQuestionDetails(foundQuestion);
-                        questionOutput.classList.remove('hidden');
+                        displayQuestionDetails(foundQuestion); // Exibe os detalhes da questão
+                        questionOutput.classList.remove('hidden'); // Torna visível antes de animar
+                        requestAnimationFrame(() => {
+                            questionOutput.style.maxHeight = questionOutput.scrollHeight + 'px';
+                            questionOutput.classList.add('active'); // Ativa a transição do acordeão
+                            questionOutput.setAttribute('aria-expanded', 'true');
+                        });
+                        questionOutput.ontransitionend = () => {
+                            if (questionOutput.classList.contains('active')) {
+                                questionOutput.style.maxHeight = 'fit-content';
+                            }
+                            questionOutput.ontransitionend = null;
+                        };
                     } else {
-                        noQuestionFound.classList.remove('hidden');
+                        noQuestionFound.classList.remove('hidden'); // Mostra mensagem de "não encontrado"
                     }
-                }, 1000); // 1 segundo de atraso
+                }, 1000); // Atraso de 1 segundo
             }
         });
 
-        // Função para gerar a seção de download de exames completos
+        /**
+         * Gera a seção de download de exames completos, com acordeões para cada ano.
+         */
         function generateFullExamsDownloadSection() {
             const container = document.getElementById('full-exams-container');
             container.innerHTML = ''; // Limpa o conteúdo existente
@@ -1579,6 +1562,9 @@
                 const toggleButton = document.createElement('div');
                 toggleButton.className = 'toggle-button';
                 toggleButton.setAttribute('data-target', `exams-${examYear.ano}-content`);
+                toggleButton.setAttribute('role', 'button');
+                toggleButton.setAttribute('aria-expanded', 'false');
+                toggleButton.setAttribute('aria-controls', `exams-${examYear.ano}-content`);
                 
                 const title = document.createElement('h4');
                 title.className = 'font-bold text-lg text-[#6A4A3C]';
@@ -1594,7 +1580,7 @@
 
                 const contentDiv = document.createElement('div');
                 contentDiv.id = `exams-${examYear.ano}-content`;
-                contentDiv.className = 'accordion-content hidden mt-2';
+                contentDiv.className = 'accordion-content hidden mt-2 overflow-x-auto'; // Adicionado overflow-x-auto aqui
                 
                 const ul = document.createElement('ul');
                 ul.className = 'list-disc list-inside space-y-2 text-gray-700 pl-4';
@@ -1618,76 +1604,124 @@
              attachAccordionLogic();
         }
 
-        // Lógica do Acordeão
+        /**
+         * Anexa a lógica de alternância do acordeão a todos os botões com a classe 'toggle-button'.
+         * Remove listeners antigos para evitar duplicação antes de adicionar novos.
+         */
         function attachAccordionLogic() {
             document.querySelectorAll('.toggle-button').forEach(button => {
-                button.removeEventListener('click', toggleAccordion); // Remover listeners antigos para evitar duplicação
+                // Remove quaisquer listeners de clique anteriores para evitar múltiplas execuções
+                button.removeEventListener('click', toggleAccordion);
+                // Adiciona o novo listener de clique
                 button.addEventListener('click', toggleAccordion);
             });
         }
 
+        /**
+         * Função de alternância para o comportamento do acordeão.
+         * Gerencia a expansão e o colapso do conteúdo usando max-height para transições suaves.
+         * @param {Event} event - O objeto de evento do clique.
+         */
         function toggleAccordion(event) {
-            const targetId = event.currentTarget.dataset.target;
-            const targetContent = document.getElementById(targetId);
-            const toggleIcon = event.currentTarget.querySelector('.toggle-icon');
+            const button = event.currentTarget; // O botão que foi clicado
+            const targetId = button.dataset.target; // O ID do conteúdo a ser alternado
+            const targetContent = document.getElementById(targetId); // O elemento de conteúdo
+            const toggleIcon = button.querySelector('.toggle-icon'); // O ícone dentro do botão
 
             if (targetContent) {
-                if (targetContent.classList.contains('active')) {
-                    targetContent.classList.remove('active');
-                    if (toggleIcon) toggleIcon.classList.remove('active');
-                    setTimeout(() => targetContent.classList.add('hidden'), 500); // Esconder após a transição
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                    // Colapsar
+                    targetContent.style.maxHeight = targetContent.scrollHeight + 'px'; // Define para a altura atual para animar a partir dela
+                    requestAnimationFrame(() => {
+                        targetContent.style.maxHeight = '0'; // Anima para 0
+                        targetContent.classList.remove('active');
+                        if (toggleIcon) toggleIcon.classList.remove('active');
+                        button.setAttribute('aria-expanded', 'false');
+                    });
+                    targetContent.ontransitionend = () => {
+                        // Só adiciona 'hidden' se o colapso for completo
+                        if (targetContent.style.maxHeight === '0px') {
+                            targetContent.classList.add('hidden');
+                        }
+                        targetContent.ontransitionend = null; // Limpa o listener
+                    };
                 } else {
-                    targetContent.classList.remove('hidden'); // Garantir que não está escondido antes de iniciar a transição
-                    setTimeout(() => targetContent.classList.add('active'), 10); // Mostrar e depois fazer a transição
-                    if (toggleIcon) toggleIcon.classList.add('active');
+                    // Expandir
+                    targetContent.classList.remove('hidden'); // Torna visível primeiro (display: block/flex)
+                    targetContent.style.maxHeight = '0'; // Garante que comece do 0 para a animação
+                    requestAnimationFrame(() => {
+                        targetContent.style.maxHeight = targetContent.scrollHeight + 'px'; // Anima para a altura total
+                        targetContent.classList.add('active');
+                        if (toggleIcon) toggleIcon.classList.add('active');
+                        button.setAttribute('aria-expanded', 'true');
+                    });
+                    targetContent.ontransitionend = () => {
+                        // Uma vez expandido, remove o maxHeight fixo para permitir que o conteúdo dinâmico cresça
+                        if (targetContent.classList.contains('active')) {
+                            targetContent.style.maxHeight = 'fit-content';
+                        }
+                        targetContent.ontransitionend = null; // Limpa o listener
+                    };
                 }
             }
         }
 
-        // Lógica do Relógio de Contagem Regressiva
+        /**
+         * Inicia o relógio de contagem regressiva para o ENEM 2025.
+         * Atualiza os elementos de dias, horas, minutos e segundos a cada segundo.
+         */
         function startCountdown() {
             // Defina a data do ENEM 2025 (Exemplo: 2 de Novembro de 2025 às 13:00 BRT)
+            // Certifique-se de que o fuso horário esteja correto para evitar desvios.
             const enemDate = new Date('2025-11-02T13:00:00-03:00').getTime();
 
             const updateCountdown = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = enemDate - now;
+                const now = new Date().getTime(); // Tempo atual
+                const distance = enemDate - now; // Distância até a data do ENEM
 
+                // Cálculos para dias, horas, minutos e segundos
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+                // Atualiza o texto dos elementos HTML, adicionando zero à esquerda se for um único dígito
                 document.getElementById('days').textContent = String(days).padStart(2, '0');
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
                 document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 
+                // Se a contagem regressiva terminou, exibe uma mensagem e para o intervalo
                 if (distance < 0) {
                     clearInterval(updateCountdown);
                     document.getElementById('countdown').innerHTML = '<span class="text-3xl font-bold">O ENEM 2025 já começou! Boa prova!</span>';
                 }
-            }, 1000);
+            }, 1000); // Atualiza a cada segundo
         }
 
-        // Lógica para preencher as datas importantes
+        /**
+         * Preenche a tabela de datas importantes do ENEM.
+         */
         function populateImportantDates() {
             const dates = [
-                { event: "Inscrições ENEM", date: "Maio/Junho 2025 (a confirmar)" },
-                { event: "Pagamento da Taxa de Inscrição", date: "Junho 2025 (a confirmar)" },
-                { event: "Solicitação de Isenção", date: "Abril/Maio 2025 (a confirmar)" },
-                { event: "1º Dia de Provas", date: "02 de Novembro de 2025 (a confirmar)" },
-                { event: "2º Dia de Provas", date: "09 de Novembro de 2025 (a confirmar)" },
-                { event: "Divulgação do Gabarito Oficial", date: "Novembro 2025 (a confirmar)" },
-                { event: "Divulgação dos Resultados", date: "Janeiro 2026 (a confirmar)" },
-                { event: "Inscrições SISU", date: "Fevereiro 2026 (a confirmar)" },
-                { event: "Inscrições PROUNI", date: "Fevereiro 2026 (a confirmar)" },
-                { event: "Inscrições FIES", date: "Março 2026 (a confirmar)" },
+                { event: "Inscrições ENEM", date: "Maio/Junho 2025" },
+                { event: "Pagamento da Taxa de Inscrição", date: "Junho 2025" },
+                { event: "Solicitação de Isenção", date: "Abril/Maio 2025" },
+                { event: "1º Dia de Provas", date: "02 de Novembro de 2025" },
+                { event: "2º Dia de Provas", date: "09 de Novembro de 2025" },
+                { event: "Divulgação do Gabarito Oficial", date: "Novembro 2025" },
+                { event: "Divulgação dos Resultados", date: "Janeiro 2026" },
+                { event: "Inscrições SISU", date: "Fevereiro 2026" },
+                { event: "Inscrições PROUNI", date: "Fevereiro 2026" },
+                { event: "Inscrições FIES", date: "Março 2026" },
             ];
 
             const tableBody = document.getElementById('important-dates-table-body');
             tableBody.innerHTML = ''; // Limpa o conteúdo anterior
 
+            // Adiciona cada item de data à tabela
             dates.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = 'border-b last:border-b-0 hover:bg-gray-50';
@@ -1700,15 +1734,22 @@
         }
 
 
-        // Inicializar no DOMContentLoaded
+        // Inicializar todas as funções quando o DOM estiver completamente carregado
         document.addEventListener('DOMContentLoaded', () => {
-            startCountdown();
-            populateImportantDates();
-            populateUniversityCampusSelector();
-            generateYearlyButtons();
-            generateFullExamsDownloadSection(); // Gerar seção de exames completos
-            attachAccordionLogic(); // Anexar lógica a todos os botões de alternância inicialmente
+            startCountdown(); // Inicia a contagem regressiva
+            populateImportantDates(); // Preenche as datas importantes
+            populateUniversityCampusSelector(); // Preenche o seletor de vagas de medicina
+            generateYearlyButtons(); // Gera os botões de ano para a análise anual
+            generateFullExamsDownloadSection(); // Gera a seção de download de exames completos
+            attachAccordionLogic(); // Anexa a lógica do acordeão a todos os botões de alternância
         });
     </script>
 </body>
 </html>
+```
+
+---
+
+Espero que essas últimas modificações finalmente resolvam todos os problemas de proporção e recorte! Agora, o infográfico deve se adaptar de forma mais fluida e exibir todo o conteúdo sem cortes.
+
+Por favor, teste novamente e me diga se está tudo certo ou se ainda há algo que precise de ajus
