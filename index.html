@@ -1,153 +1,1725 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Química no ENEM</title>
-<style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    header { display:flex; justify-content:center; align-items:center; padding:10px; background:#004080; }
-    header img#logo { max-height:80px; object-fit:contain; }
-    .professor { text-align:center; margin:20px; }
-    .professor img { width:150px; border-radius:50%; }
-    table { width:100%; border-collapse:collapse; margin:20px 0; font-size:14px; }
-    th, td { border:1px solid #ccc; padding:8px; text-align:left; }
-    th { background:#eee; }
-    h2 { text-align:center; margin-top:30px; }
-    .year-section { margin:40px auto; max-width:1000px; background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 8px rgba(0,0,0,0.1); }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Análise da Química no ENEM</title>
+    <!-- Inclui o Tailwind CSS para estilos utilitários e responsivos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inclui o Chart.js para a criação de gráficos interativos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Pré-carrega as fontes Inter do Google Fonts para uma melhor experiência de carregamento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Define a fonte "Inter" como padrão para o corpo do documento -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Define a família da fonte para todo o corpo do documento */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilos base para contêineres de gráfico, garantindo responsividade e uma altura inicial razoável */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Limite máximo para gráficos em larguras maiores */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Altura padrão para gráficos */
+            min-height: 200px; /* Altura mínima para evitar que os gráficos fiquem muito pequenos */
+            max-height: 40vh; /* Limite a altura do gráfico para telas muito altas, para melhor usabilidade móvel */
+        }
+        /* Ajustes específicos para contêineres de gráfico em telas maiores (desktop) */
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px; /* Altura maior para gráficos em desktop */
+                max-height: 450px; /* Limite máximo para desktop */
+            }
+        }
+        /* Estilos para o conteúdo do acordeão, com transição para max-height para um efeito suave */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Adiciona transição para padding */
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        /* Quando o acordeão está ativo, expande o max-height e ajusta o padding */
+        .accordion-content.active {
+            /* max-height será definido via JS para 'fit-content' ou scrollHeight */
+            padding-top: 1rem; /* Restaura o padding para mostrar o conteúdo */
+            padding-bottom: 1rem;
+        }
+        /* Estilos para o botão de alternância do acordeão */
+        .toggle-button {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Estilos para o ícone de alternância do acordeão, com rotação suave */
+        .toggle-icon {
+            transition: transform 0.3s ease-out;
+        }
+        /* Rotação do ícone quando o acordeão está ativo */
+        .toggle-icon.active {
+            transform: rotate(90deg);
+        }
+        /* Estilos para imagens de questões, garantindo que sejam responsivas e bem apresentadas */
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem; /* Bordas arredondadas */
+            margin-top: 1rem; /* Margem superior */
+            margin-bottom: 1rem; /* Margem inferior */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra */
+        }
+        /* Esconde elementos visualmente, mas mantém acessível para leitores de tela */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
 
-<header>
-    <img id="logo" src="assets/images/logo.png" alt="Marca Completa">
-</header>
+    <div class="container mx-auto p-4 md:p-8">
 
-<div class="professor">
-    <img src="https://github.com/eusouomama/QuimicaNoENEM/blob/deeb1b9887760640fd4f82cf3a94e5bf6bde08ce/assets/images/mama.png" alt="Professor Mamá">
-    <h2>Professor Mamá</h2>
-</div>
+        <header class="text-center mb-12">
+            <!-- Seção do logo da marca e links de redes sociais -->
+            <div class="mb-6 flex flex-col items-center space-y-4">
+                <!-- Logo principal da marca - Ajustado para manter a proporção e evitar cortes -->
+                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="max-h-24 w-auto mx-auto shadow-lg object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <!-- Links para redes sociais -->
+                <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
+                    <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Logo Instagram" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E1306C/FFFFFF/png?text=IG';">
+                        <span class="font-semibold">@eusouomama</span>
+                    </a>
+                    <a href="https://www.youtube.com/@eusouomama" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="Logo YouTube" class="h-6 w-6 mr-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF0000/FFFFFF/png?text=YT';">
+                        <span class="font-semibold">Química do Mamá</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Título principal e subtítulo do infográfico -->
+            <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wider">Química no ENEM: Seu Roteiro de Estudos</h1>
+            <p class="text-lg md:text-xl text-[#6A4A3C] mt-2">Uma análise aprofundada de conteúdos, habilidades e oportunidades de ingresso em Medicina.</p>
+        </header>
 
-<main>
-    <h2>Questões de Química no ENEM (2009–2024)</h2>
+        <main class="space-y-10">
+            
+            <!-- Seção do Relógio de Contagem Regressiva para o ENEM -->
+            <section class="bg-gradient-to-r from-[#00A0B0] to-[#CC333F] text-white rounded-lg shadow-xl p-6 mb-8 mt-6">
+                <h2 class="text-3xl font-bold mb-4 text-center">Contagem Regressiva para o ENEM 2025!</h2>
+                <div id="countdown" class="flex justify-center items-center space-x-1 md:space-x-8 text-center">
+                    <div>
+                        <span id="days" class="block text-3xl md:text-6xl font-black">00</span>
+                        <span class="block text-sm md:text-base font-semibold">Dias</span>
+                    </div>
+                    <div class="text-2xl md:text-5xl font-black">:</div>
+                    <div>
+                        <span id="hours" class="block text-3xl md:text-6xl font-black">00</span>
+                        <span class="block text-sm md:text-base font-semibold">Horas</span>
+                    </div>
+                    <div class="text-2xl md:text-5xl font-black">:</div>
+                    <div>
+                        <span id="minutes" class="block text-3xl md:text-6xl font-black">00</span>
+                        <span class="block text-sm md:text-base font-semibold">Minutos</span>
+                    </div>
+                    <div class="text-2xl md:text-5xl font-black">:</div>
+                    <div>
+                        <span id="seconds" class="block text-3xl md:text-6xl font-black">00</span>
+                        <span class="block text-sm md:text-base font-semibold">Segundos</span>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Repetição ano a ano -->
-    <div class="year-section">
-        <h3>2009</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Tema Detalhado</th>
-                    <th>Competência</th>
-                    <th>Habilidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Impressa</td>
-                    <td>Equilíbrio químico em processos industriais</td>
-                    <td>C7</td>
-                    <td>H26</td>
-                </tr>
-                <tr>
-                    <td>PPL</td>
-                    <td>Estequiometria aplicada à combustão</td>
-                    <td>C5</td>
-                    <td>H22</td>
-                </tr>
-            </tbody>
-        </table>
+            <!-- Seção de Datas Importantes do ENEM -->
+            <section class="bg-white rounded-lg shadow-lg p-6 mb-8 text-center">
+                <h3 class="text-2xl font-bold text-[#6A4A3C] mb-4">Datas Importantes do ENEM 2025</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 border-b">
+                                <th class="py-2 px-4 text-left text-gray-600 font-semibold">Evento</th>
+                                <th class="py-2 px-4 text-left text-gray-600 font-semibold">Período/Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="important-dates-table-body">
+                            <!-- As datas serão preenchidas dinamicamente via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">As datas são estimativas e podem ser alteradas pelo INEP. Consulte o edital oficial.</p>
+            </section>
+            <!-- Fim da seção de Datas Importantes -->
+
+            <!-- Seção de Pilar Consistente na Prova -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-2">Um Pilar Consistente na Prova</h2>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
+                <div class="flex justify-center items-center">
+                    <div class="text-8xl font-black text-[#EB6841]">~15</div>
+                    <div class="text-2xl font-bold text-left ml-4 text-[#6A4A3C]">
+                        Questões<br>por edição
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-500">Isso representa aproximadamente 1/3 da prova de Ciências da Natureza, destacando a importância estratégica de um preparo focado.</p>
+            </section>
+
+            <!-- Seção de Gráficos de Distribuição por Área e Foco Cognitivo -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">O Panorama Geral: Distribuição por Área</h3>
+                    <p class="text-center text-gray-600 mb-4 text-sm">A prova do ENEM concentra-se em três grandes pilares da Química, que juntos, somam quase 80% de todas as questões. O foco está nos fundamentos, nas transformações de energia e nos compostos do cotidiano.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="areasChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-center text-[#00A0B0] mb-4">A Filosofia do Exame: Foco Cognitivo</h3>
+                    <p class="text-center text-gray-600 mb-4 text-sm">O ENEM não testa apenas o que você sabe, mas como você aplica o conhecimento. A grande maioria das questões exige a aplicação de conceitos para interpretar fenômenos e solucionar problemas práticos.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="cognitiveChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Temas Mais Recorrentes -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-2">Mergulho Profundo: Os Temas Mais Recorrentes</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Uma análise detalhada revela um padrão claro nos tópicos mais cobrados ao longo dos anos (2011-2024). Dominar esses temas é um passo fundamental para um bom desempenho na prova. A seguir, os temas mais frequentes:</p>
+                <ul class="list-disc list-inside text-left text-gray-700 mx-auto max-w-prose mb-6">
+                    <li>Funções Orgânicas: Com 38 questões, é um dos temas mais dominantes.</li>
+                    <li>Reações Orgânicas: Presente em 30 questões, fundamental para entender transformações.</li>
+                    <li>Cinética Química: Cobrada em 26 questões, essencial para processos e velocidade de reação.</li>
+                    <li>Eletroquímica (Pilhas): Apareceu em 22 questões, focando em geração de energia.</li>
+                    <li>Separação de Misturas: Também com 20 questões, demonstra a importância da Química no cotidiano.</li>
+                    <li>Concentração de Soluções: Com 19 questões, mostra a relevância da quantificação.</li>
+                    <li>Química Ambiental: Com 18 questões, aborda sustentabilidade e impactos.</li>
+                    <li>Termoquímica: Presente em 16 questões, essencial para processos energéticos.</li>
+                    <li>Estrutura Atômica: Com 15 questões, base para o entendimento da matéria.</li>
+                    <li>Ligações Químicas: Com 14 questões, fundamental para a formação de compostos.</li>
+                </ul>
+                <div class="w-full max-w-4xl mx-auto h-[500px] md:h-[600px] relative">
+                    <canvas id="topicsChart"></canvas>
+                </div>
+            </section>
+            
+            <!-- Seção de Coerência e Previsibilidade do Exame -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Coerência e Previsibilidade do Exame</h2>
+                <p class="text-lg text-gray-600 mb-4">A disciplina de Química mantém uma presença marcante e previsível na prova de Ciências da Natureza.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl font-black text-[#EB6841]">~15</span>
+                        <p class="text-xl font-bold text-[#6A4A3C]">Questões<br>por edição
+                    </div>
+                    <div class="text-4xl font-bold text-[#00A0B0] transform md:rotate-0 rotate-90">↔</div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl font-black text-[#EDC951]">Idêntica</span>
+                        <p class="text-xl font-bold text-[#6A4A3C]">Matriz de Referência</p>
+                        <p class="text-sm text-gray-500">Conteúdo, estrutura e filosofia pedagógica equivalentes entre Impresso, PPL e Digital.</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essa estabilidade permite um planejamento de estudos mais eficiente, focando nos pilares e na abordagem do exame sem surpresas quanto ao formato.</p>
+            </section>
+
+            <!-- Seção de Interdisciplinaridade e Contextualização -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Interdisciplinaridade e Contextualização</h2>
+                <p class="text-lg text-gray-600 mb-6">A Química no ENEM vai além da teoria, conectando-se com outras disciplinas e situações do cotidiano, valorizando a aplicação do conhecimento em contextos reais.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <p class="text-5xl mb-4 text-[#EB6841]">🌎</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Ambiental e Sustentabilidade</h4>
+                        <p class="text-sm text-gray-500 mt-2">Temas como <span class="font-semibold">poluição da água (15 questões)</span> e <span class="font-semibold">controle de poluição (17 questões)</span> frequentemente exigem a compreensão de fenômenos globais e soluções sustentáveis, muitas vezes ligando-se à <span class="font-bold">Biologia</span> (ciclos biogeoquímicos) e <span class="font-bold">Geografia</span> (impactos regionais).</p>
+                    </div>
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <p class="text-5xl mb-4 text-[#CC333F]">⚡</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Físico-Química, Energia e Tecnologia</h4>
+                        <p class="text-sm text-gray-500 mt-2">A <span class="font-semibold">Termoquímica (13 questões)</span> é abordada em contextos de combustão de veículos e processos energéticos em seres vivos, conectando-se à <span class="font-bold">Física</span> (transformações de energia) e à <span class="font-bold">Tecnologia</span> (desenvolvimento de novas fontes). Questões sobre <span class="font-semibold">Eletroquímica</span> frequentemente exploram o funcionamento de pilhas e baterias em dispositivos eletrônicos ou carros elétricos.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-left p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200 col-span-1 md:col-span-2">
+                        <p class="text-5xl mb-4 text-[#EDC951]">🧪</p>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Química Orgânica, Saúde e Cotidiano</h4>
+                        <p class="text-sm text-gray-500 mt-2">A Química Orgânica, com <span class="font-semibold">Funções Orgânicas (38 questões)</span> e <span class="font-semibold">Reações Orgânicas (30 questões)</span>, frequentemente aparece em cenários de <span class="font-bold">saúde</span> (medicamentos, alimentos) e <span class="font-bold">cotidiano</span> (polímeros, cosméticos), exigindo a compreensão da estrutura e das transformações das moléculas que nos cercam.</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essa abordagem integrada reflete a importância de ver a Química como uma ciência viva e atuante na compreensão do mundo ao redor, preparando o estudante para analisar problemas complexos e relevantes em diversas áreas.</p>
+            </section>
+
+            <!-- Seção de Alinhamento com a BNCC: Competências Avaliadas -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-[#00A0B0] mb-2">Alinhamento com a BNCC: Competências Avaliadas</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">As questões são formuladas para avaliar competências específicas da Base Nacional Comum Curricular, priorizando a capacidade de análise crítica e resolução de problemas em contextos reais.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#CC333F]">56%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 3</h4>
+                        <p class="text-sm text-gray-500">Analisar e resolver situações-problema, avaliando aplicações do conhecimento científico e tecnológico.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#EB6841]">34%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 1</h4>
+                        <p class="text-sm text-gray-500">Analisar fenômenos naturais e processos tecnológicos, com base nas interações e relações entre matéria e energia.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl font-black text-[#EDC951]">10%</div>
+                        <h4 class="font-bold text-lg mt-2 text-[#6A4A3C]">Competência 2</h4>
+                        <p class="text-sm text-gray-500">Interpretar a dinâmica da vida, da Terra e do Cosmos, relacionando fenômenos e processos químicos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Habilidades Essenciais para o ENEM (Acordeão) -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Habilidades Essenciais para o ENEM</h2>
+                <p class="text-lg text-gray-600 mb-6">A prova de Química no ENEM foca em habilidades específicas, que são cruciais para a aplicação do conhecimento e a resolução de problemas complexos. Dominar estas habilidades é tão importante quanto o conteúdo teórico.</p>
+                <div class="grid grid-cols-1 gap-4 text-left">
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill1-content" role="button" aria-expanded="false" aria-controls="skill1-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT307 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">▶</span>
+                        </div>
+                        <div id="skill1-content" class="accordion-content hidden">
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade exige que o estudante seja capaz de <span class="font-semibold">avaliar materiais, tecnologias, processos e sistemas</span> não apenas por suas propriedades e aplicações técnicas, mas também considerando seu <span class="font-semibold">impacto socioambiental</span>. Isso inclui analisar o ciclo de vida de produtos, a eficiência energética de processos e a sustentabilidade de novas tecnologias. Questões relacionadas a esta habilidade podem pedir que você compare a pegada de carbono de diferentes combustíveis ou avalie a segurança de um novo material sintético, por exemplo.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Alta</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill2-content" role="button" aria-expanded="false" aria-controls="skill2-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT104 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">▶</span>
+                        </div>
+                        <div id="skill2-content" class="accordion-content hidden">
+                            <p class="text-sm text-gray-700 mt-2">Focada na avaliação dos <span class="font-semibold">impactos socioambientais</span> de materiais e tecnologias. Aqui, o aluno precisa identificar os prejuízos à saúde e ao meio ambiente resultantes da produção, uso e descarte de produtos químicos e tecnológicos, e propor soluções ou ações mais sustentáveis. Exemplos de questões incluem a análise da poluição da água por resíduos industriais ou a discussão sobre alternativas menos tóxicas em produtos de limpeza.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <div class="toggle-button" data-target="skill3-content" role="button" aria-expanded="false" aria-controls="skill3-content">
+                            <h4 class="font-bold text-lg text-[#6A4A3C]">EM13CNT301 <span class="text-xs font-normal text-gray-500 ml-2"> (Clique para expandir)</span></h4>
+                            <span class="toggle-icon text-2xl text-[#00A0B0]">▶</span>
+                        </div>
+                        <div id="skill3-content" class="accordion-content hidden">
+                            <p class="text-sm text-gray-700 mt-2">Esta habilidade envolve a capacidade de <span class="font-semibold">raciocínio científico</span>. O aluno é desafiado a construir questões a partir de um problema, elaborar hipóteses para sua solução, prever resultados de experimentos ou fenômenos e interpretar dados (em gráficos, tabelas, textos) para chegar a conclusões. Muitas questões do ENEM que apresentam dados experimentais ou cenários complexos testam diretamente essa habilidade, exigindo uma análise crítica e a formulação de um plano para resolver a situação.</p>
+                            <p class="text-xs text-gray-500 mt-2">Frequência: Média-Alta</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-6 text-base text-gray-700">Essas habilidades indicam que o ENEM busca estudantes que consigam aplicar o conhecimento de Química para analisar e resolver problemas complexos e relevantes para o mundo real.</p>
+            </section>
+            
+            <!-- Seção de Modalidades de Aplicação (Acordeão) -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center text-[#00A0B0] mb-6">Modalidades de Aplicação: Uma Prova, Múltiplos Formatos</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Apesar das diferenças no meio de aplicação, o conteúdo, a estrutura e a abordagem pedagógica da prova de Química permanecem consistentes em todas as versões do ENEM.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <button class="p-4 border-2 border-[#EB6841] rounded-lg text-center hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="impresso-info" role="button" aria-expanded="false" aria-controls="impresso-info">
+                        <span class="text-2xl font-bold">ENEM 1ª aplicação</span>
+                        <span class="toggle-icon text-2xl ml-4">▶</span>
+                    </button>
+                    <button class="p-4 border-2 border-[#CC333F] rounded-lg text-center hover:bg-[#CC333F] hover:text-white transition duration-300 ease-in-out toggle-button" data-target="ppl-digital-info" role="button" aria-expanded="false" aria-controls="ppl-digital-info">
+                        <span class="text-2xl font-bold">ENEM PPL / Digital</span>
+                        <span class="toggle-icon text-2xl ml-4">▶</span>
+                    </button>
+                </div>
+                <div id="impresso-info" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM 1ª aplicação</h4>
+                    <p class="text-sm text-gray-700">Esta é a modalidade tradicional do ENEM, realizada anualmente em cadernos de questões e folhas de respostas físicas. É o formato mais amplamente utilizado e com maior número de inscritos. Sua estrutura e conteúdo servem como base para as outras modalidades.</p>
+                </div>
+                <div id="ppl-digital-info" class="accordion-content hidden mt-4 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">ENEM PPL / Digital</h4>
+                    <p class="text-sm text-gray-700">O <span class="font-semibold">ENEM PPL (Pessoas Privadas de Liberdade)</span> é uma segunda aplicação da prova, com conteúdo equivalente ao ENEM 1ª aplicação, mas voltado para um público específico. O <span class="font-semibold">ENEM Digital</span> foi uma versão oferecida entre 2020 e 2022, realizada em computadores, mas com a mesma matriz de referência e estrutura da prova impressa. Apesar das diferenças de formato e público, ambos mantiveram a coerência pedagógica com o exame principal.</p>
+                </div>
+            </section>
+
+            <!-- Seção de Vagas de Medicina - Unificada -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">Vagas de Medicina no ENEM</h2>
+                <p class="text-lg text-gray-600 mb-6">Selecione a universidade e o campus para visualizar as vagas e notas de corte para o curso de Medicina:</p>
+                <div class="flex justify-center mb-6">
+                    <select id="universityCampusSelector" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] text-gray-800">
+                        <option value="">Selecione uma Universidade e Campus</option>
+                        <!-- As opções serão preenchidas por JavaScript -->
+                    </select>
+                </div>
+                <div id="vagas-display" class="accordion-content hidden mt-6 text-left w-full max-w-2xl mx-auto bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-x-auto">
+                    <!-- A tabela com as vagas e notas de corte será injetada aqui pelo JavaScript -->
+                </div>
+            </section>
+            <!-- Fim da Nova Seção de Vagas de Medicina - Unificada -->
+
+            <!-- Seção de Análise Ano a Ano da Prova de Química -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">📊 Análise Ano a Ano da Prova de Química 📊</h2>
+                <p class="text-lg text-gray-600 mb-6">Explore os destaques da prova de Química em cada edição do ENEM, de 2009 a 2024. Clique no ano para ver a análise detalhada!</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8" id="yearly-buttons-container">
+                    <!-- Botões dos anos gerados dinamicamente por JS -->
+                </div>
+                <div id="yearly-analysis-output" class="accordion-content hidden text-left w-full max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200 overflow-x-auto">
+                    <h4 class="font-bold text-xl text-[#6A4A3C] mb-2">Destaques do ENEM <span id="selectedYear"></span>:</h4>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Resumo:</span> <span id="yearSummary"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Questões de Química:</span> <span id="yearChemistryQuestions"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearApplicationType"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Temas Principais:</span> <span id="yearMainThemes"></span></p>
+                    <p class="text-gray-800 mb-2"><span class="font-semibold">Foco em Competências:</span> <span id="yearCompetencyFocus"></span></p>
+                    <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidades Cobradas:</span> <span id="yearHabilidades"></span></p>
+                    <div class="chart-container mt-6">
+                        <canvas id="yearlyThemesChart"></canvas>
+                    </div>
+
+                    <!-- Nova seção para a tabela de questões detalhadas do ano -->
+                    <div id="yearlyDetailedQuestionsTableContainer" class="mt-8 pt-4 border-t border-gray-300">
+                        <!-- Tabela de questões detalhadas será injetada aqui -->
+                    </div>
+                    <!-- Fim da nova seção para a tabela -->
+
+                    <!-- Seção para a questão de exemplo do ano -->
+                    <div id="yearlyQuestionSection" class="mt-8 pt-4 border-t border-gray-300">
+                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span id="yearlyQuestionYearDisplay"></span>:</h5>
+                        <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
+                        <div id="yearlyQuestionContent" class="hidden">
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="yearlyQuestionYear"></span></p>
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearlyQuestionType"></span></p>
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
+                            <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
+                            <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
+                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div>
+                            <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
+                            <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
+                            <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4"></ul>
+                            <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
+                            <p id="yearlyCorrectAnswer" class="text-gray-800 font-semibold"></p>
+                        </div>
+                        <div id="noYearlyQuestionFound" class="text-center text-gray-600 hidden">Nenhuma questão de exemplo detalhada encontrada para este ano em nossos registros.</div>
+                    </div>
+                    <!-- Fim da seção da questão de exemplo -->
+
+                </div>
+            </section>
+
+            <!-- Seção de Busca de Questões Anteriores do ENEM -->
+            <section class="text-center bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔎 Busca de Questões Anteriores do ENEM 🔎</h2>
+                <p class="text-lg text-gray-600 mb-6">Digite um tema de química para buscar uma questão que já caiu em provas anteriores do ENEM. Ideal para revisar tópicos específicos!</p>
+                <div class="flex flex-col items-center max-w-xl mx-auto">
+                    <input type="text" id="topicInput" placeholder="Ex: Eletroquímica, Termoquímica, Funções Orgânicas" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A0B0] mb-4 text-gray-800">
+                    <button id="generateQuestionBtn" class="bg-[#EB6841] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-[#CC333F] transition duration-300 ease-in-out">
+                        Buscar Questão ENEM
+                    </button>
+                    <div id="loadingIndicator" class="mt-4 text-[#00A0B0] hidden" aria-live="polite">
+                        Buscando questão... Por favor, aguarde.
+                    </div>
+                    <div id="questionOutput" class="accordion-content hidden mt-6 text-left w-full bg-gray-50 p-6 rounded-lg border border-gray-200 overflow-x-auto">
+                        <p class="font-bold text-lg text-[#6A4A3C] mb-2">Questão Encontrada:</p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="questionYear"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="questionType"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="questionDetailedTopic"></span></p>
+                        <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="questionCompetence"></span></p>
+                        <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="questionSkill"></span></p>
+                        <div id="questionImageContainer" class="text-center mb-4"></div>
+                        <p id="questionText" class="text-gray-800 mb-4 font-medium"></p>
+                        <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
+                        <ul id="alternativesList" class="list-none space-y-2 text-gray-700"></ul>
+                        <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
+                        <p id="correctAnswer" class="text-gray-800"></p>
+                    </div>
+                    <div id="noQuestionFound" class="mt-6 text-center text-gray-600 hidden" aria-live="polite">
+                        Nenhuma questão encontrada para o tema digitado. Tente outro tema!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção para Provas Completas do ENEM para Download -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8" id="full-exams-download">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">🔗 Provas Completas do ENEM para Download 🔗</h2>
+                <p class="text-lg text-gray-600 mb-6">Acesse as provas completas do ENEM em PDF para aprofundar seus estudos. Clique no ano para expandir e ver as modalidades disponíveis:</p>
+                <div id="full-exams-container" class="space-y-4">
+                    <!-- Conteúdo será gerado via JavaScript -->
+                </div>
+            </section>
+            <!-- Fim da seção de Provas Completas do ENEM para Download -->
+
+            <!-- Seção: Sobre o Professor Mamá -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8 text-center max-w-xl mx-auto">
+                <h2 class="text-2xl font-bold text-[#00A0B0] mb-4">✨ Sobre o Professor Mamá ✨</h2>
+                <div class="flex flex-col items-center">
+                    <!-- LINK RAW DIRETO da sua imagem no GitHub. -->
+                    <img 
+                        src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/18a21bb6065ff4214b744059c42b5380510ca66d/assets/images/mama.png" 
+                        alt="Foto do Professor Matheus Braga (Professor Mamá)" 
+                        class="w-40 h-40 rounded-full object-cover shadow-lg mb-6 border-4 border-[#EB6841]"
+                        onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';"
+                    >
+                    <p class="text-xl font-bold text-[#6A4A3C] mb-2">Matheus Braga – Mais conhecido como <span class="text-[#CC333F]">Professor Mamá</span></p>
+                    <p class="text-md text-gray-700 mb-3">Licenciado em Química pela Universidade de Brasília (UnB).</p>
+                    <p class="text-md text-gray-700 mb-3">Professor há mais de 10 anos na capital federal.</p>
+                    <p class="text-md text-gray-700">Apaixonado pela sala de aula e entusiasta das redes sociais, busca conectar-se aos alunos de forma mais acessível, tornando a Química parte do seu dia a dia de maneira envolvente.</p>
+                </div>
+            </section>
+            <!-- Fim da Seção: Sobre o Professor Mamá -->
+
+        </main>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <!-- Rodapé, se necessário adicionar conteúdo aqui -->
+        </footer>
+
     </div>
 
-    <div class="year-section">
-        <h3>2010</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Tema Detalhado</th>
-                    <th>Competência</th>
-                    <th>Habilidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Impressa</td>
-                    <td>pH de soluções ácidas e básicas</td>
-                    <td>C7</td>
-                    <td>H27</td>
-                </tr>
-                <tr>
-                    <td>PPL</td>
-                    <td>Reações de oxirredução no cotidiano</td>
-                    <td>C7</td>
-                    <td>H28</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <script>
+        // Variável para armazenar a instância do Chart.js para temas anuais, permitindo sua destruição e recriação
+        let yearlyThemesChartInstance = null; 
 
-    <!-- ====== AQUI vão todos os anos 2011 a 2024 ====== -->
-    <div class="year-section">
-        <h3>2011</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Tema Detalhado</th>
-                    <th>Competência</th>
-                    <th>Habilidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Impressa</td>
-                    <td>Radioatividade e meia-vida em contextos ambientais</td>
-                    <td>C7</td>
-                    <td>H26</td>
-                </tr>
-                <tr>
-                    <td>PPL</td>
-                    <td>Rendimento de reação de produção de ácido acetilsalicílico</td>
-                    <td>C7</td>
-                    <td>H24</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        // Paleta de cores vibrantes e lúdicas para os gráficos
+        const energeticPlayfulPalette = ['#00A0B0', '#EB6841', '#CC333F', '#EDC951', '#6A4A3C', '#8A4A5C', '#3F6841', '#B0A000'];
 
-    <!-- ... repete para 2012, 2013, ..., 2024 -->
+        /**
+         * Callback para formatar o título do tooltip do Chart.js.
+         * Garante que labels divididos em múltiplas linhas sejam exibidos corretamente.
+         * @param {Array<Object>} tooltipItems - Itens do tooltip.
+         * @returns {string} - Título formatado.
+         */
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        /**
+         * Função para quebrar rótulos longos em múltiplas linhas para melhor legibilidade em gráficos.
+         * @param {string} label - O rótulo a ser quebrado.
+         * @returns {string|Array<string>} - O rótulo original ou um array de strings para múltiplas linhas.
+         */
+        const wrapLabel = (label) => {
+            const maxLength = 16; // Número máximo de caracteres por linha
+            if (label.length <= maxLength) return label;
+            
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
 
-    <div class="year-section">
-        <h3>2024</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Tema Detalhado</th>
-                    <th>Competência</th>
-                    <th>Habilidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Impressa</td>
-                    <td>Reações ácido-base na neutralização de efluentes</td>
-                    <td>C7</td>
-                    <td>H27</td>
-                </tr>
-                <tr>
-                    <td>PPL</td>
-                    <td>Reações ácido-base na neutralização de efluentes</td>
-                    <td>C7</td>
-                    <td>H27</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            for (const word of words) {
+                // Se adicionar a próxima palavra exceder o limite e já houver algo na linha atual, inicia uma nova linha
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            lines.push(currentLine.trim()); // Adiciona a última linha
+            return lines;
+        };
 
-</main>
+        // --- Dados dos Gráficos Principais ---
 
+        // Dados para o gráfico de distribuição por áreas da Química no ENEM
+        const areasData = {
+            labels: ['Química Geral', 'Físico-Química', 'Química Orgânica', 'Outras (Ambiental, Inorgânica)'],
+            datasets: [{
+                label: '% de Questões',
+                data: [30, 28, 27, 15], // Valores atualizados para refletir a nova base de dados
+                backgroundColor: energeticPlayfulPalette,
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        // Inicializa o gráfico de Rosca (Doughnut Chart) para a distribuição por áreas
+        new Chart(document.getElementById('areasChart'), {
+            type: 'doughnut',
+            data: areasData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom', // Legenda na parte inferior para melhor visualização em telas menores
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback // Usa o callback para títulos de tooltip
+                        }
+                    }
+                }
+            }
+        });
+
+        // Dados para o gráfico de foco cognitivo
+        const cognitiveData = {
+            labels: ['Compreender Fenômenos', 'Enfrentar Situações-Problema'],
+            datasets: [{
+                label: '% de Questões',
+                data: [65, 35], // Valores atualizados
+                backgroundColor: ['#CC333F', '#EB6841'],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        // Inicializa o gráfico de Pizza (Pie Chart) para o foco cognitivo
+        new Chart(document.getElementById('cognitiveChart'), {
+            type: 'pie',
+            data: cognitiveData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom', // Legenda na parte inferior
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Dados brutos para os temas mais recorrentes
+        const topicsRawData = [
+            { label: 'Funções Orgânicas', value: 38 },
+            { label: 'Reações Orgânicas', value: 30 },
+            { label: 'Cinética Química', value: 26 },
+            { label: 'Eletroquímica (Pilhas)', value: 22 },
+            { label: 'Separação de Misturas', value: 20 },
+            { label: 'Concentração de Soluções', value: 19 },
+            { label: 'Química Ambiental', value: 18 },
+            { label: 'Termoquímica', value: 16 },
+            { label: 'Estrutura Atômica', value: 15 },
+            { label: 'Ligações Químicas', value: 14 }
+        ];
+
+        // Inicializa o gráfico de Barras Horizontal para os temas mais recorrentes
+        new Chart(document.getElementById('topicsChart'), {
+            type: 'bar',
+            data: {
+                labels: topicsRawData.map(d => wrapLabel(d.label)), // Aplica a função wrapLabel
+                datasets: [{
+                    label: 'Número de Questões (2009-2024)',
+                    data: topicsRawData.map(d => d.value),
+                    backgroundColor: energeticPlayfulPalette[0], // Usa a primeira cor da paleta
+                    borderColor: energeticPlayfulPalette[0],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Define o eixo Y como índice para barras horizontais
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                           color: '#6A4A3C' // Cor dos rótulos do eixo X
+                        },
+                        grid: {
+                          color: '#E0E0E0' // Cor das linhas de grade do eixo X
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#6A4A3C' // Cor dos rótulos do eixo Y
+                        },
+                        grid: {
+                            display: false // Esconde as linhas de grade do eixo Y
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Esconde a legenda
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+
+        // --- Dados de Vagas de Medicina ---
+        // Contém informações sobre vagas de medicina em diferentes universidades e campi
+        const medicineVagasData = [
+            {
+                university: "Universidade Federal de Alagoas (UFAL)",
+                campus: "Arapiraca",
+                type: "Ampla Concorrência",
+                vagas: 15,
+                notaCorte: 785.60
+            },
+            {
+                university: "Universidade Federal de Alagoas (UFAL)",
+                campus: "Arapiraca",
+                type: "Cotas Lazer", // Exemplo de cota
+                vagas: 8,
+                notaCorte: 770.20
+            },
+            {
+                university: "Universidade Federal de Alagoas (UFAL)",
+                campus: "Maceió",
+                type: "Ampla Concorrência",
+                vagas: 25,
+                notaCorte: 802.15
+            },
+            {
+                university: "Universidade Federal de Alagoas (UFAL)",
+                campus: "Maceió",
+                type: "Cotas Lazer",
+                vagas: 12,
+                notaCorte: 790.50
+            },
+            {
+                university: "Universidade Federal do Rio de Janeiro (UFRJ)",
+                campus: "Cidade Universitária",
+                type: "Ampla Concorrência",
+                vagas: 30,
+                notaCorte: 815.30
+            },
+            {
+                university: "Universidade Federal do Rio de Janeiro (UFRJ)",
+                campus: "Cidade Universitária",
+                type: "Cotas Lazer",
+                vagas: 15,
+                notaCorte: 800.00
+            },
+            {
+                university: "Universidade de São Paulo (USP)",
+                campus: "São Paulo (Capital)",
+                type: "Ampla Concorrência",
+                vagas: 40,
+                notaCorte: 820.00
+            },
+            {
+                university: "Universidade de São Paulo (USP)",
+                campus: "São Paulo (Capital)",
+                type: "Cotas Lazer",
+                vagas: 20,
+                notaCorte: 805.00
+            },
+            // Adicione mais universidades e campus conforme necessário
+        ];
+
+        // --- Dados de Provas Completas do ENEM para Download ---
+        // Contém links para download das provas completas do ENEM por ano e tipo de aplicação
+        const fullExamsData = [
+            {
+                ano: 2024,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2024" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2024" },
+                    { tipo: "ENEM Digital - Caderno Verde", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2024" }
+                ]
+            },
+            {
+                ano: 2023,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2023" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2023" }
+                ]
+            },
+            {
+                ano: 2022,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2022" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2022" },
+                    { tipo: "ENEM Digital - Caderno Verde", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2022" }
+                ]
+            },
+            {
+                ano: 2021,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2021" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2021" },
+                    { tipo: "ENEM Digital - Caderno Verde", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2021" }
+                ]
+            },
+            {
+                ano: 2020,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2020" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2020" },
+                    { tipo: "ENEM Digital - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2020" }
+                ]
+            },
+            {
+                ano: 2019,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2019" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2019" },
+                ]
+            },
+            {
+                ano: 2018,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2018" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2018" },
+                ]
+            },
+            {
+                ano: 2017,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2017" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2017" },
+                ]
+            },
+            {
+                ano: 2016,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2016" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2016" },
+                ]
+            },
+            {
+                ano: 2015,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2015" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2015" },
+                ]
+            },
+            {
+                ano: 2014,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2014" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2014" },
+                ]
+            },
+            {
+                ano: 2013,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2013" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2013" },
+                ]
+            },
+            {
+                ano: 2012,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2012" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2012" },
+                ]
+            },
+            {
+                ano: 2011,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2011" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2011" },
+                ]
+            },
+            {
+                ano: 2010,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Amarelo", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2010" },
+                    { tipo: "ENEM PPL - Caderno Branco", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2010" },
+                ]
+            },
+            {
+                ano: 2009,
+                downloads: [
+                    { tipo: "ENEM 1ª Aplicação - Caderno Azul", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2009" },
+                    { tipo: "ENEM PPL - Caderno Rosa", url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gab/2009" },
+                ]
+            },
+        ];
+
+        let initialEnemData = [
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Produção de fertilizantes nitrogenados e controle ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de neutralização em processos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto ambiental de compostos químicos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de separação de misturas no cotidiano","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração de soluções químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em sistemas biológicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Uso de indicadores ácido-base em análises químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Comportamento de gases ideais em diferentes condições","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Fenômenos de corrosão e prevenção em materiais metálicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reações químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros sintéticos e naturais","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de purificação de água","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Efeitos de substâncias químicas no meio ambiente","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de neutralização em processos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto ambiental de compostos químicos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de separação de misturas no cotidiano","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração de soluções químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em sistemas biológicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Uso de indicadores ácido-base em análises químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Comportamento de gases ideais em diferentes condições","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Fenômenos de corrosão e prevenção em materiais metálicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reações químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros sintéticos e naturais","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de purificação de água","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Efeitos de substâncias químicas no meio ambiente","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
+            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"}
+        ];
+
+        let detailedYearlyQuestionsData = []; // Global para dados anuais detalhados do CSV
+        let pastQuestionsData = []; // Global para questões de busca do CSV
+        let enemByYearAnalysisData = []; // Global para dados de análise por ano do CSV
+
+
+        /**
+         * Função para carregar e parsear o arquivo CSV.
+         * Como o contentFetcher não está disponível no ambiente de execução do navegador,
+         * os dados são agora passados diretamente via `initialEnemData`.
+         * Esta função foi adaptada para processar `initialEnemData`.
+         * @param {Array<Object>} rawData - Os dados brutos do ENEM.
+         * @returns {Array<Object>} - Um array de objetos, onde cada objeto é uma linha do CSV.
+         */
+        function processEnemRawData(rawData) {
+            // Filtra os dados para remover as provas "Digital"
+            return rawData.filter(row => row['Tipo de Prova'] !== 'Digital');
+        }
+
+        /**
+         * Prepara os dados do ENEM para uso nas seções de análise e busca.
+         * Popula detailedYearlyQuestionsData, pastQuestionsData e enemByYearAnalysisData.
+         */
+        function prepareEnemData(data) {
+            const tempDetailedYearlyQuestionsData = [];
+            const tempPastQuestionsData = [];
+            const tempEnemByYearAnalysisData = [];
+            const years = [...new Set(data.map(row => parseInt(row.Ano)))].sort((a, b) => b - a);
+
+            years.forEach(year => {
+                const yearDataFiltered = data.filter(row => parseInt(row.Ano) === year);
+                const quimicaQuestionsCount = yearDataFiltered.length;
+                const applicationTypes = [...new Set(yearDataFiltered.map(item => item['Tipo de Prova']))].join(', ');
+                
+                // Calculate main themes
+                const themeCounts = yearDataFiltered.reduce((acc, item) => {
+                    const theme = item['Assunto/Tema'].split('(')[0].trim();
+                    acc[theme] = (acc[theme] || 0) + 1;
+                    return acc;
+                }, {});
+                const sortedThemes = Object.entries(themeCounts).sort(([, a], [, b]) => b - a);
+                const mainThemesList = sortedThemes.slice(0, 3).map(([theme,]) => theme);
+                
+                // Calculate competency focus
+                const competencyCounts = yearDataFiltered.reduce((acc, item) => {
+                    acc[item['Competência Avaliada']] = (acc[item['Competência Avaliada']] || 0) + 1;
+                    return acc;
+                }, {});
+                const sortedCompetencies = Object.entries(competencyCounts).sort(([, a], [, b]) => b - a);
+                const competencyFocusList = sortedCompetencies.slice(0, 2).map(([comp,]) => comp);
+
+                // Calculate habilidades
+                const habilidadeCounts = yearDataFiltered.reduce((acc, item) => {
+                    acc[item['Habilidade Avaliada']] = (acc[item['Habilidade Avaliada']] || 0) + 1;
+                    return acc;
+                }, {});
+                const sortedHabilidades = Object.entries(habilidadeCounts).sort(([, a], [, b]) => b - a);
+                const habilidadesList = sortedHabilidades.slice(0, 3).map(([hab,]) => hab);
+
+                // Calculate themesData for the chart
+                const themesDataChart = sortedThemes.slice(0, 4).map(([theme, count]) => ({
+                    theme: theme,
+                    percentage: parseFloat(((count / quimicaQuestionsCount) * 100).toFixed(1))
+                }));
+
+
+                tempEnemByYearAnalysisData.push({
+                    year: year,
+                    title: `ENEM ${year}: Análise Detalhada em Química`,
+                    summary: `A prova de Química do ENEM ${year} contou com ${quimicaQuestionsCount} questões, abrangendo as modalidades ${applicationTypes}.`,
+                    quimicaQuestions: quimicaQuestionsCount,
+                    aplicacaoType: applicationTypes,
+                    mainThemes: mainThemesList,
+                    competencyFocus: competencyFocusList,
+                    habilidades: habilidadesList,
+                    themesData: themesDataChart
+                });
+
+                yearDataFiltered.forEach(row => {
+                    tempDetailedYearlyQuestionsData.push({
+                        ano: parseInt(row.Ano),
+                        tipo: row['Tipo de Prova'],
+                        tema: row['Assunto/Tema'],
+                        competencia: row['Competência Avaliada'],
+                        habilidade: row['Habilidade Avaliada']
+                    });
+
+                    tempPastQuestionsData.push({
+                        ano: String(row.Ano),
+                        tipo_aplicacao: row['Tipo de Prova'],
+                        tema: row['Assunto/Tema'].split('(')[0].trim(),
+                        tema_detalhado: row['Assunto/Tema'],
+                        competencia: row['Competência Avaliada'],
+                        habilidade: row['Habilidade Avaliada'],
+                        questao: `Com base no tema "${row['Assunto/Tema']}", qual seria a abordagem correta para resolver uma questão que envolve o seguinte cenário: [Descreva brevemente um cenário genérico relacionado ao tema]?`,
+                        alternativas: [
+                            'A) Analisar as propriedades e interações dos elementos.',
+                            'B) Aplicar princípios de equilíbrio e cinética.',
+                            'C) Interpretar dados e gráficos para identificar padrões.',
+                            'D) Relacionar o fenômeno com aplicações tecnológicas e ambientais.',
+                            'E) Calcular grandezas químicas a partir de dados fornecidos.'
+                        ],
+                        resposta_correta: `A resposta correta dependeria da aplicação específica do conhecimento sobre "${row['Assunto/Tema']}" no cenário dado.`,
+                        imageUrl: `https://placehold.co/400x200/${Math.floor(Math.random()*16777215).toString(16)}/FFFFFF?text=Questão+ENEM+${row.Ano}`
+                    });
+                });
+            });
+
+            detailedYearlyQuestionsData = tempDetailedYearlyQuestionsData;
+            pastQuestionsData = tempPastQuestionsData;
+            enemByYearAnalysisData = tempEnemByYearAnalysisData;
+        }
+
+        /**
+         * Preenche o seletor de universidade e campus com opções únicas dos dados de vagas de medicina.
+         */
+        function populateUniversityCampusSelector() {
+            const selector = document.getElementById('universityCampusSelector');
+            selector.innerHTML = '<option value="">Selecione uma Universidade e Campus</option>'; // Limpa e adiciona opção padrão
+            const uniqueOptions = new Set(); // Usa um Set para armazenar strings "Universidade - Campus" únicas e evitar duplicações
+
+            medicineVagasData.forEach(item => {
+                const optionText = `${item.university} - ${item.campus}`;
+                uniqueOptions.add(optionText);
+            });
+
+            uniqueOptions.forEach(optionText => {
+                const option = document.createElement('option');
+                option.value = optionText;
+                option.textContent = optionText;
+                selector.appendChild(option);
+            });
+
+            // Adiciona um listener de evento para reagir à mudança de seleção
+            selector.addEventListener('change', (event) => {
+                const selectedValue = event.target.value;
+                displayMedicineVagas(selectedValue);
+            });
+        }
+
+        /**
+         * Exibe as vagas de medicina com base na universidade e campus selecionados.
+         * @param {string} selectedValue - A string formatada "Universidade - Campus" selecionada.
+         */
+        function displayMedicineVagas(selectedValue) {
+            const vagasDisplay = document.getElementById('vagas-display');
+            vagasDisplay.innerHTML = ''; // Limpa o conteúdo anterior
+
+            if (!selectedValue) {
+                // Se nada for selecionado, colapsa o acordeão e retorna
+                toggleAccordionState(vagasDisplay, false); // Colapsa o acordeão
+                return;
+            }
+
+            const [selectedUniversity, selectedCampus] = selectedValue.split(' - ');
+            // Filtra os dados de vagas para encontrar as correspondentes à seleção
+            const filteredVagas = medicineVagasData.filter(item => 
+                item.university === selectedUniversity && item.campus === selectedCampus
+            );
+
+            if (filteredVagas.length > 0) {
+                // Constrói a tabela HTML com as vagas encontradas
+                let tableHtml = `
+                    <h4 class="font-bold text-lg text-[#6A4A3C] mb-2">Vagas para Medicina em ${selectedUniversity} - ${selectedCampus}:</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm text-sm">
+                            <thead>
+                                <tr class="bg-gray-100 border-b">
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Tipo de Concorrência</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Vagas</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Nota de Corte</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                filteredVagas.forEach(vaga => {
+                    tableHtml += `
+                        <tr class="border-b last:border-b-0 hover:bg-gray-50">
+                            <td class="py-2 px-4 text-gray-800">${vaga.type}</td>
+                            <td class="py-2 px-4 text-gray-800">${vaga.vagas}</td>
+                            <td class="py-2 px-4 text-gray-800">${vaga.notaCorte.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+                tableHtml += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">As notas de corte são aproximadas e podem variar a cada ano.</p>
+                `;
+                vagasDisplay.innerHTML = tableHtml;
+                toggleAccordionState(vagasDisplay, true); // Expande o acordeão
+            } else {
+                vagasDisplay.innerHTML = '<p class="text-center text-gray-600">Nenhuma vaga encontrada para esta seleção.</p>';
+                toggleAccordionState(vagasDisplay, true); // Expande para mostrar a mensagem
+            }
+        }
+
+        /**
+         * Gera os botões dos anos para a seção de análise anual, ordenados do mais recente para o mais antigo.
+         */
+        function generateYearlyButtons() {
+            const container = document.getElementById('yearly-buttons-container');
+            container.innerHTML = ''; // Limpa botões antigos
+            // Mapeia os anos únicos dos dados e os ordena do mais recente para o mais antigo
+            const years = [...new Set(enemByYearAnalysisData.map(item => item.year))].sort((a, b) => b - a);
+
+            years.forEach(year => {
+                const button = document.createElement('button');
+                button.textContent = year;
+                button.className = 'py-3 px-5 bg-[#EDC951] text-[#6A4A3C] font-bold rounded-lg shadow-md hover:bg-[#EB6841] hover:text-white transition duration-300 ease-in-out';
+                button.onclick = () => displayYearlyAnalysis(year); // Adiciona o manipulador de clique
+                container.appendChild(button);
+            });
+        }
+
+        /**
+         * Exibe a análise detalhada da prova de Química para o ano selecionado.
+         * Inclui um resumo, contagem de questões, tipos de aplicação, temas principais, foco em competências,
+         * habilidades cobradas, um gráfico de temas e uma tabela detalhada de questões.
+         * @param {number} year - O ano para o qual a análise deve ser exibida.
+         */
+        async function displayYearlyAnalysis(year) {
+            const outputDiv = document.getElementById('yearly-analysis-output');
+            const selectedYearSpan = document.getElementById('selectedYear');
+            const yearSummarySpan = document.getElementById('yearSummary');
+            const yearChemistryQuestionsSpan = document.getElementById('yearChemistryQuestions');
+            const yearApplicationTypeSpan = document.getElementById('yearApplicationType');
+            const yearMainThemesSpan = document.getElementById('yearMainThemes');
+            const yearCompetencyFocusSpan = document.getElementById('yearCompetencyFocus');
+            const yearHabilidadesSpan = document.getElementById('yearHabilidades');
+            const yearlyQuestionYearDisplay = document.getElementById('yearlyQuestionYearDisplay');
+            const yearlyQuestionLoading = document.getElementById('yearlyQuestionLoading');
+            const yearlyQuestionContent = document.getElementById('yearlyQuestionContent');
+            const noYearlyQuestionFound = document.getElementById('noYearlyQuestionFound');
+            const yearlyDetailedQuestionsTableContainer = document.getElementById('yearlyDetailedQuestionsTableContainer');
+
+            // Resetar visibilidade e classes para nova exibição
+            yearlyQuestionContent.classList.add('hidden');
+            yearlyQuestionLoading.classList.add('hidden');
+            noYearlyQuestionFound.classList.add('hidden');
+            yearlyDetailedQuestionsTableContainer.innerHTML = ''; // Limpar tabela detalhada anterior
+
+            selectedYearSpan.textContent = year; // Atualiza o ano no título
+            
+            toggleAccordionState(outputDiv, true); // Expande o acordeão de saída
+
+            // Filtrar os dados detalhados das questões para o ano selecionado
+            const yearAnalysisData = enemByYearAnalysisData.find(item => item.year === year);
+            const yearDetailedData = detailedYearlyQuestionsData.filter(item => item.ano === year);
+
+
+            if (yearAnalysisData) {
+                // Calcula e exibe o resumo dos dados
+                yearSummarySpan.textContent = yearAnalysisData.summary;
+                yearChemistryQuestionsSpan.textContent = `${yearAnalysisData.quimicaQuestions} questões`;
+                yearApplicationTypeSpan.textContent = yearAnalysisData.aplicacaoType;
+                yearMainThemesSpan.textContent = yearAnalysisData.mainThemes.join(', ');
+                yearCompetencyFocusSpan.textContent = yearAnalysisData.competencyFocus.join(', ');
+                yearHabilidadesSpan.textContent = yearAnalysisData.habilidades.join(', ');
+
+                // Gera e exibe a tabela de questões detalhadas para o ano
+                let detailedTableHtml = `
+                    <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questões Detalhadas do ENEM ${year}:</h5>
+                    <div class="overflow-x-auto"> <!-- Adicionado para rolagem horizontal em tabelas largas -->
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm text-sm">
+                            <thead>
+                                <tr class="bg-gray-100 border-b">
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Tipo</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Tema Detalhado</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Competência</th>
+                                    <th class="py-2 px-4 text-left text-gray-600 font-semibold">Habilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                yearDetailedData.forEach(q => {
+                    detailedTableHtml += `
+                        <tr class="border-b last:border-b-0 hover:bg-gray-50">
+                            <td class="py-2 px-4 text-gray-800">${q.tipo}</td>
+                            <td class="py-2 px-4 text-gray-800">${q.tema}</td>
+                            <td class="py-2 px-4 text-gray-800">${q.competencia}</td>
+                            <td class="py-2 px-4 text-gray-800">${q.habilidade}</td>
+                        </tr>
+                    `;
+                });
+                detailedTableHtml += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                yearlyDetailedQuestionsTableContainer.innerHTML = detailedTableHtml;
+
+
+                // Destroi a instância anterior do gráfico de temas anuais se existir
+                if (yearlyThemesChartInstance) {
+                    yearlyThemesChartInstance.destroy();
+                }
+
+                // Inicializa o novo gráfico de barras horizontal para temas anuais
+                yearlyThemesChartInstance = new Chart(document.getElementById('yearlyThemesChart'), {
+                    type: 'pie', // Alterado para pie chart para temas anuais
+                    data: {
+                        labels: yearAnalysisData.themesData.map(d => wrapLabel(d.theme)),
+                        datasets: [{
+                            label: `% de Questões em ${year}`,
+                            data: yearAnalysisData.themesData.map(d => d.percentage),
+                            backgroundColor: energeticPlayfulPalette.slice(0, yearAnalysisData.themesData.length),
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Exibe uma questão de exemplo aleatória para o ano, se disponível em pastQuestionsData
+                yearlyQuestionYearDisplay.textContent = year;
+                const exampleQuestionForYear = pastQuestionsData.find(q => q.ano === String(year));
+                if (exampleQuestionForYear) {
+                    displayQuestionDetails(exampleQuestionForYear, 'yearly');
+                    yearlyQuestionContent.classList.remove('hidden'); // Mostra a seção da questão de exemplo
+                } else {
+                    noYearlyQuestionFound.classList.remove('hidden'); // Mostra mensagem se não houver questão de exemplo
+                }
+
+            } else {
+                // Se não houver dados para o ano, exibe mensagem e esconde o gráfico
+                yearSummarySpan.textContent = 'Dados não disponíveis para este ano.';
+                yearChemistryQuestionsSpan.textContent = 'N/A';
+                yearApplicationTypeSpan.textContent = 'N/A';
+                yearMainThemesSpan.textContent = 'N/A';
+                yearCompetencyFocusSpan.textContent = 'N/A';
+                yearHabilidadesSpan.textContent = 'N/A';
+                if (yearlyThemesChartInstance) {
+                    yearlyThemesChartInstance.destroy();
+                    yearlyThemesChartInstance = null;
+                }
+                noYearlyQuestionFound.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Exibe os detalhes de uma questão específica em um dos containers de questão.
+         * @param {Object} question - Objeto contendo os detalhes da questão.
+         * @param {string} prefix - Prefixo para os IDs dos elementos HTML ('yearly' para análise anual, vazio para busca).
+         */
+        function displayQuestionDetails(question, prefix = '') {
+            document.getElementById(`${prefix}QuestionYear`).textContent = question.ano;
+            document.getElementById(`${prefix}QuestionType`).textContent = question.tipo_aplicacao;
+            document.getElementById(`${prefix}QuestionDetailedTopic`).textContent = question.tema_detalhado;
+            document.getElementById(`${prefix}QuestionCompetence`).textContent = question.competencia;
+            document.getElementById(`${prefix}QuestionSkill`).textContent = question.habilidade;
+            document.getElementById(`${prefix}QuestionText`).textContent = question.questao;
+
+            const alternativesList = document.getElementById(`${prefix}AlternativesList`);
+            alternativesList.innerHTML = '';
+            question.alternativas.forEach(alt => {
+                const li = document.createElement('li');
+                li.textContent = alt;
+                alternativesList.appendChild(li);
+            });
+            document.getElementById(`${prefix}CorrectAnswer`).textContent = question.resposta_correta;
+
+            const questionImageContainer = document.getElementById(`${prefix}QuestionImageContainer`);
+            questionImageContainer.innerHTML = '';
+            if (question.imageUrl) {
+                const img = document.createElement('img');
+                img.src = question.imageUrl;
+                img.alt = `Imagem da questão de ${question.tema_detalhado}`;
+                img.className = 'question-image';
+                // Fallback para imagem não carregada
+                img.onerror = function() { this.onerror=null; this.src='https://placehold.co/400x200/CCCCCC/6A4A3C?text=Imagem+Não+Disponível'; this.alt='Imagem da questão não disponível.'; };
+                questionImageContainer.appendChild(img);
+            }
+        }
+
+        // Listener de evento para o botão de busca de questões por tema
+        document.getElementById('generateQuestionBtn').addEventListener('click', () => {
+            const topicInput = document.getElementById('topicInput').value.trim();
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const questionOutput = document.getElementById('questionOutput');
+            const noQuestionFound = document.getElementById('noQuestionFound');
+
+            // Esconde saídas anteriores
+            toggleAccordionState(questionOutput, false); // Colapsa o acordeão
+            noQuestionFound.classList.add('hidden');
+
+            if (topicInput) {
+                loadingIndicator.classList.remove('hidden'); // Mostra o indicador de carregamento
+
+                // Simula um atraso de chamada de API para buscar a questão
+                setTimeout(() => {
+                    // Tenta encontrar uma questão cujo tema ou tema_detalhado inclua o texto digitado
+                    const foundQuestion = pastQuestionsData.find(q =>
+                        q.tema.toLowerCase().includes(topicInput.toLowerCase()) ||
+                        q.tema_detalhado.toLowerCase().includes(topicInput.toLowerCase())
+                    );
+
+                    loadingIndicator.classList.add('hidden'); // Esconde o indicador de carregamento
+
+                    if (foundQuestion) {
+                        displayQuestionDetails(foundQuestion); // Exibe os detalhes da questão
+                        toggleAccordionState(questionOutput, true); // Expande o acordeão
+                    } else {
+                        noQuestionFound.classList.remove('hidden'); // Mostra mensagem de "não encontrado"
+                    }
+                }, 1000); // Atraso de 1 segundo
+            }
+        });
+
+        /**
+         * Gera a seção de download de exames completos, com acordeões para cada ano.
+         */
+        function generateFullExamsDownloadSection() {
+            const container = document.getElementById('full-exams-container');
+            container.innerHTML = ''; // Limpa o conteúdo existente
+
+            fullExamsData.forEach(examYear => {
+                const yearDiv = document.createElement('div');
+                yearDiv.className = 'p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200';
+
+                const toggleButton = document.createElement('div');
+                toggleButton.className = 'toggle-button';
+                toggleButton.setAttribute('data-target', `exams-${examYear.ano}-content`);
+                toggleButton.setAttribute('role', 'button');
+                toggleButton.setAttribute('aria-expanded', 'false');
+                toggleButton.setAttribute('aria-controls', `exams-${examYear.ano}-content`);
+                
+                const title = document.createElement('h4');
+                title.className = 'font-bold text-lg text-[#6A4A3C]';
+                title.textContent = `Provas do ENEM ${examYear.ano}`;
+                
+                const icon = document.createElement('span');
+                icon.className = 'toggle-icon text-2xl text-[#00A0B0]';
+                icon.innerHTML = '▶'; // Seta para a direita
+
+                toggleButton.appendChild(title);
+                toggleButton.appendChild(icon);
+                yearDiv.appendChild(toggleButton);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.id = `exams-${examYear.ano}-content`;
+                contentDiv.className = 'accordion-content hidden mt-2 overflow-x-auto'; // Adicionado overflow-x-auto aqui
+                
+                const ul = document.createElement('ul');
+                ul.className = 'list-disc list-inside space-y-2 text-gray-700 pl-4';
+
+                examYear.downloads.forEach(download => {
+                    const li = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = download.url;
+                    link.target = '_blank';
+                    link.className = 'text-[#00A0B0] hover:underline';
+                    link.textContent = download.tipo;
+                    li.appendChild(link);
+                    ul.appendChild(li);
+                });
+                contentDiv.appendChild(ul);
+                yearDiv.appendChild(contentDiv);
+                container.appendChild(yearDiv);
+            });
+
+             // Anexa a lógica do acordeão aos botões recém-criados
+             attachAccordionLogic();
+        }
+
+        /**
+         * Anexa a lógica de alternância do acordeão a todos os botões com a classe 'toggle-button'.
+         * Remove listeners antigos para evitar duplicação antes de adicionar novos.
+         */
+        function attachAccordionLogic() {
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                // Remove quaisquer listeners de clique anteriores para evitar múltiplas execuções
+                button.removeEventListener('click', toggleAccordion);
+                // Adiciona o novo listener de clique
+                button.addEventListener('click', toggleAccordion);
+            });
+        }
+
+        /**
+         * Função para controlar o estado de expansão/colapso de um acordeão.
+         * @param {HTMLElement} targetContent - O elemento de conteúdo do acordeão.
+         * @param {boolean} expand - True para expandir, false para colapsar.
+         */
+        function toggleAccordionState(targetContent, expand) {
+            const button = document.querySelector(`[data-target="${targetContent.id}"]`);
+            const toggleIcon = button ? button.querySelector('.toggle-icon') : null;
+
+            if (expand) {
+                targetContent.classList.remove('hidden'); // Torna visível primeiro
+                targetContent.style.maxHeight = '0'; // Garante que comece do 0 para a animação
+                requestAnimationFrame(() => {
+                    targetContent.style.maxHeight = targetContent.scrollHeight + 'px'; // Anima para a altura total
+                    targetContent.classList.add('active');
+                    if (toggleIcon) toggleIcon.classList.add('active');
+                    if (button) button.setAttribute('aria-expanded', 'true');
+                });
+                targetContent.ontransitionend = () => {
+                    if (targetContent.classList.contains('active')) {
+                        targetContent.style.maxHeight = 'fit-content'; // Remove maxHeight fixo após a transição
+                    }
+                    targetContent.ontransitionend = null;
+                };
+            } else {
+                targetContent.style.maxHeight = targetContent.scrollHeight + 'px'; // Define para a altura atual para animar a partir dela
+                requestAnimationFrame(() => {
+                    targetContent.style.maxHeight = '0'; // Anima para 0
+                    targetContent.classList.remove('active');
+                    if (toggleIcon) toggleIcon.classList.remove('active');
+                    if (button) button.setAttribute('aria-expanded', 'false');
+                });
+                targetContent.ontransitionend = () => {
+                    if (targetContent.style.maxHeight === '0px') {
+                        targetContent.classList.add('hidden'); // Esconde completamente após a transição
+                    }
+                    targetContent.ontransitionend = null;
+                };
+            }
+        }
+
+        /**
+         * Função de alternância para o comportamento do acordeão (chamada pelo clique do botão).
+         * @param {Event} event - O objeto de evento do clique.
+         */
+        function toggleAccordion(event) {
+            const button = event.currentTarget;
+            const targetId = button.dataset.target;
+            const targetContent = document.getElementById(targetId);
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+            toggleAccordionState(targetContent, !isExpanded);
+        }
+
+
+        /**
+         * Inicia o relógio de contagem regressiva para o ENEM 2025.
+         * Atualiza os elementos de dias, horas, minutos e segundos a cada segundo.
+         */
+        function startCountdown() {
+            // Defina a data do ENEM 2025 (Exemplo: 2 de Novembro de 2025 às 13:00 BRT)
+            // Certifique-se de que o fuso horário esteja correto para evitar desvios.
+            const enemDate = new Date('2025-11-02T13:00:00-03:00').getTime();
+
+            const updateCountdown = setInterval(() => {
+                const now = new Date().getTime(); // Tempo atual
+                const distance = enemDate - now; // Distância até a data do ENEM
+
+                // Cálculos para dias, horas, minutos e segundos
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Atualiza o texto dos elementos HTML, adicionando zero à esquerda se for um único dígito
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                // Se a contagem regressiva terminou, exibe uma mensagem e para o intervalo
+                if (distance < 0) {
+                    clearInterval(updateCountdown);
+                    document.getElementById('countdown').innerHTML = '<span class="text-3xl font-bold">O ENEM 2025 já começou! Boa prova!</span>';
+                }
+            }, 1000); // Atualiza a cada segundo
+        }
+
+        /**
+         * Preenche a tabela de datas importantes do ENEM.
+         */
+        function populateImportantDates() {
+            const dates = [
+                { event: "Inscrições ENEM", date: "Maio/Junho 2025" },
+                { event: "Pagamento da Taxa de Inscrição", date: "Junho 2025" },
+                { event: "Solicitação de Isenção", date: "Abril/Maio 2025" },
+                { event: "1º Dia de Provas", date: "02 de Novembro de 2025" },
+                { event: "2º Dia de Provas", date: "09 de Novembro de 2025" },
+                { event: "Divulgação do Gabarito Oficial", date: "Novembro 2025" },
+                { event: "Divulgação dos Resultados", date: "Janeiro 2026" },
+                { event: "Inscrições SISU", date: "Fevereiro 2026" },
+                { event: "Inscrições PROUNI", date: "Fevereiro 2026" },
+                { event: "Inscrições FIES", date: "Março 2026" },
+            ];
+
+            const tableBody = document.getElementById('important-dates-table-body');
+            tableBody.innerHTML = ''; // Limpa o conteúdo anterior
+
+            // Adiciona cada item de data à tabela
+            dates.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b last:border-b-0 hover:bg-gray-50';
+                tr.innerHTML = `
+                    <td class="py-2 px-4 text-gray-800">${item.event}</td>
+                    <td class="py-2 px-4 text-gray-800">${item.date}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+
+        // Inicializar todas as funções quando o DOM estiver completamente carregado
+        document.addEventListener('DOMContentLoaded', async () => {
+            startCountdown(); // Inicia a contagem regressiva
+            populateImportantDates(); // Preenche as datas importantes
+
+            // Carregar e preparar os dados do ENEM do CSV
+            const processedData = processEnemRawData(initialEnemData);
+            prepareEnemData(processedData);
+
+            populateUniversityCampusSelector(); // Preenche o seletor de vagas de medicina
+            generateYearlyButtons(); // Gera os botões de ano para a análise anual
+            generateFullExamsDownloadSection(); // Gera a seção de download de exames completos
+            attachAccordionLogic(); // Anexa a lógica do acordeão a todos os botões de alternância
+        });
+    </script>
 </body>
 </html>
