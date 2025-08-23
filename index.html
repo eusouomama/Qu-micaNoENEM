@@ -95,8 +95,12 @@
         <header class="text-center mb-12">
             <!-- Seção do logo da marca e links de redes sociais -->
             <div class="mb-6 flex flex-col items-center space-y-4">
-                <!-- Logo principal da marca - Atualizado com o link do GitHub -->
-                <img src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/9487fedb5d5ac8a30e2bfcbcbb2da708a56771f5/assets/images/Logo%201.png" alt="Sua Marca" class="max-h-24 w-auto mx-auto shadow-lg object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <!-- Logo principal da marca - Atualizado com o link do GitHub e estilos para melhor integração -->
+                <img src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/9487fedb5d5ac8a30e2bfcbcbb2da708a56771f5/assets/images/Logo%201.png" 
+                     alt="Sua Marca" 
+                     class="max-w-full h-auto mx-auto shadow-lg object-contain rounded-lg border border-gray-200" 
+                     style="box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 200px;"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
                 <!-- Links para redes sociais -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
                     <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
@@ -134,7 +138,7 @@
                         <span id="minutes" class="block text-3xl md:text-6xl font-black">00</span>
                         <span class="block text-sm md:text-base font-semibold">Minutos</span>
                     </div>
-                    <div class="text-2xl md:text-5xl font-black">:</div>
+                    <div class="2xl md:text-5xl font-black">:</div>
                     <div>
                         <span id="seconds" class="block text-3xl md:text-6xl font-black">00</span>
                         <span class="block text-sm md:text-base font-semibold">Segundos</span>
@@ -385,28 +389,6 @@
                         <!-- Tabela de questões detalhadas será injetada aqui -->
                     </div>
                     <!-- Fim da nova seção para a tabela -->
-
-                    <!-- Seção para a questão de exemplo do ano -->
-                    <div id="yearlyQuestionSection" class="mt-8 pt-4 border-t border-gray-300">
-                        <h5 class="font-bold text-lg text-[#00A0B0] mb-3">Questão de Exemplo do ENEM <span id="yearlyQuestionYearDisplay"></span>:</h5>
-                        <div id="yearlyQuestionLoading" class="text-center text-[#00A0B0] hidden">Carregando questão de exemplo...</div>
-                        <div id="yearlyQuestionContent" class="hidden">
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Ano:</span> <span id="yearlyQuestionYear"></span></p>
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tipo de Aplicação:</span> <span id="yearlyQuestionType"></span></p>
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Tema Detalhado:</span> <span id="yearlyQuestionDetailedTopic"></span></p>
-                            <p class="text-gray-800 mb-2"><span class="font-semibold">Competência:</span> <span id="yearlyQuestionCompetence"></span></p>
-                            <p class="text-gray-800 mb-4"><span class="font-semibold">Habilidade:</span> <span id="yearlyQuestionSkill"></span></p>
-                            <div id="yearlyQuestionImageContainer" class="text-center mb-4"></div>
-                            <p id="yearlyQuestionText" class="text-gray-800 mb-4 font-medium"></p>
-                            <p class="font-bold text-base text-[#6A4A3C] mb-2">Alternativas:</p>
-                            <ul id="yearlyAlternativesList" class="list-disc list-inside space-y-2 text-gray-700 pl-4"></ul>
-                            <p class="font-bold text-base text-[#00A0B0] mt-4 mb-2">Resposta Correta:</p>
-                            <p id="yearlyCorrectAnswer" class="text-gray-800 font-semibold"></p>
-                        </div>
-                        <div id="noYearlyQuestionFound" class="text-center text-gray-600 hidden">Nenhuma questão de exemplo detalhada encontrada para este ano em nossos registros.</div>
-                    </div>
-                    <!-- Fim da seção da questão de exemplo -->
-
                 </div>
             </section>
 
@@ -458,7 +440,7 @@
                 <div class="flex flex-col items-center">
                     <!-- LINK RAW DIRETO da sua imagem no GitHub. -->
                     <img 
-                        src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/18a21bb6065ff4214b744059c42b5380510ca66d/assets/images/mama.png" 
+                        src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/9487fedb5d5ac8a30e2bfcbcbb2da708a56771f5/assets/images/mama.png" 
                         alt="Foto do Professor Matheus Braga (Professor Mamá)" 
                         class="w-40 h-40 rounded-full object-cover shadow-lg mb-6 border-4 border-[#EB6841]"
                         onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';">
@@ -503,10 +485,10 @@
         /**
          * Função para quebrar rótulos longos em múltiplas linhas para melhor legibilidade em gráficos.
          * @param {string} label - O rótulo a ser quebrado.
+         * @param {number} maxLength - O número máximo de caracteres antes de quebrar a linha.
          * @returns {string|Array<string>} - O rótulo original ou um array de strings para múltiplas linhas.
          */
-        const wrapLabel = (label) => {
-            const maxLength = 16; // Número máximo de caracteres por linha
+        const wrapLabel = (label, maxLength = 16) => { // Aumentado maxLength para 16
             if (label.length <= maxLength) return label;
             
             const words = label.split(' ');
@@ -525,6 +507,12 @@
             lines.push(currentLine.trim()); // Adiciona a última linha
             return lines;
         };
+
+        // Helper function to standardize Habilidade format
+        function standardizeHabilidade(habilidadeString) {
+            const match = habilidadeString.match(/H(\d+)/);
+            return match ? `H${match[1]}` : habilabilidadeString;
+        }
 
         // --- Dados dos Gráficos Principais ---
 
@@ -548,11 +536,19 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom', // Legenda na parte inferior para melhor visualização em telas menores
+                        position: 'right', // Legenda à direita
+                        align: 'start', // Alinha ao topo
+                        labels: {
+                            font: {
+                                size: 12
+                            },
+                            boxWidth: 20,
+                            padding: 10
+                        }
                     },
                     tooltip: {
                         callbacks: {
-                            title: tooltipTitleCallback // Usa o callback para títulos de tooltip
+                            title: tooltipTitleCallback
                         }
                     }
                 }
@@ -579,7 +575,15 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom', // Legenda na parte inferior
+                        position: 'right', // Legenda à direita
+                        align: 'start', // Alinha ao topo
+                        labels: {
+                            font: {
+                                size: 12
+                            },
+                            boxWidth: 20,
+                            padding: 10
+                        }
                     },
                     tooltip: {
                         callbacks: {
@@ -1369,12 +1373,28 @@
             const lines = csvString.trim().split('\n');
             if (lines.length === 0) return [];
 
-            const headers = lines[0].replace(/"/g, '').split(',');
+            // Identifica o índice da primeira linha de cabeçalho válida
+            let headerIndex = -1;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].startsWith('"Ano","Tipo de Prova"')) {
+                    headerIndex = i;
+                    break;
+                }
+            }
+
+            if (headerIndex === -1) {
+                console.error("CSV malformado: Não foi possível encontrar a linha de cabeçalho.");
+                return [];
+            }
+
+            const headers = lines[headerIndex].replace(/"/g, '').split(',');
             const result = [];
 
-            for (let i = 1; i < lines.length; i++) {
+            // Começa a processar as linhas de dados após o primeiro cabeçalho
+            for (let i = headerIndex + 1; i < lines.length; i++) {
                 const currentLine = lines[i];
-                if (!currentLine.trim()) continue; // Ignora linhas vazias
+                // Ignora linhas vazias ou linhas que são cabeçalhos repetidos
+                if (!currentLine.trim() || currentLine.startsWith('"Ano","Tipo de Prova"')) continue; 
 
                 const values = [];
                 let inQuote = false;
@@ -1399,8 +1419,7 @@
                     }
                     result.push(rowObject);
                 } else {
-                    // This warning is useful for debugging malformed lines
-                    // console.warn('Linha malformada ignorada:', currentLine);
+                    // console.warn('Linha malformada ignorada:', currentLine); // Comentado para evitar poluição do console
                 }
             }
             return result;
@@ -1425,8 +1444,8 @@
             const tempPastQuestionsData = [];
             const tempEnemByYearAnalysisData = [];
             
-            // Garante que os anos sejam únicos e ordenados do mais recente para o mais antigo
-            const years = [...new Set(data.map(row => parseInt(row.Ano)))].sort((a, b) => b - a);
+            // Garante que os anos sejam únicos e ordenados do mais recente para o mais antigo, filtrando NaN
+            const years = [...new Set(data.map(row => parseInt(row.Ano)).filter(year => !isNaN(year)))].sort((a, b) => b - a);
 
             years.forEach(year => {
                 const yearDataFiltered = data.filter(row => parseInt(row.Ano) === year);
@@ -1452,7 +1471,8 @@
 
                 // Calcula as habilidades
                 const habilidadeCounts = yearDataFiltered.reduce((acc, item) => {
-                    acc[item['Habilidade Avaliada']] = (acc[item['Habilidade Avaliada']] || 0) + 1;
+                    const standardizedHab = standardizeHabilidade(item['Habilidade Avaliada']);
+                    acc[standardizedHab] = (acc[standardizedHab] || 0) + 1;
                     return acc;
                 }, {});
                 const sortedHabilidades = Object.entries(habilidadeCounts).sort(([, a], [, b]) => b - a);
@@ -1483,7 +1503,7 @@
                         tipo: row['Tipo de Prova'],
                         tema: row['Assunto/Tema'],
                         competencia: row['Competência Avaliada'],
-                        habilidade: row['Habilidade Avaliada']
+                        habilidade: standardizeHabilidade(row['Habilidade Avaliada']) // Aplica padronização aqui
                     });
 
                     tempPastQuestionsData.push({
@@ -1492,7 +1512,7 @@
                         tema: row['Assunto/Tema'].split('(')[0].trim(),
                         tema_detalhado: row['Assunto/Tema'],
                         competencia: row['Competência Avaliada'],
-                        habilidade: row['Habilidade Avaliada'],
+                        habilidade: standardizeHabilidade(row['Habilidade Avaliada']), // Aplica padronização aqui
                         questao: `Com base no tema "${row['Assunto/Tema']}", qual seria a abordagem correta para resolver uma questão que envolve o seguinte cenário: [Descreva brevemente um cenário genérico relacionado ao tema]?`,
                         alternativas: [
                             'A) Analisar as propriedades e interações dos elementos.',
@@ -1603,8 +1623,8 @@
         function generateYearlyButtons() {
             const container = document.getElementById('yearly-buttons-container');
             container.innerHTML = ''; // Limpa botões antigos
-            // Mapeia os anos únicos dos dados e os ordena do mais recente para o mais antigo
-            const years = [...new Set(enemByYearAnalysisData.map(item => item.year))].sort((a, b) => b - a);
+            // Mapeia os anos únicos dos dados e os ordena do mais recente para o mais antigo, filtrando NaN
+            const years = [...new Set(enemByYearAnalysisData.map(item => item.year))].filter(year => !isNaN(year)).sort((a, b) => b - a);
 
             years.forEach(year => {
                 const button = document.createElement('button');
@@ -1630,16 +1650,9 @@
             const yearMainThemesSpan = document.getElementById('yearMainThemes');
             const yearCompetencyFocusSpan = document.getElementById('yearCompetencyFocus');
             const yearHabilidadesSpan = document.getElementById('yearHabilidades');
-            const yearlyQuestionYearDisplay = document.getElementById('yearlyQuestionYearDisplay');
-            const yearlyQuestionLoading = document.getElementById('yearlyQuestionLoading');
-            const yearlyQuestionContent = document.getElementById('yearlyQuestionContent');
-            const noYearlyQuestionFound = document.getElementById('noYearlyQuestionFound');
             const yearlyDetailedQuestionsTableContainer = document.getElementById('yearlyDetailedQuestionsTableContainer');
 
             // Resetar visibilidade e classes para nova exibição
-            yearlyQuestionContent.classList.add('hidden');
-            yearlyQuestionLoading.classList.add('hidden');
-            noYearlyQuestionFound.classList.add('hidden');
             yearlyDetailedQuestionsTableContainer.innerHTML = ''; // Limpar tabela detalhada anterior
 
             selectedYearSpan.textContent = year; // Atualiza o ano no título
@@ -1702,7 +1715,7 @@
                 yearlyThemesChartInstance = new Chart(document.getElementById('yearlyThemesChart'), {
                     type: 'pie', // Alterado para pie chart para temas anuais
                     data: {
-                        labels: yearAnalysisData.themesData.map(d => wrapLabel(d.theme)),
+                        labels: yearAnalysisData.themesData.map(d => wrapLabel(d.theme, 16)), // Aumentado maxLength para 16
                         datasets: [{
                             label: `% de Questões em ${year}`,
                             data: yearAnalysisData.themesData.map(d => d.percentage),
@@ -1716,7 +1729,15 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                position: 'bottom',
+                                position: 'right', // Legenda à direita
+                                align: 'start', // Alinha ao topo
+                                labels: {
+                                    font: {
+                                        size: 12
+                                    },
+                                    boxWidth: 20,
+                                    padding: 10
+                                }
                             },
                             tooltip: {
                                 callbacks: {
@@ -1726,16 +1747,6 @@
                         }
                     }
                 });
-
-                // Exibe uma questão de exemplo aleatória para o ano, se disponível em pastQuestionsData
-                yearlyQuestionYearDisplay.textContent = year;
-                const exampleQuestionForYear = pastQuestionsData.find(q => q.ano === String(year));
-                if (exampleQuestionForYear) {
-                    displayQuestionDetails(exampleQuestionForYear, 'yearly');
-                    yearlyQuestionContent.classList.remove('hidden'); // Mostra a seção da questão de exemplo
-                } else {
-                    noYearlyQuestionFound.classList.remove('hidden'); // Mostra mensagem se não houver questão de exemplo
-                }
 
             } else {
                 // Se não houver dados para o ano, exibe mensagem e esconde o gráfico
@@ -1749,7 +1760,6 @@
                     yearlyThemesChartInstance.destroy();
                     yearlyThemesChartInstance = null;
                 }
-                noYearlyQuestionFound.classList.remove('hidden');
             }
         }
 
