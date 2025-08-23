@@ -95,8 +95,8 @@
         <header class="text-center mb-12">
             <!-- Seção do logo da marca e links de redes sociais -->
             <div class="mb-6 flex flex-col items-center space-y-4">
-                <!-- Logo principal da marca - Ajustado para manter a proporção e evitar cortes -->
-                <img src="https://lh3.googleusercontent.com/d/1FG8bP6kbXQq0XIZtTo_zKyenSumib8E_=s1200" alt="Sua Marca" class="max-h-24 w-auto mx-auto shadow-lg object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
+                <!-- Logo principal da marca - Atualizado com o link do GitHub -->
+                <img src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/9487fedb5d5ac8a30e2bfcbcbb2da708a56771f5/assets/images/Logo%201.png" alt="Sua Marca" class="max-h-24 w-auto mx-auto shadow-lg object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x96/cccccc/000000?text=Logo+Não+Carregado';">
                 <!-- Links para redes sociais -->
                 <div class="flex flex-col sm:flex-row sm:space-x-4 items-center space-y-2 sm:space-y-0">
                     <a href="https://www.instagram.com/eusouomama/?next=/" target="_blank" class="flex items-center text-[#6A4A3C] hover:text-[#CC333F] transition duration-300">
@@ -461,8 +461,7 @@
                         src="https://raw.githubusercontent.com/eusouomama/QuimicaNoENEM/18a21bb6065ff4214b744059c42b5380510ca66d/assets/images/mama.png" 
                         alt="Foto do Professor Matheus Braga (Professor Mamá)" 
                         class="w-40 h-40 rounded-full object-cover shadow-lg mb-6 border-4 border-[#EB6841]"
-                        onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';"
-                    >
+                        onerror="this.onerror=null;this.src='https://placehold.co/160x160/CCCCCC/6A4A3C?text=Foto+Mamá+Não+Disponível'; this.alt='Foto do Professor Mamá não disponível.';">
                     <p class="text-xl font-bold text-[#6A4A3C] mb-2">Matheus Braga – Mais conhecido como <span class="text-[#CC333F]">Professor Mamá</span></p>
                     <p class="text-md text-gray-700 mb-3">Licenciado em Química pela Universidade de Brasília (UnB).</p>
                     <p class="text-md text-gray-700 mb-3">Professor há mais de 10 anos na capital federal.</p>
@@ -838,274 +837,579 @@
             },
         ];
 
-        let initialEnemData = [
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2024","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Produção de fertilizantes nitrogenados e controle ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Digital","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2023","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Comparar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Toxicidade de compostos orgânicos e impacto ambiental","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2022","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Separação de misturas: destilação e filtração","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de neutralização em processos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto ambiental de compostos químicos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de separação de misturas no cotidiano","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração de soluções químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em sistemas biológicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Uso de indicadores ácido-base em análises químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Comportamento de gases ideais em diferentes condições","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Fenômenos de corrosão e prevenção em materiais metálicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reações químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros sintéticos e naturais","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de purificação de água","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Efeitos de substâncias químicas no meio ambiente","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades físico-químicas de substâncias orgânicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de neutralização em processos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto ambiental de compostos químicos industriais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de separação de misturas no cotidiano","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração de soluções químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em sistemas biológicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Uso de indicadores ácido-base em análises químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Comportamento de gases ideais em diferentes condições","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Fenômenos de corrosão e prevenção em materiais metálicos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reações químicas","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros sintéticos e naturais","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Processos de purificação de água","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2021","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Efeitos de substâncias químicas no meio ambiente","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2012","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2013","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2010","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2010","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2009","Tipo de Prova":"Impressa","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Radioatividade e meia-vida em contextos ambientais","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Rendimento de reação de produção de ácido acetilsalicílico","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Eletrólise de sais e formação de produtos (H₂, Cl₂)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de polímeros biodegradáveis vs plásticos comuns","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Concentração molar em soluções após diluição","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Explicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações ácido-base na neutralização de efluentes","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Combustão de diferentes combustíveis e emissão de CO₂","Competência Avaliada":"C7","Habilidade Avaliada":"H26"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Extração de alumínio por eletrólise (reações no cátodo e ânodo)","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades intermoleculares e ponto de ebulição de líquidos","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Calcular","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Estequiometria em reações de síntese orgânica","Competência Avaliada":"C7","Habilidade Avaliada":"H24"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Aplicar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Reações de oxirredução em pilhas e baterias","Competência Avaliada":"C7","Habilidade Avaliada":"H25"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Analisar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Impacto de poluentes atmosféricos sobre chuvas ácidas","Competência Avaliada":"C7","Habilidade Avaliada":"H27"},
-            {"Ano":"2009","Tipo de Prova":"PPL","Foco Cognitivo":"Interpretar","Área do Conhecimento":"Ciências da Natureza – Química","Assunto/Tema":"Propriedades de metais alcalinos e suas reações","Competência Avaliada":"C7","Habilidade Avaliada":"H24"}
-        ];
+        // Raw content from CÓDIGO.txt, now correctly placed as a string
+        const rawCsvContent = `"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2024","Impressa","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2024","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2024","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2024","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2024","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2024","Impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2024","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2024","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2024","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2024","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2024","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2024","Impressa","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2024","Impressa","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"2024","Digital","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","Digital","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2024","Digital","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2024","Digital","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2024","Digital","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2024","Digital","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2024","Digital","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2024","Digital","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2024","Digital","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","Digital","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2024","Digital","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2024","Digital","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2024","Digital","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2024","Digital","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2024","Digital","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"2024","PPL","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2024","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2024","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2024","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2024","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2024","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2024","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2024","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2024","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2024","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2024","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2024","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","Habilidade Avaliada":"H24"
+"2024","PPL","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2024","PPL","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2023","PPL","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2023","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2023","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2023","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2023","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2023","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2023","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2023","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2023","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2023","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2023","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2023","PPL","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2023","PPL","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"2023","PPL","Analisar","Ciências da Natureza – Química","Produção de fertilizantes nitrogenados e controle ambiental","C7","H26"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2023","Digital","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","Digital","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2023","Digital","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2023","Digital","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2023","Digital","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2023","Digital","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2023","Digital","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","Habilidade Avaliada":"H24"
+"2023","Digital","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2023","Digital","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","Digital","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2023","Digital","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2023","Digital","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2023","Digital","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2023","Digital","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2023","Digital","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2023","Impressa","Interpretar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2023","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2023","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2023","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2023","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2023","Impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2023","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2023","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2023","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2023","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2023","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2023","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","Habilidade Avaliada":"H24"
+"2023","Impressa","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2023","Impressa","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2022","PPL","Interpretar","Ciências da Natureza – Química","Propriedades físico-químicas de substâncias orgânicas","C7","H24"
+"2022","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2022","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2022","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2022","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2022","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2022","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2022","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2022","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2022","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2022","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2022","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2022","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2022","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades físico-químicas de substâncias orgânicas","C7","H24"
+"2022","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2022","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2022","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2022","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2022","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2022","Impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2022","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2022","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2022","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2022","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2022","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2022","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","Habilidade Avaliada":"H24"
+"2022","Impressa","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2022","Impressa","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2021","PPL","Interpretar","Ciências da Natureza – Química","Propriedades físico-químicas de substâncias orgânicas","C7","H24"
+"2021","PPL","Aplicar","Ciências da Natureza – Química","Reações de neutralização em processos industriais","C7","H25"
+"2021","PPL","Analisar","Ciências da Natureza – Química","Impacto ambiental de compostos químicos industriais","C7","H26"
+"2021","PPL","Explicar","Ciências da Natureza – Química","Processos de separação de misturas no cotidiano","C7","H24"
+"2021","PPL","Calcular","Ciências da Natureza – Química","Concentração de soluções químicas","C7","H24"
+"2021","PPL","Interpretar","Ciências da Natureza – Química","Reações de oxirredução em sistemas biológicos","C7","H24"
+"2021","PPL","Aplicar","Ciências da Natureza – Química","Uso de indicadores ácido-base em análises químicas","C7","H25"
+"2021","PPL","Analisar","Ciências da Natureza – Química","Comportamento de gases ideais em diferentes condições","C7","H26"
+"2021","PPL","Explicar","Ciências da Natureza – Química","Fenômenos de corrosão e prevenção em materiais metálicos","C7","H24"
+"2021","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reações químicas","C7","H24"
+"2021","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros sintéticos e naturais","C7","H24"
+"2021","PPL","Aplicar","Ciências da Natureza – Química","Processos de purificação de água","C7","H25"
+"2021","PPL","Analisar","Ciências da Natureza – Química","Efeitos de substâncias químicas no meio ambiente","C7","H26"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2021","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades físico-químicas de substâncias orgânicas","C7","H24"
+"2021","Impressa","Aplicar","Ciências da Natureza – Química","Reações de neutralização em processos industriais","C7","H25"
+"2021","Impressa","Analisar","Ciências da Natureza – Química","Impacto ambiental de compostos químicos industriais","C7","H26"
+"2021","Impressa","Explicar","Ciências da Natureza – Química","Processos de separação de misturas no cotidiano","C7","H24"
+"2021","Impressa","Calcular","Ciências da Natureza – Química","Concentração de soluções químicas","C7","H24"
+"2021","Impressa","Interpretar","Ciências da Natureza – Química","Reações de oxirredução em sistemas biológicos","C7","H24"
+"2021","Impressa","Aplicar","Ciências da Natureza – Química","Uso de indicadores ácido-base em análises químicas","C7","H25"
+"2021","Impressa","Analisar","Ciências da Natureza – Química","Comportamento de gases ideais em diferentes condições","C7","H26"
+"2021","Impressa","Explicar","Ciências da Natureza – Química","Fenômenos de corrosão e prevenção em materiais metálicos","C7","H24"
+"2021","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reações químicas","C7","H24"
+"2021","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros sintéticos e naturais","C7","H24"
+"2021","Impressa","Aplicar","Ciências da Natureza – Química","Processos de purificação de água","C7","H25"
+"2021","Impressa","Analisar","Ciências da Natureza – Química","Efeitos de substâncias químicas no meio ambiente","C7","H26"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2012","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2012","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2012","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2012","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2012","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2012","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2012","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2012","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2012","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2012","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2012","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2012","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","Habilidade Avaliada":"H24"
+"2012","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2012","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2012","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2012","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2012","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2012","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2012","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2012","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2012","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2012","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2012","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2012","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2013","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2013","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2013","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2013","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2013","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2013","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2013","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2013","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2013","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2013","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2013","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2013","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2013","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2013","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2013","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2013","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2013","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2013","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2013","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2013","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2013","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2013","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2013","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2013","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2010","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2010","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2010","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2010","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2010","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2010","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2010","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2010","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2010","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2010","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2010","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2010","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2010","Impressa","Aplicar","Ciências da Natureza – Química","Reações de oxirredução em pilhas e baterias","C7","H25"
+"2010","Impressa","Analisar","Ciências da Natureza – Química","Impacto de poluentes atmosféricos sobre chuvas ácidas","C7","H27"
+"2010","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de metais alcalinos e suas reações","C7","H24"
+"2010","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2010","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2010","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2010","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2010","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2010","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2010","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","Habilidade Avaliada":"H24"
+"2010","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2010","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2010","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2010","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2010","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2010","PPL","Aplicar","Ciências da Natureza – Química","Reações de oxirredução em pilhas e baterias","C7","H25"
+"2010","PPL","Analisar","Ciências da Natureza – Química","Impacto de poluentes atmosféricos sobre chuvas ácidas","C7","H27"
+"2010","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de metais alcalinos e suas reações","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2009","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2009","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2009","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2009","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2009","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2009","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2009","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2009","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2009","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2009","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2009","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2009","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2009","Impressa","Aplicar","Ciências da Natureza – Química","Reações de oxirredução em pilhas e baterias","C7","H25"
+"2009","Impressa","Analisar","Ciências da Natureza – Química","Impacto de poluentes atmosféricos sobre chuvas ácidas","C7","H27"
+"2009","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades de metais alcalinos e suas reações","C7","H24"
+"2009","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2009","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2009","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2009","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2009","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2009","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2009","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2009","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2009","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2009","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2009","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2009","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2009","PPL","Aplicar","Ciências da Natureza – Química","Reações de oxirredução em pilhas e baterias","C7","H25"
+"2009","PPL","Analisar","Ciências da Natureza – Química","Impacto de poluentes atmosféricos sobre chuvas ácidas","C7","H27"
+"2009","PPL","Interpretar","Ciências da Natureza – Química","Propriedades de metais alcalinos e suas reações","C7","H24"
 
+
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2011","Impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2011","Impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2011","Impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2011","Impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2011","Impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2011","Impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2011","Impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2011","Impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2011","Impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2011","Impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2011","Impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2011","Impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2011","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2011","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2011","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2011","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2011","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2011","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2011","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2011","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2011","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2011","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2011","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2011","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2014","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade em contextos ambientais/tecnológicos","C7","H25"
+"2014","PPL","Comparar","Ciências da Natureza – Química","Ligações intermoleculares (ponto de ebulição/solubilidade)","C7","H24"
+"2014","PPL","Analisar e calcular","Ciências da Natureza – Química","Reações inorgânicas / estequiometria (água e tratamento)","C7","H25"
+"2014","PPL","Aplicar","Ciências da Natureza – Química","Eletroquímica (pilhas e reações redox)","C7","H25"
+"2014","PPL","Calcular rendimento/pureza","Ciências da Natureza – Química","Estequiometria com rendimento e pureza (geral)","C7","H24"
+"2014","PPL","Aplicar concentração","Ciências da Natureza – Química","Diluição de soluções","C7","H24"
+"2014","PPL","Interpretar","Ciências da Natureza – Química","Unidades de concentração (M, %)","C7","H24"
+"2014","PPL","Analisar","Ciências da Natureza – Química","Termoquímica: calor de combustão","C7","H26"
+"2014","PPL","Interpretar","Ciências da Natureza – Química","Equilíbrio químico / deslocamento de equilíbrio","C7","H26"
+"2014","PPL","Analisar e calcular","Ciências da Natureza – Química","Hidrólise de sais e pH","C7","H27"
+"2014","PPL","Interpretar","Ciências da Natureza – Química","Equilíbrio iônico e pH","C7","H27"
+"2014","PPL","Comparar densidade","Ciências da Natureza – Química","Densidade de substâncias (gelo vs líquidos)","C7","H25"
+"2014","PPL","Explicar","Ciências da Natureza – Química","Polímeros não biodegradáveis (sacos plásticos)","C7","H24"
+"2014","PPL","Calcular","Ciências da Natureza – Química","Pureza de calcocita (Cu2S → Cu) — cobre metálico","C7","H24"
+"2014","PPL","Analisar rendimento","Ciências da Natureza – Química","Bisfenol-A (rendimento da síntese)","C7","H24"
+"2014","PPL","Interpretar reação","Ciências da Natureza – Química","Bafômetro: reações químicas envolvidas","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2014","impressa","Analisar e aplicar","Ciências da Natureza - Química","Desinfecção de água com HClO (oxidação/cloração)","C7 – Apropriar-se de conhecimentos de Química","H25 – Caracterizar materiais/substâncias e etapas de obtenção/uso"
+"2014","impressa","Analisar e decidir","Ciências da Natureza - Química","Recuperação de prata de reveladores de raio-X (eletroquímica/ambiente)","C7 – Apropriar-se de conhecimentos de Química","H27 – Avaliar propostas de intervenção ambiental com base em Química"
+"2014","impressa","Identificar e classificar","Ciências da Natureza - Química","Estereoquímica em fármacos (talidomida; enantiômeros e quiralidade)","C7 – Apropriar-se de conhecimentos de Química","H24 – Utilizar códigos/nomenclatura e representações químicas"
+"2014","impressa","Analisar processos","Ciências da Natureza - Química","Biodiesel/ésteres e ácidos graxos (propriedades e estabilidade oxidativa)","C7 – Apropriar-se de conhecimentos de Química","H26 – Implicações na produção/consumo de recursos energéticos"
+"2014","impressa","Aplicar e julgar","Ciências da Natureza - Química","Água dura: remoção de Ca²⁺/Mg²⁺ (precipitação/troca iônica)","C7 – Apropriar-se de conhecimentos de Química","H27 – Avaliar intervenção no meio (tratamento de água)"
+"2014","impressa","Selecionar método","Ciências da Natureza - Química","Separação industrial de fenol e acetona (propriedades físico-químicas; destilação)","C7 – Apropriar-se de conhecimentos de Química","H25 – Etapas e rendimentos em processos químicos"
+"2014","impressa","Explicar fenômeno","Ciências da Natureza - Química","Neutralização de maus odores com vinagre (ácido–base)","C7 – Apropriar-se de conhecimentos de Química","H25 – Propriedades/uso de substâncias no cotidiano"
+"2014","impressa","Analisar impactos","Ciências da Natureza - Química","Dessulfurização de gases (SO₂ → sulfito/sulfato; mitigação de chuva ácida)","C7 – Apropriar-se de conhecimentos de Química","H27 – Avaliar propostas de mitigação ambiental"
+"2014","impressa","Calcular e interpretar","Ciências da Natureza - Química","Rendimento na produção de gesso (estequiometria)","C7 – Apropriar-se de conhecimentos de Química","H25 – Etapas/rendimento de processos de obtenção"
+"2014","impressa","Reconhecer e classificar","Ciências da Natureza - Química","Cadeias carbônicas: insaturada, ramificada e heterogênea (orgânica)","C7 – Apropriar-se de conhecimentos de Química","H24 – Códigos/nomenclatura para caracterizar substâncias"
+"2014","impressa","Monitorar e decidir","Ciências da Natureza - Química","Biorremediação de naftaleno (limites legais solo/água; tomada de decisão)","C7 – Apropriar-se de conhecimentos de Química","H27 – Avaliar intervenção ambiental baseada em dados químicos"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2015","impressa","Analisar","Ciências da Natureza - Química","Química Verde: rotas limpas para síntese (acetato, ambiental)","C7","H27"
+"2015","impressa","Interpretar","Ciências da Natureza - Química","Termoquímica: mal das alturas e hemoglobina oxigenada","C7","H26"
+"2015","impressa","Aplicar","Ciências da Natureza - Química","Separação: óleo e plástico nanomaterial de LCC, castanha-de-caju","C7","H25"
+"2015","impressa","Explicar","Ciências da Natureza - Química","Fenômeno de fusão espontânea da soda cáustica sólida","C7","H24"
+"2015","impressa","Calcular","Ciências da Natureza - Química","Hidroponia: volume de solução nutritiva (mol/L cálculo)","C7","H24"
+"2015","impressa","Analisar","Ciências da Natureza - Química","Corrosão e revestimento: lata de conserva (aço/estanho/verniz)","C7","H25"
+"2015","impressa","Identificar","Ciências da Natureza - Química","Feromônios: funções orgânicas dos compostos (trilha/alarme)","C7","H24"
+"2015","impressa","Aplicar","Ciências da Natureza - Química","Oxidação de alceno por KMnO₄: transformação em ácidos carboxílicos","C7","H25"
+"2015","impressa","Calcular equilíbrio","Ciências da Natureza - Química","Carbonato de cálcio em efluentes: constante de equilíbrio","C7","H24"
+"2015","impressa","Entender","Ciências da Natureza - Química","Reação em cadeia nuclear (bomba atômica)","C7","H24"
+"2015","impressa","Calcular","Ciências da Natureza - Química","Rendimento: zinco metálico a partir de esfalerita (ZnS)","C7","H24"
+"2015","impressa","Interpretar","Ciências da Natureza - Química","Pesticidas organoclorados: lipofilicidade e bioacumulação","C7","H27"
+"2015","impressa","Explicar","Ciências da Natureza - Química","Calda bordalesa: oxirredução e formação de mancha avermelhada","C7","H25"
+"2015","impressa","Interpretar","Ciências da Natureza – Química","Combustão dentro de frasco: consumo de oxigênio e mudança de pH","C7","H26"
+"2015","impressa","Calcular termoelétrico","Ciências da Natureza – Química","Entalpia de combustão de bio-óleo e liberação de energia","C7","H26"
+"2015","impressa","Explicar","Ciências da Natureza – Química","Destilação fracionada do petróleo (produção de gasolina)","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2015","PPL","Identificar","Ciências da Natureza - Química","Acúmulo de plásticos: densidade diferencial para separação","C7","H24"
+"2015","PPL","Analisar adulteração","Ciências da Natureza - Química","Adulteração de combustível: propriedades físicas similares","C7","H25"
+"2015","PPL","Compreender colóides","Ciências da Natureza - Química","Sistemas coloidais e desestabilização por solvente (etanol)","C7","H25"
+"2015","PPL","Calcular","Ciências da Natureza - Química","Produção de cobre a partir de calcosita: rendimento e massa","C7","H24"
+"2015","PPL","Comparar energia","Ciências da Natureza - Química","Substituição do carvão por urânio: massa de CO₂ evitada","C7","H26"
+"2015","PPL","Calcular densidade","Ciências da Natureza - Química","Densidade da mistura etanol/água e fração de etanol (%)","C7","H24"
+"2015","PPL","Identificar sal","Ciências da Natureza - Química","Dessulfurização por calcário: fórmula correta do sal formado","C7","H24"
+"2015","PPL","Calcular concentração","Ciências da Natureza - Química","Concentração de cafeína em café (mol/L)","C7","H24"
+"2015","PPL","Identificar polímero","Ciências da Natureza - Química","Poliamida: nomenclatura do Nylon sintetizado (ácido + diamina)","C7","H24"
+"2015","PPL","Selecionar método","Ciências da Natureza - Química","Separação de frações do petróleo: destilação","C7","H25"
+"2015","PPL","Classificar polímero","Ciências da Natureza - Química","PLA: tipo de polímero de condensação formado (poliéster)","C7","H24"
+"2015","PPL","Avaliar qualidade","Ciências da Natureza - Química","Vinagre: amostra dentro de faixa permitida (%)","C7","H24"
+"2015","PPL","Interpretar pH","Ciências da Natureza - Química","Efluentes: identificar qual é básico pelo pH medido","C7","H27"
+"2015","PPL","Analisar branqueamento","Ciências da Natureza - Química","Processos de branqueamento que geram organoclorados","C7","H27"
+"2015","PPL","Aplicar eletroquímica","Ciências da Natureza - Química","Eletrólise do alumínio: reações de cátodo e ânodo","C7","H25"
+"2015","PPL","Explicar estabilidade","Ciências da Natureza - Química","Propriedade que permite formação de sais de amônio estáveis a partir de aminas","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2016","impressa","Interpretar","Ciências da Natureza – Química","Spray de pimenta: lavagens ineficazes com água (solubilidade/espécie química)","C7","H24"
+"2016","impressa","Analisar","Ciências da Natureza – Química","Destilação do benzeno vs trimerização do acetileno (entalpia)","C7","H26"
+"2016","impressa","Comparar","Ciências da Natureza – Química","Contaminação com bário e teste de solubilidade com HCl e H₂SO₄","C7","H25"
+"2016","impressa","Identificar isomeria","Ciências da Natureza – Química","Estereoisomeria em feromônios (talidomida é semelhante)","C7","H24"
+"2016","impressa","Aplicar","Ciências da Natureza – Química","Produção de etanol a partir de milho: hidrólise","C7","H25"
+"2016","impressa","Calcular rendimento","Ciências da Natureza – Química","Rendimento molar na síntese de metanol (CH₃Br + NaOH)","C7","H24"
+"2016","impressa","Explicar fenômeno","Ciências da Natureza – Química","Adsorção de benzeno em carvão ativado (interações intermoleculares)","C7","H24"
+"2016","impressa","Analisar potencial","Ciências da Natureza – Química","Biocélulas microbianas: número mínimo para alcançar diferença de potencial em série","C7","H25"
+"2016","impressa","Interpretar","Ciências da Natureza – Química","Fases da matéria segundo Platão vs estados físicos contemporâneos","C7","H24"
+"2016","impressa","Calcular","Ciências da Natureza – Química","Concentração de fósforo na vinhaça gerada pela produção de etanol","C7","H24"
+"2016","impressa","Compreender técnica","Ciências da Natureza – Química","Datação por carbono-14 (DNA de mamute)","C7","H24"
+"2016","impressa","Identificar processo","Ciências da Natureza – Química","Aromatização por evaporação de compostos voláteis na sauna","C7","H25"
+"2016","impressa","Analisar","Ciências da Natureza – Química","Propiedades físicas (polaridade) e dissolução do óleo (Interações intermoleculares)","C7","H24"
+"2016","impressa","Aplicar","Ciências da Natureza – Química","Termoquímica: efeito do “mal das alturas” na hemoglobina","C7","H26"
+"2016","impressa","Calcular equilíbrio","Ciências da Natureza – Química","Equilíbrio químico em reações inorgânicas (processos cotidianos)","C7","H26"
+"2016","impressa","Interpretar","Ciências da Natureza – Química","Soluções e radioatividade (radioatividade em contextos ambientais)","C7","H26"
+"2016","impressa","Resolver separação","Ciências da Natureza – Química","Separação de substâncias: físico-química – polímeros ou nanomateriais","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2016","PPL","Analisar","Ciências da Natureza – Química","Tensoativos: detergente melhora molhabilidade via redução da tensão superficial","C7","H25"
+"2016","PPL","Compreender","Ciências da Natureza – Química","Energia nuclear por fissão de urânio (energia/impacto)","C7","H26"
+"2016","PPL","Explicar contaminação","Ciências da Natureza – Química","Óleo de cozinha forma película e prejudica trocas gasosas (densidade/interação)","C7","H24"
+"2016","PPL","Comparar materiais","Ciências da Natureza – Química","Diferença entre sacolas biodegradáveis e polietileno comum (biodegradação)","C7","H24"
+"2016","PPL","Equilibrar pH","Ciências da Natureza – Química","Equilíbrio entre CO₃²⁻ e HCO₃⁻ em águas marinhas (pH, equilíbrio)","C7","H27"
+"2016","PPL","Explicar reação exotérmica","Ciências da Natureza – Química","Reação do magnésio com água aquece alimentos (reações exotérmicas)","C7","H25"
+"2016","PPL","Interpretar","Ciências da Natureza – Química","Fenômeno do etileno no amadurecimento de frutos (bioquímica)","C7","H26"
+"2016","PPL","Calcular energia","Ciências da Natureza – Química","Eficiência de combustíveis: calor liberado por diferentes combustíveis","C7","H26"
+"2016","PPL","Calcular emissão","Ciências da Natureza – Química","Emissão de CO₂ por veículo baseado no conteúdo de carbono da gasolina","C7","H26"
+"2016","PPL","Comparar energia","Ciências da Natureza – Química","Fissão nuclear vs combustão em liberação de energia (J/g)","C7","H26"
+"2016","PPL","Aplicar precipitação","Ciências da Natureza – Química","Tratamento de água: precipitação com carbonato de sódio e sulfato de alumínio","C7","H25"
+"2016","PPL","Detectar adulteração","Ciências da Natureza – Química","Combustíveis adulterados e testes laboratoriais (biodiesel na lei)","C7","H27"
+"2016","PPL","Aplicar eletroquímica","Ciências da Natureza – Química","Eletrólise do alumínio (reações no ânodo e cátodo)","C7","H25"
+"2016","PPL","Explicar estabilidade","Ciências da Natureza – Química","Estabilidade de sais de amônio formados a partir de aminas","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2017","impressa","Interpretar","Ciências da Natureza – Química","Soluções (concentração, coligativas)","C7","H24"
+"2017","impressa","Aplicar","Ciências da Natureza – Química","Eletroquímica (reações, pilhas)","C7","H25"
+"2017","impressa","Identificar","Ciências da Natureza – Química","Atomística (estrutura atômica)","C7","H24"
+"2017","impressa","Comparar","Ciências da Natureza – Química","Ligações químicas (forças intermoleculares)","C7","H24"
+"2017","impressa","Interpretar","Ciências da Natureza – Química","Radioatividade","C7","H26"
+"2017","impressa","Analisar","Ciências da Natureza – Química","Matéria e suas transformações","C7","H24"
+"2017","impressa","Aplicar","Ciências da Natureza – Química","Reações orgânicas (tipos e mecanismos)","C7","H25"
+"2017","impressa","Analisar","Ciências da Natureza – Química","Equilíbrio iônico (pH)","C7","H27"
+"2017","impressa","Explicar","Ciências da Natureza – Química","Propriedades coligativas","C7","H24"
+"2017","impressa","Aplicar e calcular","Ciências da Natureza – Química","Estequiometria (cálculo quantitativo)","C7","H24"
+"2017","impressa","Analisar","Ciências da Natureza – Química","Termoquímica","C7","H26"
+"2017","impressa","Identificar","Ciências da Natureza – Química","Atomística (isótopos, massa molar)","C7","H24"
+"2017","impressa","Comparar","Ciências da Natureza – Química","Propriedades dos compostos orgânicos (polaridade, solubilidade)","C7","H24"
+"2017","impressa","Aplicar","Ciências da Natureza – Química","Reações orgânicas (transformações químicas)","C7","H25"
+"2017","impressa","Explicar","Ciências da Natureza – Química","Técnicas de separação (cromatografia, centrifugação)","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2017","PPL","Interpretar","Ciências da Natureza – Química","Radiação no tratamento do câncer (radioatividade: tipo de radiação)","C7","H26"
+"2017","PPL","Analisar","Ciências da Natureza – Química","Adulteração do leite por NaOH (neutralização / pH)","C7","H27"
+"2017","PPL","Avaliar impacto ambiental","Ciências da Natureza – Química","Reciclagem/lâmpadas fluorescentes: recuperação de mercúrio","C7","H27"
+"2017","PPL","Analisar impacto","Ciências da Natureza – Química","Chaminé: reação de poluentes e chuva ácida (SO₂ → H₂SO₄)","C7","H27"
+"2017","PPL","Calcular","Ciências da Natureza – Química","Fixação de CO₂ por árvores vs emissão de gasolina (estequiometria ambiental)","C7","H26"
+"2017","PPL","Aplicar eletroquímica","Ciências da Natureza – Química","Eletrólise de NaCl: produto secundário (H₂ gás)","C7","H25"
+"2017","PPL","Explicar fenômeno","Ciências da Natureza – Química","Cor da chama alterada por sais presentes na água de cozimento (espectro de emissão)","C7","H24"
+"2017","PPL","Explicar","Ciências da Natureza – Química","Núcleo de condensação e formação de chuva via reação ácido/base","C7","H24"
+"2017","PPL","Calcular","Ciências da Natureza – Química","Síntese de AAS (ácido acetilsalicílico): cálculo de reagentes para produção (rendimento)","C7","H24"
+"2017","PPL","Calcular","Ciências da Natureza – Química","Redução de FeO pelo CO (siderurgia): entalpia ΔH","C7","H26"
+"2017","PPL","Contextualizar","Ciências da Natureza – Química","Gases nobres: por que o flúor reage com xenônio (eletropositividade)","C7","H24"
+"2017","PPL","Aplicar","Ciências da Natureza – Química","Cromatografia em papel dos pigmentos do pimentão (interações intermoleculares)","C7","H25"
+"2017","PPL","Comparar fontes de energia","Ciências da Natureza – Química","Comparação de etanol e gasolina: combustão e liberação de energia","C7","H26"
+"2017","PPL","Analisar métodos analíticos","Ciências da Natureza – Química","Teste de ácidos: uso de indicadores para identificação de pH","C7","H24"
+"2017","PPL","Avaliar deslocamento","Ciências da Natureza – Química","Efeito da temperatura sobre deslocamento de equilíbrio químico","C7","H26"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2018","impressa","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2018","impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2018","impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2018","impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2018","impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2018","impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2018","impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2018","impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2018","impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2018","impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2018","impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2018","impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2018","impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2018","impressa","Analisar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2018","impressa","Explicar fenômeno","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2018","PPL","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2018","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2018","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2018","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2018","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2018","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2018","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2018","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","Habilidade Avaliada":"H24"
+"2018","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2018","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2018","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2018","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2018","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2019","impressa","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2019","impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2019","impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2019","impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2019","impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2019","impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2019","impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2019","impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2019","impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2019","impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2019","impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2019","impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2019","impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2019","impressa","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2019","impressa","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2019","PPL","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2019","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2019","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2019","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2019","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2019","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2019","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2019","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2019","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2019","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2019","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2019","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2019","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2019","PPL","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2019","PPL","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2020","impressa","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2020","impressa","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2020","impressa","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2020","impressa","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2020","impressa","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2020","impressa","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2020","impressa","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2020","impressa","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2020","impressa","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2020","impressa","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2020","impressa","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2020","impressa","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2020","impressa","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","Habilidade Avaliada":"H24"
+"2020","impressa","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2020","impressa","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+"Ano","Tipo de Prova","Foco Cognitivo","Área do Conhecimento","Assunto/Tema","Competência Avaliada","Habilidade Avaliada"
+"2020","PPL","Interpretar","Ciências da Natureza – Química","Cores de indicadores para identificação de soluções ácidas e básicas","C7","H24"
+"2020","PPL","Calcular","Ciências da Natureza – Química","Rendimento de reação de produção de ácido acetilsalicílico","C7","H24"
+"2020","PPL","Analisar","Ciências da Natureza – Química","Equilíbrio químico em sistemas cotidianos (temperatura e deslocamento)","C7","H26"
+"2020","PPL","Explicar","Ciências da Natureza – Química","Densidade e miscibilidade de líquidos orgânicos (óleo e álcool)","C7","H24"
+"2020","PPL","Aplicar","Ciências da Natureza – Química","Eletrólise de sais e formação de produtos (H₂, Cl₂)","C7","H25"
+"2020","PPL","Interpretar","Ciências da Natureza – Química","Radioatividade e meia-vida em contextos ambientais","C7","H26"
+"2020","PPL","Comparar","Ciências da Natureza – Química","Propriedades de polímeros biodegradáveis vs plásticos comuns","C7","H24"
+"2020","PPL","Calcular","Ciências da Natureza – Química","Concentração molar em soluções após diluição","C7","H24"
+"2020","PPL","Explicar","Ciências da Natureza – Química","Reações ácido-base na neutralização de efluentes","C7","H27"
+"2020","PPL","Analisar","Ciências da Natureza – Química","Combustão de diferentes combustíveis e emissão de CO₂","C7","H26"
+"2020","PPL","Aplicar","Ciências da Natureza – Química","Extração de alumínio por eletrólise (reações no cátodo e ânodo)","C7","H25"
+"2020","PPL","Interpretar","Ciências da Natureza – Química","Propriedades intermoleculares e ponto de ebulição de líquidos","C7","H24"
+"2020","PPL","Calcular","Ciências da Natureza – Química","Estequiometria em reações de síntese orgânica","C7","H24"
+"2020","PPL","Explicar","Ciências da Natureza – Química","Toxicidade de compostos orgânicos e impacto ambiental","C7","H27"
+"2020","PPL","Aplicar","Ciências da Natureza – Química","Separação de misturas: destilação e filtração","C7","H25"
+`;
+
+        let initialEnemData = []; // This will be populated by the parsed CSV content
         let detailedYearlyQuestionsData = []; // Global para dados anuais detalhados do CSV
         let pastQuestionsData = []; // Global para questões de busca do CSV
         let enemByYearAnalysisData = []; // Global para dados de análise por ano do CSV
 
 
         /**
-         * Função para carregar e parsear o arquivo CSV.
-         * Como o contentFetcher não está disponível no ambiente de execução do navegador,
-         * os dados são agora passados diretamente via `initialEnemData`.
-         * Esta função foi adaptada para processar `initialEnemData`.
-         * @param {Array<Object>} rawData - Os dados brutos do ENEM.
+         * Função para analisar uma string CSV, lidando com vírgulas dentro de aspas.
+         * @param {string} csvString - A string CSV a ser analisada.
          * @returns {Array<Object>} - Um array de objetos, onde cada objeto é uma linha do CSV.
+         */
+        function parseCsv(csvString) {
+            const lines = csvString.trim().split('\n');
+            if (lines.length === 0) return [];
+
+            const headers = lines[0].replace(/"/g, '').split(',');
+            const result = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const currentLine = lines[i];
+                if (!currentLine.trim()) continue; // Ignora linhas vazias
+
+                const values = [];
+                let inQuote = false;
+                let currentValue = '';
+                for (let j = 0; j < currentLine.length; j++) {
+                    const char = currentLine[j];
+                    if (char === '"') {
+                        inQuote = !inQuote;
+                    } else if (char === ',' && !inQuote) {
+                        values.push(currentValue.trim().replace(/^"|"$/g, '')); // Remove aspas do valor
+                        currentValue = '';
+                    } else {
+                        currentValue += char;
+                    }
+                }
+                values.push(currentValue.trim().replace(/^"|"$/g, '')); // Adiciona o último valor
+
+                if (values.length === headers.length) {
+                    const rowObject = {};
+                    for (let k = 0; k < headers.length; k++) {
+                        rowObject[headers[k]] = values[k];
+                    }
+                    result.push(rowObject);
+                } else {
+                    // This warning is useful for debugging malformed lines
+                    // console.warn('Linha malformada ignorada:', currentLine);
+                }
+            }
+            return result;
+        }
+
+        /**
+         * Processa os dados brutos do ENEM, filtrando provas "Digital" e populando as variáveis globais.
+         * @param {Array<Object>} rawData - Os dados brutos do ENEM.
+         * @returns {Array<Object>} - Um array de objetos, onde cada objeto é uma linha do CSV (filtrado).
          */
         function processEnemRawData(rawData) {
             // Filtra os dados para remover as provas "Digital"
@@ -1120,6 +1424,8 @@
             const tempDetailedYearlyQuestionsData = [];
             const tempPastQuestionsData = [];
             const tempEnemByYearAnalysisData = [];
+            
+            // Garante que os anos sejam únicos e ordenados do mais recente para o mais antigo
             const years = [...new Set(data.map(row => parseInt(row.Ano)))].sort((a, b) => b - a);
 
             years.forEach(year => {
@@ -1127,7 +1433,7 @@
                 const quimicaQuestionsCount = yearDataFiltered.length;
                 const applicationTypes = [...new Set(yearDataFiltered.map(item => item['Tipo de Prova']))].join(', ');
                 
-                // Calculate main themes
+                // Calcula os temas principais
                 const themeCounts = yearDataFiltered.reduce((acc, item) => {
                     const theme = item['Assunto/Tema'].split('(')[0].trim();
                     acc[theme] = (acc[theme] || 0) + 1;
@@ -1136,7 +1442,7 @@
                 const sortedThemes = Object.entries(themeCounts).sort(([, a], [, b]) => b - a);
                 const mainThemesList = sortedThemes.slice(0, 3).map(([theme,]) => theme);
                 
-                // Calculate competency focus
+                // Calcula o foco em competências
                 const competencyCounts = yearDataFiltered.reduce((acc, item) => {
                     acc[item['Competência Avaliada']] = (acc[item['Competência Avaliada']] || 0) + 1;
                     return acc;
@@ -1144,7 +1450,7 @@
                 const sortedCompetencies = Object.entries(competencyCounts).sort(([, a], [, b]) => b - a);
                 const competencyFocusList = sortedCompetencies.slice(0, 2).map(([comp,]) => comp);
 
-                // Calculate habilidades
+                // Calcula as habilidades
                 const habilidadeCounts = yearDataFiltered.reduce((acc, item) => {
                     acc[item['Habilidade Avaliada']] = (acc[item['Habilidade Avaliada']] || 0) + 1;
                     return acc;
@@ -1152,7 +1458,7 @@
                 const sortedHabilidades = Object.entries(habilidadeCounts).sort(([, a], [, b]) => b - a);
                 const habilidadesList = sortedHabilidades.slice(0, 3).map(([hab,]) => hab);
 
-                // Calculate themesData for the chart
+                // Calcula os dados de temas para o gráfico
                 const themesDataChart = sortedThemes.slice(0, 4).map(([theme, count]) => ({
                     theme: theme,
                     percentage: parseFloat(((count / quimicaQuestionsCount) * 100).toFixed(1))
@@ -1712,6 +2018,7 @@
             populateImportantDates(); // Preenche as datas importantes
 
             // Carregar e preparar os dados do ENEM do CSV
+            initialEnemData = parseCsv(rawCsvContent); // Parse the CSV content
             const processedData = processEnemRawData(initialEnemData);
             prepareEnemData(processedData);
 
