@@ -511,7 +511,7 @@
         // Helper function to standardize Habilidade format
         function standardizeHabilidade(habilidadeString) {
             const match = habilidadeString.match(/H(\d+)/);
-            return match ? `H${match[1]}` : habilabilidadeString;
+            return match ? `H${match[1]}` : habilidadeString;
         }
 
         // --- Dados dos Gráficos Principais ---
@@ -536,8 +536,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'right', // Legenda à direita
-                        align: 'start', // Alinha ao topo
+                        position: 'bottom', // Legenda na parte inferior
                         labels: {
                             font: {
                                 size: 12
@@ -575,8 +574,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'right', // Legenda à direita
-                        align: 'start', // Alinha ao topo
+                        position: 'bottom', // Legenda na parte inferior
                         labels: {
                             font: {
                                 size: 12
